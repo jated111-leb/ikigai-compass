@@ -50,27 +50,32 @@ export function ExerciseCardSelect({ selected, onSave }: ExerciseCardSelectProps
               </button>
 
               {isExpanded && (
-                <div className="p-4 pt-0 grid sm:grid-cols-2 gap-3 animate-fade-slide-in">
-                  {cat.topics.map((topic) => {
-                    const isSelected = selected.includes(topic.id);
-                    return (
-                      <button
-                        key={topic.id}
-                        onClick={() => toggleTopic(topic.id)}
-                        className={`text-left p-4 rounded-lg border transition-all ${
-                          isSelected
-                            ? 'border-accent bg-accent/10 shadow-sm'
-                            : 'border-border/40 bg-card hover:border-accent/40'
-                        }`}
-                      >
-                        <h4 className="font-semibold text-foreground text-sm">{topic.title}</h4>
-                        <p className="text-xs text-muted-foreground mt-1">{topic.description}</p>
-                        {isSelected && (
-                          <span className="inline-block mt-2 text-xs text-accent font-medium">✦ Resonates with me</span>
-                        )}
-                      </button>
-                    );
-                  })}
+                <div className="p-4 pt-0 space-y-3 animate-fade-slide-in">
+                  {cat.description && (
+                    <p className="text-sm text-muted-foreground italic leading-relaxed px-1 pt-2">{cat.description}</p>
+                  )}
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {cat.topics.map((topic) => {
+                      const isSelected = selected.includes(topic.id);
+                      return (
+                        <button
+                          key={topic.id}
+                          onClick={() => toggleTopic(topic.id)}
+                          className={`text-left p-4 rounded-lg border transition-all ${
+                            isSelected
+                              ? 'border-accent bg-accent/10 shadow-sm'
+                              : 'border-border/40 bg-card hover:border-accent/40'
+                          }`}
+                        >
+                          <h4 className="font-semibold text-foreground text-sm">{topic.title}</h4>
+                          <p className="text-xs text-muted-foreground mt-1">{topic.description}</p>
+                          {isSelected && (
+                            <span className="inline-block mt-2 text-xs text-accent font-medium">✦ Resonates with me</span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>

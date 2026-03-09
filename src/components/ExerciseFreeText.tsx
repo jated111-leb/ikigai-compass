@@ -5,11 +5,12 @@ import { useDebouncedSave } from "@/lib/store";
 interface ExerciseFreeTextProps {
   prompt: string;
   placeholder?: string;
+  guidance?: string;
   value: string;
   onSave: (value: string) => void;
 }
 
-export function ExerciseFreeText({ prompt, placeholder, value, onSave }: ExerciseFreeTextProps) {
+export function ExerciseFreeText({ prompt, placeholder, guidance, value, onSave }: ExerciseFreeTextProps) {
   const [text, setText] = useState(value);
   const debouncedSave = useDebouncedSave(onSave);
 
@@ -23,6 +24,9 @@ export function ExerciseFreeText({ prompt, placeholder, value, onSave }: Exercis
   return (
     <div className="space-y-3">
       <label className="block text-lg font-semibold text-foreground font-serif">{prompt}</label>
+      {guidance && (
+        <p className="text-sm text-muted-foreground italic leading-relaxed">{guidance}</p>
+      )}
       <Textarea
         value={text}
         onChange={(e) => handleChange(e.target.value)}

@@ -1,5 +1,5 @@
 export interface ExerciseData {
-  type: 'freetext' | 'multiselect' | 'ranking' | 'cardselect' | 'timeline';
+  type: 'freetext' | 'multiselect' | 'ranking' | 'cardselect' | 'timeline' | 'visualization';
   prompt: string;
   response?: string;
   selected?: string[];
@@ -33,19 +33,23 @@ export interface ModuleState {
 }
 
 export interface ContentBlock {
-  type: 'paragraph' | 'quote';
+  type: 'paragraph' | 'quote' | 'heading' | 'framework' | 'callout';
   text: string;
   author?: string;
+  source?: string;
+  level?: 1 | 2 | 3;
 }
 
 export interface Exercise {
-  type: 'freetext' | 'multiselect' | 'ranking' | 'cardselect' | 'timeline';
+  type: 'freetext' | 'multiselect' | 'ranking' | 'cardselect' | 'timeline' | 'visualization';
   prompt: string;
   placeholder?: string;
   options?: string[];
+  guidance?: string;
 }
 
 export interface ModuleStep {
+  title?: string;
   content: ContentBlock[];
   exercise?: Exercise;
 }
@@ -55,6 +59,7 @@ export interface ModuleContent {
   title: string;
   description: string;
   icon: string;
+  journeyPhase: 'inward' | 'outward';
   steps: ModuleStep[];
 }
 
@@ -63,10 +68,15 @@ export interface Archetype {
   name: string;
   icon: string;
   description: string;
+  fullDescription: string;
+  strengths: string[];
+  worldContribution: string;
+  signalQuestions: string[];
 }
 
 export interface WorldNeedCategory {
   title: string;
   icon: string;
+  description: string;
   topics: { id: string; title: string; description: string }[];
 }
