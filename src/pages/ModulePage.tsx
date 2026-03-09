@@ -61,7 +61,6 @@ const ModulePage = () => {
     navigate("/journey");
   };
 
-  // Module 6 synthesis
   const handleSynthesize = () => {
     setSynthesizing(true);
     setTimeout(() => {
@@ -100,6 +99,11 @@ const ModulePage = () => {
 
         {/* Step content */}
         <div className="animate-fade-slide-in space-y-8" key={step}>
+          {/* Step title */}
+          {currentStepData.title && (
+            <h2 className="text-xl font-serif font-semibold text-foreground/90 mb-4">{currentStepData.title}</h2>
+          )}
+
           {/* Content zone */}
           {currentStepData.content.length > 0 && (
             <ContentBlock blocks={currentStepData.content} />
@@ -108,10 +112,11 @@ const ModulePage = () => {
           {/* Exercise zone */}
           {currentStepData.exercise && (
             <div className="pt-2">
-              {currentStepData.exercise.type === 'freetext' && (
+              {(currentStepData.exercise.type === 'freetext' || currentStepData.exercise.type === 'visualization') && (
                 <ExerciseFreeText
                   prompt={currentStepData.exercise.prompt}
                   placeholder={currentStepData.exercise.placeholder}
+                  guidance={currentStepData.exercise.guidance}
                   value={exerciseData.response || ''}
                   onSave={(response) => handleExerciseSave({ type: 'freetext', prompt: currentStepData.exercise!.prompt, response })}
                 />
@@ -147,8 +152,8 @@ const ModulePage = () => {
             </div>
           )}
 
-          {/* Archetypes section for module 5 */}
-          {moduleId === 5 && step === 2 && (
+          {/* Archetypes section for module 5 - show on archetype step */}
+          {moduleId === 5 && currentStepData.title === "Your Archetype" && (
             <div className="space-y-4">
               <h3 className="font-serif font-semibold text-foreground text-lg">Explore the Archetypes</h3>
               <div className="grid sm:grid-cols-2 gap-3">
@@ -181,9 +186,7 @@ const ModulePage = () => {
                       <div
                         key={i}
                         className="w-3 h-3 rounded-full bg-accent"
-                        style={{
-                          animation: `breathe 2s ease-in-out ${i * 0.3}s infinite`,
-                        }}
+                        style={{ animation: `breathe 2s ease-in-out ${i * 0.3}s infinite` }}
                       />
                     ))}
                   </div>

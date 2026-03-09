@@ -19,8 +19,8 @@ const JourneyPage = () => {
     return 'locked';
   };
 
-  const inwardModules = modules.filter(m => m.id <= 3);
-  const outwardModules = modules.filter(m => m.id > 3);
+  const inwardModules = modules.filter(m => m.journeyPhase === 'inward');
+  const outwardModules = modules.filter(m => m.journeyPhase === 'outward');
 
   return (
     <div className="min-h-screen py-8 px-6">
