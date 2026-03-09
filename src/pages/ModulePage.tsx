@@ -43,7 +43,7 @@ const ModulePage = () => {
   const isLastStep = step === totalSteps - 1;
   const IconComp = (Icons as any)[moduleContent.icon] || Icons.Circle;
 
-  const exerciseData = modState.exercises[String(step)] || {};
+  const exerciseData = modState.exercises[String(step)] || {} as any;
 
   const handleExerciseSave = (data: any) => {
     saveExercise(moduleId, step, data);
