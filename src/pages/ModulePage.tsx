@@ -26,6 +26,7 @@ const ModulePage = () => {
   const modState = getModuleState(moduleId);
   const [step, setStep] = useState(modState.currentStep || 0);
   const [showAi, setShowAi] = useState(false);
+  const [synthesizing, setSynthesizing] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
