@@ -26,8 +26,8 @@ export { module5 } from "./modules/module-5-whats-your-story";
 export { module6 } from "./modules/module-6-whats-your-gift";
 
 // Data
-export { worldNeedCategories } from "./data/world-needs";
-export { archetypes } from "./data/archetypes";
+export { worldNeedCategories } from "./content/world-needs";
+export { archetypes } from "./content/archetypes";
 
 // AI Prompts
 export { aiSystemPrompts, masterSynthesisPrompt } from "./ai-prompts/system-prompts";
