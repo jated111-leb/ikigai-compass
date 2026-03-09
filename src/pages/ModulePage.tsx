@@ -62,7 +62,6 @@ const ModulePage = () => {
   };
 
   // Module 6 synthesis
-  const [synthesizing, setSynthesizing] = useState(false);
   const handleSynthesize = () => {
     setSynthesizing(true);
     setTimeout(() => {
