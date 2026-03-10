@@ -44,6 +44,12 @@ export const module1: ModuleData = {
     },
     {
       id: "m1-intro-5",
+      type: "callout",
+      content:
+        "Research shows that 70% of employees endure their jobs rather than enjoy them. People who report having a clear sense of purpose have improved life expectancy, reduced risk of heart attack and stroke, and are 2.4 times less likely to develop Alzheimer's disease. This journey is not a luxury — it is essential.",
+    },
+    {
+      id: "m1-intro-6",
       type: "paragraph",
       content:
         "In this first module, we will explore what truly excites you — not what you think should excite you, not what looks impressive on a resume, but the real, honest inclinations of your soul. We will move through your passions, your childhood dreams, and the deeper spiritual aspirations hiding beneath the surface.",
@@ -247,6 +253,12 @@ export const module1: ModuleData = {
         },
         {
           id: "m1-s4-c3",
+          type: "paragraph",
+          content:
+            "Abraham Maslow called these deeper drives 'Being-values' or B-values — the ultimate motivations that emerge when basic needs are met: perfection, truth, beauty, goodness, unity, aliveness, justice, simplicity, playfulness. He found that self-actualizing people are not driven by deficiency but by these meta-motivations — and that pursuing them is what eventually leads beyond self-actualization into self-transcendence.",
+        },
+        {
+          id: "m1-s4-c4",
           type: "callout",
           content:
             "Metapassions are the WHY behind the WHAT. They are the spiritual fuel that powers your surface interests. Identifying them helps you see the common thread running through seemingly different passions.",

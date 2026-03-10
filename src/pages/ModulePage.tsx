@@ -13,8 +13,10 @@ import { ArchetypeCard } from "@/components/ArchetypeCard";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Button } from "@/components/ui/button";
 import { archetypes } from "@/lib/content";
-import { ArrowLeft, ArrowRight, Check, Compass, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Compass, Sparkles, AlertCircle, Key } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import * as Icons from "lucide-react";
+import { streamSynthesis, hasApiKey, setApiKey } from "@/lib/ai-service";
 
 const ModulePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -25,12 +27,14 @@ const ModulePage = () => {
 
   const modState = getModuleState(moduleId);
   const [step, setStep] = useState(modState.currentStep || 0);
-  const [showAi, setShowAi] = useState(false);
   const [synthesizing, setSynthesizing] = useState(false);
+  const [synthesisText, setSynthesisText] = useState('');
+  const [synthesisError, setSynthesisError] = useState<string | null>(null);
+  const [showSynthesisKeyForm, setShowSynthesisKeyForm] = useState(false);
+  const [synthApiKeyInput, setSynthApiKeyInput] = useState('');
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setShowAi(false);
   }, [step]);
 
   if (!moduleContent || !isModuleUnlocked(moduleId)) {
@@ -47,7 +51,6 @@ const ModulePage = () => {
 
   const handleExerciseSave = (data: any) => {
     saveExercise(moduleId, step, data);
-    if (!showAi) setShowAi(true);
   };
 
   const handleNext = () => {
@@ -61,13 +64,74 @@ const ModulePage = () => {
     navigate("/journey");
   };
 
-  const handleSynthesize = () => {
+  const handleSynthesize = async () => {
+    if (!hasApiKey()) {
+      setShowSynthesisKeyForm(true);
+      return;
+    }
+
     setSynthesizing(true);
-    setTimeout(() => {
-      const statement = "To use my gift of deep understanding and creative expression to help others find their own path to meaning — bridging the gap between who they are and who they're becoming.";
-      setIkigaiStatement(statement);
+    setSynthesisText('');
+    setSynthesisError(null);
+
+    try {
+      const fullText = await streamSynthesis(
+        state.modules,
+        state.selectedWorldNeeds,
+        state.timelineEvents,
+        state.archetypeResult,
+        (text) => {
+          setSynthesisText(text);
+        }
+      );
+
+      // Extract just the Ikigai statement from the full response
+      // The AI returns both statement and threads; store the full response
+      setIkigaiStatement(fullText);
       setSynthesizing(false);
-    }, 3000);
+    } catch (err: any) {
+      if (err.message === 'NO_API_KEY') {
+        setShowSynthesisKeyForm(true);
+      } else if (err.message === 'INVALID_API_KEY') {
+        setSynthesisError('Invalid API key. Please check your key and try again.');
+        setShowSynthesisKeyForm(true);
+      } else {
+        setSynthesisError(err.message || 'Failed to generate synthesis. Please try again.');
+      }
+      setSynthesizing(false);
+    }
+  };
+
+  const handleSaveSynthesisKey = () => {
+    if (synthApiKeyInput.trim()) {
+      setApiKey(synthApiKeyInput.trim());
+      setSynthApiKeyInput('');
+      setShowSynthesisKeyForm(false);
+      setSynthesisError(null);
+      setTimeout(() => handleSynthesize(), 100);
+    }
+  };
+
+  // Compute userResponse string for AI coaching based on exercise type
+  const getUserResponse = (): string => {
+    if (!currentStepData.exercise) return '';
+    const type = currentStepData.exercise.type;
+    if (type === 'freetext' || type === 'visualization') {
+      return exerciseData.response || '';
+    }
+    if (type === 'multiselect') {
+      return (exerciseData.selected || []).join(', ');
+    }
+    if (type === 'ranking') {
+      return (exerciseData.order || []).join(', ');
+    }
+    if (type === 'cardselect') {
+      return state.selectedWorldNeeds.join(', ');
+    }
+    if (type === 'timeline') {
+      return state.timelineEvents.map((e: any) => `${e.year}: ${e.description}`).join('; ');
+    }
+    return '';
   };
 
   return (
@@ -140,13 +204,13 @@ const ModulePage = () => {
               {currentStepData.exercise.type === 'cardselect' && (
                 <ExerciseCardSelect
                   selected={state.selectedWorldNeeds}
-                  onSave={(selected) => { setWorldNeeds(selected); setShowAi(true); }}
+                  onSave={(selected) => { setWorldNeeds(selected); }}
                 />
               )}
               {currentStepData.exercise.type === 'timeline' && (
                 <ExerciseTimeline
                   events={state.timelineEvents}
-                  onSave={(events) => { setTimelineEvents(events); setShowAi(true); }}
+                  onSave={(events) => { setTimelineEvents(events); }}
                 />
               )}
             </div>
@@ -172,7 +236,48 @@ const ModulePage = () => {
           {/* Module 6 synthesis */}
           {moduleId === 6 && isLastStep && (
             <div className="space-y-6 pt-4">
-              {!state.ikigaiStatement && !synthesizing && (
+              {/* API Key form for synthesis */}
+              {showSynthesisKeyForm && (
+                <div className="bg-background/60 rounded-lg p-4 space-y-3 border border-border/60">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Key className="h-4 w-4" />
+                    <span>Enter your OpenAI API key to generate your Ikigai</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <Input
+                      type="password"
+                      value={synthApiKeyInput}
+                      onChange={(e) => setSynthApiKeyInput(e.target.value)}
+                      placeholder="sk-..."
+                      className="bg-background"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') handleSaveSynthesisKey();
+                      }}
+                    />
+                    <Button variant="warm" size="sm" onClick={handleSaveSynthesisKey}>
+                      Save
+                    </Button>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Your key is stored locally in your browser and never sent to our servers.
+                  </p>
+                </div>
+              )}
+
+              {/* Synthesis error */}
+              {synthesisError && (
+                <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-3 flex items-start gap-2">
+                  <AlertCircle className="h-4 w-4 text-destructive mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-sm text-destructive">{synthesisError}</p>
+                    <Button variant="ghost" size="sm" className="mt-2 text-xs" onClick={handleSynthesize}>
+                      Try again
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              {!state.ikigaiStatement && !synthesizing && !showSynthesisKeyForm && (
                 <div className="text-center">
                   <Button variant="hero" size="lg" onClick={handleSynthesize} className="px-8 py-6 text-lg">
                     <Sparkles className="h-5 w-5 mr-2" /> Generate My Ikigai
@@ -180,36 +285,57 @@ const ModulePage = () => {
                 </div>
               )}
               {synthesizing && (
-                <div className="text-center py-12 space-y-4">
-                  <div className="flex justify-center gap-2">
-                    {[0, 1, 2, 3, 4].map(i => (
-                      <div
-                        key={i}
-                        className="w-3 h-3 rounded-full bg-accent"
-                        style={{ animation: `breathe 2s ease-in-out ${i * 0.3}s infinite` }}
-                      />
-                    ))}
+                <div className="space-y-6 py-4">
+                  <div className="text-center space-y-4">
+                    <div className="flex justify-center gap-2">
+                      {[0, 1, 2, 3, 4].map(i => (
+                        <div
+                          key={i}
+                          className="w-3 h-3 rounded-full bg-accent"
+                          style={{ animation: `breathe 2s ease-in-out ${i * 0.3}s infinite` }}
+                        />
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground italic font-serif">Synthesizing your journey...</p>
                   </div>
-                  <p className="text-muted-foreground italic font-serif">Synthesizing your journey...</p>
+                  {/* Show streaming synthesis text */}
+                  {synthesisText && (
+                    <div className="border-2 border-accent/20 rounded-2xl p-8 bg-accent/5 animate-fade-slide-in">
+                      <p className="text-lg font-serif leading-relaxed text-primary whitespace-pre-wrap">
+                        {synthesisText}
+                        <span className="inline-block w-1.5 h-4 bg-accent/60 animate-pulse ml-0.5 align-text-bottom" />
+                      </p>
+                    </div>
+                  )}
                 </div>
               )}
-              {state.ikigaiStatement && (
-                <div className="text-center py-8 space-y-6 animate-fade-slide-in">
+              {state.ikigaiStatement && !synthesizing && (
+                <div className="py-8 space-y-6 animate-fade-slide-in">
                   <div className="border-2 border-accent/30 rounded-2xl p-8 bg-accent/5">
-                    <p className="text-2xl font-serif leading-relaxed text-primary italic">
-                      "{state.ikigaiStatement}"
+                    <p className="text-lg font-serif leading-relaxed text-primary whitespace-pre-wrap">
+                      {state.ikigaiStatement}
                     </p>
                   </div>
-                  <Button variant="warm" onClick={() => navigate("/export")}>
-                    Export My Journey
-                  </Button>
+                  <div className="text-center">
+                    <Button variant="warm" onClick={() => navigate("/export")}>
+                      Export My Journey
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>
           )}
 
-          {/* AI coaching */}
-          <AiCoachingPanel visible={showAi} />
+          {/* AI coaching - shows for exercise steps */}
+          {currentStepData.exercise && (
+            <AiCoachingPanel
+              moduleId={moduleId}
+              exercisePrompt={currentStepData.exercise.prompt}
+              exerciseGuidance={currentStepData.exercise.guidance}
+              followUpPrompt={currentStepData.exercise.followUpPrompt}
+              userResponse={getUserResponse()}
+            />
+          )}
 
           {/* Navigation */}
           <div className="flex items-center justify-between pt-6 border-t border-border/40">

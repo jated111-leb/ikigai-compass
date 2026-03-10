@@ -101,6 +101,16 @@ export const module2: ModuleData = {
           id: "m2-e3",
           type: "freetext",
           prompt:
+            "Think about what bothered you in the news or on social media this past week. Name three things — and for each, ask: why does this bother ME specifically? What personal experience connects me to this issue?",
+          guidance:
+            "Your emotional reactions to the news are data. They reveal where your compassion lives. Don't dismiss your reactions — trace them back to their source.",
+          placeholder:
+            "Issue 1: ... Why it bothers me: ...\nIssue 2: ... Why it bothers me: ...\nIssue 3: ... Why it bothers me: ...",
+        },
+        {
+          id: "m2-e4",
+          type: "freetext",
+          prompt:
             "If you could fix one thing in the world — no constraints, unlimited resources — what would it be and why?",
           guidance:
             "This is about desire, not practicality. What would you change if you had a magic wand?",
@@ -126,6 +136,12 @@ export const module2: ModuleData = {
         },
         {
           id: "m2-s2-c2",
+          type: "framework",
+          content:
+            "Viktor Frankl's logotherapy offers a key insight called dereflection: the idea that meaning is found not by obsessing over yourself, but by redirecting your attention outward — toward a cause to serve or a person to love. When you shift focus from 'What is wrong with me?' to 'What can I give?', suffering transforms from a dead weight into fuel. This is not denial — it is the radical act of converting pain into purpose.",
+        },
+        {
+          id: "m2-s2-c3",
           type: "quote",
           quote: {
             text: "The more one forgets themselves, by giving themselves to a cause to serve, or another person to love — the more human they are and the more they actualize themselves.",
@@ -133,7 +149,7 @@ export const module2: ModuleData = {
           },
         },
         {
-          id: "m2-s2-c3",
+          id: "m2-s2-c4",
           type: "callout",
           content:
             "This section asks you to touch difficult material. Go at your own pace. You can write as much or as little as feels right. There is no requirement to share everything — only what you are ready to look at.",
@@ -141,7 +157,7 @@ export const module2: ModuleData = {
       ],
       exercises: [
         {
-          id: "m2-e4",
+          id: "m2-e5",
           type: "freetext",
           prompt:
             "What has been the most significant suffering or hardship in your life? What wound have you carried?",
@@ -153,7 +169,7 @@ export const module2: ModuleData = {
             "How has this experience changed the way you see the world? Has it made you more sensitive to certain kinds of pain in others?",
         },
         {
-          id: "m2-e5",
+          id: "m2-e6",
           type: "freetext",
           prompt:
             "What in your past experience makes you passionate about the problems you identified in the previous step?",
@@ -163,7 +179,7 @@ export const module2: ModuleData = {
             "Explore the connection between your personal pain and the world's pain...",
         },
         {
-          id: "m2-e6",
+          id: "m2-e7",
           type: "freetext",
           prompt:
             "Awareness of your pain is the ultimate tool in changing your attitude. What has your suffering taught you? What strength or sensitivity has it given you?",
@@ -191,7 +207,7 @@ export const module2: ModuleData = {
           id: "m2-s3-c2",
           type: "framework",
           content:
-            "The shadow is all that we have pushed back into the unconscious for fear of being rejected by people important in our lives. Once you've spotted aspects of your persona — the mask you wear — ask yourself what quality or trait you had to suppress in order to be appreciated and loved. For example: if you have wanted to be recognized as a gentle, generous, and smiling person, you have most likely had to hide your aggressiveness, your self-interest, and your outbursts of frustration. These qualities that you have been inclined to put on the back burner form the facets of your shadow.",
+            "Psychologist Jean Monbourquette, whose work on shadow integration forms the backbone of this module, describes the shadow as all that we have pushed back into the unconscious for fear of being rejected by people important in our lives. Once you've spotted aspects of your persona — the mask you wear — ask yourself what quality or trait you had to suppress in order to be appreciated and loved. For example: if you have wanted to be recognized as a gentle, generous, and smiling person, you have most likely had to hide your aggressiveness, your self-interest, and your outbursts of frustration. These qualities that you have been inclined to put on the back burner form the facets of your shadow.",
         },
         {
           id: "m2-s3-c3",
@@ -208,7 +224,7 @@ export const module2: ModuleData = {
       ],
       exercises: [
         {
-          id: "m2-e7",
+          id: "m2-e8",
           type: "freetext",
           prompt:
             "What image do you try to project to the world? What kind of person do you want others to see you as?",
@@ -220,7 +236,7 @@ export const module2: ModuleData = {
             "What quality or trait did you have to suppress in order to maintain that image?",
         },
         {
-          id: "m2-e8",
+          id: "m2-e9",
           type: "freetext",
           prompt:
             "What parts of yourself have you hidden, denied, or pushed away because they felt unacceptable?",
@@ -230,14 +246,36 @@ export const module2: ModuleData = {
             "Describe the qualities you've suppressed...",
         },
         {
-          id: "m2-e9",
+          id: "m2-e10",
           type: "freetext",
           prompt:
             "Try saying to yourself: \"I have the right to be [your suppressed quality].\" What emotions come up when you say that?",
           guidance:
-            "This is the taming exercise. Write down the quality, say it aloud if you can, and notice what you feel. Confusion? Relief? Guilt? Energy? All are valid.",
+            "This is the taming exercise from Monbourquette's shadow work. Write down the quality, say it aloud if you can, and notice what you feel. Confusion? Relief? Guilt? Energy? All are valid.",
           placeholder:
             "Describe the quality and the emotions that arise...",
+        },
+        {
+          id: "m2-e11",
+          type: "freetext",
+          prompt:
+            "Is there someone who gets on your nerves, irritates you, or annoys you to the point of obsession? Describe what about them bothers you — then ask: could this be a part of my own shadow that I am projecting onto them?",
+          guidance:
+            "Monbourquette calls this shadow projection. The traits that trigger us most intensely in others are often the traits we have disowned in ourselves. The person who irritates you is holding up a mirror. What do you see?",
+          placeholder:
+            "Describe the person and the trait that bothers you, then explore whether it's your own shadow...",
+          followUpPrompt:
+            "If you could have an imagined conversation with this person — putting yourself in their shoes — what would they say about why they are the way they are? And what would you learn?",
+        },
+        {
+          id: "m2-e12",
+          type: "freetext",
+          prompt:
+            "What topics of conversation do you actively avoid? In what situations do you feel most inferior or defensive? What do these avoidances reveal about the parts of yourself you haven't yet accepted?",
+          guidance:
+            "The shadow hides in your avoidances. The topics you won't discuss, the situations where you feel small, and the comparisons that sting — all point toward something you have not yet integrated.",
+          placeholder:
+            "Name your avoidances and what they reveal...",
         },
       ],
     },
@@ -265,7 +303,7 @@ export const module2: ModuleData = {
       ],
       exercises: [
         {
-          id: "m2-e10",
+          id: "m2-e13",
           type: "freetext",
           prompt:
             "Looking at your wound and your passion side by side — where do they intersect? What cause or contribution sits at the meeting point of what you love and what has hurt you?",
@@ -277,7 +315,7 @@ export const module2: ModuleData = {
             "If you imagine standing at this intersection for the rest of your life — making it your life's work — how does that feel?",
         },
         {
-          id: "m2-e11",
+          id: "m2-e14",
           type: "freetext",
           prompt:
             "How might your personal suffering become a source of strength or guidance for others who face similar challenges?",

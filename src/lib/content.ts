@@ -66,6 +66,7 @@ function convertModule(mod: ModuleData): ModuleContent {
             prompt: ex.prompt,
             placeholder: ex.placeholder,
             guidance: ex.guidance,
+            followUpPrompt: ex.followUpPrompt,
             options: ex.options?.map(o => typeof o === 'string' ? o : o.label),
           },
         });

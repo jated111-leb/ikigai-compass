@@ -36,6 +36,12 @@ export const module4: ModuleData = {
     },
     {
       id: "m4-intro-4",
+      type: "paragraph",
+      content:
+        "Our culture promotes a kind of hyperindividualism — the idea that you are a separate self, competing against other separate selves for scarce resources. This worldview creates immense suffering. It disconnects us from community, from the natural world, and from the shared purpose that gives life meaning. As Albert Einstein wrote: 'A human being is a part of the whole, called by us the universe. He experiences himself, his thoughts and feelings, as something separated from the rest — a kind of optical delusion of consciousness. This delusion is a kind of prison for us, restricting us to our personal desires and to affection for a few persons nearest to us.'",
+    },
+    {
+      id: "m4-intro-5",
       type: "quote",
       quote: {
         text: "Until he extends his circle of compassion to include all living things, man will not himself find peace.",
@@ -43,13 +49,13 @@ export const module4: ModuleData = {
       },
     },
     {
-      id: "m4-intro-5",
+      id: "m4-intro-6",
       type: "paragraph",
       content:
-        "Take deep responsibility for the impact that you have during your life while you are here. Do all of the study, all the training, all the application that you need to empower the kind of impact you want to have. In this module, you will explore five domains of world need — and discover which ones call to you.",
+        "Take deep responsibility for the impact that you have during your life while you are here. Do all of the study, all the training, all the application that you need to empower the kind of impact you want to have. Research on Ikigai — the Japanese concept of 'a reason for being' — from the Okinawan centenarian studies shows that people with a clear sense of purpose live an average of seven years longer. Purpose is not a luxury — it is a biological necessity. In this module, you will explore five domains of world need — and discover which ones call to you.",
     },
     {
-      id: "m4-intro-6",
+      id: "m4-intro-7",
       type: "callout",
       content:
         "This module uses a visual explorer. Browse the five categories below, drill into the sub-topics, and mark the ones that resonate with you. You don't need to pick the 'most important' cause — pick the ones that genuinely move you. Your emotional response is your compass.",
@@ -78,6 +84,12 @@ export const module4: ModuleData = {
           content:
             "This perspective helps us step outside the stories we have been told about what matters and what is 'just how things are.' Many of humanity's greatest problems persist not because they are unsolvable, but because we have normalized them.",
         },
+        {
+          id: "m4-s1-c3",
+          type: "framework",
+          content:
+            "Seeing the world's needs requires empathy — and empathy has three distinct components:\n\n1. Cognitive empathy — the ability to understand another person's perspective and mental state. Seeing the world through their eyes.\n\n2. Affective empathy — actually feeling what another person feels. Your nervous system resonating with their joy or pain.\n\n3. Compassionate empathy — being moved to act. Not just understanding or feeling, but doing something about it.\n\nMost people are strong in one or two of these, and weaker in the third. Your particular empathy profile shapes which world problems call to you — and how you are naturally equipped to respond.",
+        },
       ],
       exercises: [
         {
@@ -91,6 +103,16 @@ export const module4: ModuleData = {
             "Describe what you'd see with alien eyes...",
           followUpPrompt:
             "Why do you think this particular issue stands out to you? Is there a connection to what you explored in the Inward Journey?",
+        },
+        {
+          id: "m4-e2",
+          type: "freetext",
+          prompt:
+            "Name three specific changes you want to see in your society — in your community, your country, or the world at large. For each, describe what would be different if this change happened.",
+          guidance:
+            "Be specific. Not 'better education' but 'every child has access to a mentor who believes in them.' Not 'less inequality' but 'no one in my city sleeps hungry.' The more specific your vision, the more actionable it becomes.",
+          placeholder:
+            "Change 1: ... What would be different: ...\nChange 2: ... What would be different: ...\nChange 3: ... What would be different: ...",
         },
       ],
     },
@@ -122,7 +144,7 @@ export const module4: ModuleData = {
       ],
       exercises: [
         {
-          id: "m4-e2",
+          id: "m4-e3",
           type: "card_select",
           prompt:
             "Explore the five categories below and select the topics that resonate with you. Click on a category to expand it, then toggle 'This resonates with me' on any sub-topic that moves you.",
@@ -142,18 +164,24 @@ export const module4: ModuleData = {
           id: "m4-s3-c1",
           type: "paragraph",
           content:
-            "Now let's connect what you've selected to what you discovered in the Inward Journey. Your purpose is not found in either your inner world or the outer world alone — it lives in the space between them. The Magical Blend is about creating and discovering meaning in that liminal space, fully participating in the mystery of life.",
+            "Now let's connect what you've selected to what you discovered in the Inward Journey. Your purpose is not found in either your inner world or the outer world alone — it lives in the space between them. The Magical Blend is the central philosophical stance of this entire journey: the understanding that meaning is neither purely discovered 'out there' nor purely invented 'in here.' It is co-created — a dance between self and world.",
         },
         {
           id: "m4-s3-c2",
           type: "framework",
           content:
-            "The Magical Blend: Modernism says we DISCOVER meaning 'out there' in the world, leading us to doggedly pursue absolute ideals and neglect our subjective experience. Postmodernism says we CREATE all meaning ourselves — so it is all imaginary, subjective, worthless — and we slip into nihilism. The truth is neither. We create-and-discover meaning, a dance in the liminal space — not self, not world, but a magical blend — where we are fully participating in the mystery of life and cosmos, continually creating and discovering meaning, as well as beauty, freedom, and divinity.",
+            "The Magical Blend: Modernism says we DISCOVER meaning 'out there' in the world, leading us to doggedly pursue absolute ideals and neglect our subjective experience. Postmodernism says we CREATE all meaning ourselves — so it is all imaginary, subjective, worthless — and we slip into nihilism. The truth is neither. We create-and-discover meaning, a dance in the liminal space — not self, not world, but a magical blend — where we are fully participating in the mystery of life and cosmos, continually creating and discovering meaning, as well as beauty, freedom, and divinity. This is not a philosophical abstraction — it is the lived reality of purpose. Your passions are real. The world's needs are real. Your purpose emerges in the sacred space where they meet.",
+        },
+        {
+          id: "m4-s3-c3",
+          type: "callout",
+          content:
+            "The intersection of your talent (Module 1), your trauma (Module 2), and the world's need (this module) is where your Special Purpose lives. You don't need to have all the answers. You need to stand at the right intersection.",
         },
       ],
       exercises: [
         {
-          id: "m4-e3",
+          id: "m4-e4",
           type: "freetext",
           prompt:
             "Looking at the world-need topics you selected — what connections do you see to your passions from Module 1 and your wounds from Module 2?",
@@ -165,7 +193,7 @@ export const module4: ModuleData = {
             "If you could dedicate the next chapter of your life to one of these intersections — inner passion meeting outer need — which one would it be?",
         },
         {
-          id: "m4-e4",
+          id: "m4-e5",
           type: "freetext",
           prompt:
             "What problem in the world do you feel most equipped to contribute to — not because you have all the answers, but because you understand the terrain?",

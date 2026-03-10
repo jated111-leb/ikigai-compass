@@ -46,6 +46,7 @@ export interface Exercise {
   placeholder?: string;
   options?: string[];
   guidance?: string;
+  followUpPrompt?: string;
 }
 
 export interface ModuleStep {

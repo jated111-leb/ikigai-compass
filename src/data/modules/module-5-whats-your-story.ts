@@ -81,6 +81,18 @@ export const module5: ModuleData = {
             author: "Adult Development Framework",
           },
         },
+        {
+          id: "m5-s1-c4",
+          type: "framework",
+          content:
+            "Letting go of imposed identities requires a kind of mourning. Psychologists identify seven stages in this process:\n\n1. Recognition — seeing the identity clearly for what it is\n2. Acknowledgment — admitting that it was given to you, not chosen\n3. Grief — feeling the loss of who you thought you were\n4. Anger — sometimes directed at those who imposed it\n5. Negotiation — trying to keep parts of the old identity while releasing others\n6. Acceptance — letting go of the identity without bitterness\n7. Integration — carrying the wisdom from the experience without being defined by it\n\nThis is not a linear process. You may cycle through these stages many times with different identities. The goal is not to strip yourself bare — it is to consciously choose which identities serve your authentic self.",
+        },
+        {
+          id: "m5-s1-c5",
+          type: "callout",
+          content:
+            "Humanity's understanding of reality has evolved through three worldviews: Theos (pre-modern) — meaning comes from God/gods/fate, and our role is submission. Mechanos (modern) — the universe is a machine, meaning is what we discover through reason and science. Participative (emerging) — we are active co-creators of meaning, participating in a living, evolving cosmos. Which worldview have you been operating from? Which one resonates now?",
+        },
       ],
       exercises: [
         {
@@ -164,9 +176,15 @@ export const module5: ModuleData = {
         },
         {
           id: "m5-s2-c3",
+          type: "paragraph",
+          content:
+            "Jung described synchronicity as 'meaningful coincidence' — events that are not causally connected but carry profound personal significance. As you map your timeline, pay attention to these moments: the book that appeared at the right time, the chance encounter that changed your direction, the crisis that opened a door you didn't know existed. These are not random. They are signposts — evidence that your life has a deeper coherence than your conscious mind can see.",
+        },
+        {
+          id: "m5-s2-c4",
           type: "callout",
           content:
-            "Add the events that truly mattered — not the ones that look good on a resume. Include losses, discoveries, relationships, failures, awakenings. Tag each event as positive, negative, or transformative. Look for the story your life has been telling.",
+            "Add the events that truly mattered — not the ones that look good on a resume. Include losses, discoveries, relationships, failures, awakenings. Pay special attention to synchronicities — moments that felt strangely guided or fated. Tag each event as positive, negative, or transformative. Look for the story your life has been telling.",
         },
       ],
       exercises: [
@@ -284,6 +302,12 @@ export const module5: ModuleData = {
         },
         {
           id: "m5-s4-c2",
+          type: "framework",
+          content:
+            "Jung's individuation reveals a critical distinction: the difference between the Ego Self and the Higher Self. The Ego Self is who you think you are — your conscious identity, your defenses, your strategies for survival. The Higher Self is who you actually are — the totality of your psyche, conscious and unconscious integrated. The Ego Self asks: 'How do I win?' The Higher Self asks: 'What am I here to give?' Individuation is the process of the Ego Self gradually surrendering to the Higher Self — not through defeat, but through recognition that the Higher Self contains a wisdom the ego cannot access alone.",
+        },
+        {
+          id: "m5-s4-c3",
           type: "quote",
           quote: {
             text: "There is a mysterious concordance between the movements of the soul and the calls of the universe.",

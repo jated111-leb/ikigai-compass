@@ -36,6 +36,12 @@ export const module6: ModuleData = {
     },
     {
       id: "m6-intro-4",
+      type: "framework",
+      content:
+        "Abraham Maslow's later work revealed a stage beyond self-actualization that he called self-transcendence — the point where purpose goes beyond the personal self entirely. Self-actualizing people ask: 'How do I become the best version of myself?' Self-transcending people ask: 'How do I serve something larger than myself?' Maslow found that the most fulfilled human beings were not those who had achieved personal greatness, but those who had given themselves to a cause, a community, or a calling that transcended their individual needs. This is the final move: from becoming yourself to giving yourself away.",
+    },
+    {
+      id: "m6-intro-5",
       type: "quote",
       quote: {
         text: "Your own self-actualization is compulsory. If you don't self-actualize, the universe is less without your participation.",
@@ -43,7 +49,7 @@ export const module6: ModuleData = {
       },
     },
     {
-      id: "m6-intro-5",
+      id: "m6-intro-6",
       type: "paragraph",
       content:
         "Competition becomes an obsolete concept when everyone identifies their unique role — as an emergent property of the whole, as an interconnected part of the universe with a unique contribution to make. When you find your gift, you are not competing with anyone. You are offering something that only you can give.",
@@ -220,6 +226,12 @@ export const module6: ModuleData = {
         },
         {
           id: "m6-s3-c4",
+          type: "paragraph",
+          content:
+            "Remember the Magical Blend from Module 4: meaning is neither purely discovered nor purely created — it is co-created in the liminal space between self and world. Your Ikigai statement is itself an act of Magical Blend. It draws on what was always there (your deepest nature) and brings it into focus through the act of naming it (your conscious choice). Jack Kornfield reminds us: 'In the end, just three things matter: How well we have lived. How well we have loved. How well we have learned to let go.'",
+        },
+        {
+          id: "m6-s3-c5",
           type: "callout",
           content:
             "When you click 'Generate My Ikigai,' the AI will read everything you have shared across all six modules and craft a personalized purpose statement. This statement is a starting point — not a final answer. You can refine it, return to it, and let it evolve as you do.",
@@ -228,6 +240,16 @@ export const module6: ModuleData = {
       exercises: [
         {
           id: "m6-e11",
+          type: "freetext",
+          prompt:
+            "Complete this sentence: 'No matter what happens in my life, I will always...' — What is the one commitment you would make to yourself that nothing could shake?",
+          guidance:
+            "This is not about career or achievement. It is about the way you show up in the world — the non-negotiable core of who you are. Steve Jobs said: 'Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do.' What will you always do, no matter what?",
+          placeholder:
+            "No matter what happens, I will always...",
+        },
+        {
+          id: "m6-e12",
           type: "freetext",
           prompt:
             "Before the AI synthesizes your journey — try writing your own purpose statement first. In one to three sentences, describe your reason for being.",

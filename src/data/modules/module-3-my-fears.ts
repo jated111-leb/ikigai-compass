@@ -129,6 +129,12 @@ export const module3: ModuleData = {
           content:
             "A future mother, terrified of the birth process, drew her strength and courage from the consideration of the great archetypal images that inhabited her. Thus linked to the power of the myth of the universal mother, she realized that she was no longer alone to live her adventure, but that she was in relation with all of humanity. Your fears, too, are not yours alone. They are shared by every person who has ever dared to live authentically.",
         },
+        {
+          id: "m3-s2-c3",
+          type: "framework",
+          content:
+            "Psychologist Abraham Maslow identified a pattern he called the Jonas Complex — named after the biblical Jonah who fled from his calling. It describes the fear of success: the unconscious avoidance of your own greatness. Many people are not afraid of failing — they are afraid of what happens if they actually succeed. New responsibilities, jealousy from others, loss of current identity, and the terrifying weight of living up to your potential. The Jonas Complex is one of the most common and least recognized obstacles to pursuing your mission.",
+        },
       ],
       exercises: [
         {
@@ -180,7 +186,7 @@ export const module3: ModuleData = {
           id: "m3-s3-c2",
           type: "framework",
           content:
-            "There are twelve common reasons why capable people use limiting thinking patterns. They fall into three modes:\n\nReactive Mode — Avoiding being controlled, maintaining independence:\n• Familiar: There is comfort in the familiar, rooted in the brain's need for security. Without managing this, we default to what we know.\n• Protectiveness: When we identify with an idea, role, or relationship, we defend it and resist alternatives.\n• Assertiveness: Needing to be heard or taken seriously, which blocks dialogue and new perspectives.\n• Isolation: Staying away from people we think will influence us in ways we don't want.\n\nEgo Mode — Need to belong, be seen, be remembered:\n• Hope: Pursuing hope based on personal beliefs rather than reality.\n• Discriminating: Wanting to control what influences us.\n• Creative: Manifesting outcomes in areas where we want to leave a legacy.\n• Accomplishment: Achieving personal goals and gaining recognition.\n\nPurpose Mode — Inability to see where to contribute:\n• Stewardship: Working for the whole without personal gain.\n• Fulfillment: Finding meaning in helping others accomplish their work.\n• Transcendence: Rising above pettiness with higher-order aims.\n• Wholeness: Considering everything that sustains and evolves the systems we are part of.",
+            "Researcher Carol Sanford identified twelve common reasons why capable people use limiting thinking patterns. They fall into three modes:\n\nReactive Mode — Avoiding being controlled, maintaining independence:\n• Familiar: There is comfort in the familiar, rooted in the brain's need for security. Without managing this, we default to what we know.\n• Protectiveness: When we identify with an idea, role, or relationship, we defend it and resist alternatives.\n• Assertiveness: Needing to be heard or taken seriously, which blocks dialogue and new perspectives.\n• Isolation: Staying away from people we think will influence us in ways we don't want.\n\nEgo Mode — Need to belong, be seen, be remembered:\n• Hope: Pursuing hope based on personal beliefs rather than reality.\n• Discriminating: Wanting to control what influences us.\n• Creative: Manifesting outcomes in areas where we want to leave a legacy.\n• Accomplishment: Achieving personal goals and gaining recognition.\n\nPurpose Mode — Inability to see where to contribute:\n• Stewardship: Working for the whole without personal gain.\n• Fulfillment: Finding meaning in helping others accomplish their work.\n• Transcendence: Rising above pettiness with higher-order aims.\n• Wholeness: Considering everything that sustains and evolves the systems we are part of.",
         },
       ],
       exercises: [
@@ -220,7 +226,7 @@ export const module3: ModuleData = {
           id: "m3-s4-c1",
           type: "paragraph",
           content:
-            "Humans have the power to influence the subconscious mind through repetition. By subjecting the subconscious mind on a daily basis with positive, constructive knowledge, we create firmly rooted beliefs in self-empowerment which replace old and unhelpful belief systems. If we take an idea and just hold it in our mind, we unconsciously start to do things that advance us towards that goal.",
+            "Humans have the power to influence the subconscious mind through repetition. By subjecting the subconscious mind on a daily basis with positive, constructive knowledge, we create firmly rooted beliefs in self-empowerment which replace old and unhelpful belief systems. As William James wrote: 'The big revolution of our generation is to discover that the human being transforms the external aspects of his life by changing his interior attitudes.' If we take an idea and just hold it in our mind, we unconsciously start to do things that advance us towards that goal. This is not magical thinking — it is the documented power of focused intention and sustained attention.",
         },
         {
           id: "m3-s4-c2",
@@ -272,6 +278,26 @@ export const module3: ModuleData = {
           followUpPrompt:
             "Is that price acceptable to you?",
         },
+        {
+          id: "m3-e11",
+          type: "freetext",
+          prompt:
+            "List your three biggest obstacles — then for each, name the talent, gift, or insight you gained precisely BECAUSE of that obstacle. What did it force you to develop?",
+          guidance:
+            "Every obstacle carries a hidden curriculum. The financial struggle that forced you to be resourceful. The rejection that made you resilient. The isolation that deepened your inner life. Map the gifts that came from your difficulties.",
+          placeholder:
+            "Obstacle 1: ... Gift gained: ...\nObstacle 2: ... Gift gained: ...\nObstacle 3: ... Gift gained: ...",
+        },
+        {
+          id: "m3-e12",
+          type: "freetext",
+          prompt:
+            "What is your metaphor for life? Is life a battle? A garden? A journey? A rough sea? A classroom? A game? Name your metaphor — then ask: how does this metaphor shape my behavior and my relationship to fear?",
+          guidance:
+            "The metaphors we use for life are not just poetic — they are perception filters that shape our actions. Someone who sees life as a battle will relate to fear differently than someone who sees life as a garden. Neither is wrong, but becoming aware of your metaphor gives you the power to choose a more empowering one.",
+          placeholder:
+            "My metaphor for life is... and it makes me...",
+        },
       ],
     },
 
@@ -296,7 +322,7 @@ export const module3: ModuleData = {
       ],
       exercises: [
         {
-          id: "m3-e11",
+          id: "m3-e13",
           type: "freetext",
           prompt:
             "In a few sentences, summarize what you have learned about yourself across these three modules. What is the clearest thing that has emerged?",
