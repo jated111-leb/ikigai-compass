@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import { useJourney } from "@/lib/store";
 import { modules } from "@/lib/content";
 import { ContentBlock } from "@/components/ContentBlock";
@@ -21,9 +22,10 @@ import { streamSynthesis, hasApiKey, setApiKey } from "@/lib/ai-service";
 const ModulePage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const moduleId = parseInt(id || "1");
   const moduleContent = modules.find(m => m.id === moduleId);
-  const { state, getModuleState, isModuleUnlocked, saveExercise, completeModule, setWorldNeeds, setTimelineEvents, setArchetype, setIkigaiStatement } = useJourney();
+  const { state, getModuleState, isModuleUnlocked, saveExercise, completeModule, setWorldNeeds, setTimelineEvents, setArchetype, setIkigaiStatement } = useJourney(user);
 
   const modState = getModuleState(moduleId);
   const [step, setStep] = useState(modState.currentStep || 0);

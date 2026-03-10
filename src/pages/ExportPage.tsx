@@ -1,14 +1,25 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { loadJourney } from "@/lib/store";
+import { useAuth } from "@/contexts/AuthContext";
+import { useJourney } from "@/lib/store";
 import { modules, worldNeedCategories, archetypes } from "@/lib/content";
 import { Button } from "@/components/ui/button";
-import { Printer } from "lucide-react";
+import { Printer, Loader2 } from "lucide-react";
 
 const ExportPage = () => {
   const navigate = useNavigate();
-  const journey = loadJourney();
+  const { user } = useAuth();
+  const { state: journey, journeyLoading } = useJourney(user);
 
-  if (!journey) {
+  if (journeyLoading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <Loader2 className="h-6 w-6 animate-spin text-accent" />
+      </div>
+    );
+  }
+
+  if (!journey || journey.currentModule <= 1) {
     navigate("/");
     return null;
   }
