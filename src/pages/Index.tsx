@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { loadJourney, clearJourney } from "@/lib/store";
+import { useAuth } from "@/contexts/AuthContext";
+import { useJourney, clearJourney } from "@/lib/store";
 import { modules } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
-import { ArrowRight, RotateCcw } from "lucide-react";
+import { ArrowRight, RotateCcw, Loader2 } from "lucide-react";
 import * as Icons from "lucide-react";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel,
@@ -13,11 +14,12 @@ import {
 
 const Index = () => {
   const navigate = useNavigate();
-  const existing = loadJourney();
-  const hasProgress = existing && existing.currentModule > 1;
+  const { user, loading: authLoading } = useAuth();
+  const { state, journeyLoading, resetJourney } = useJourney(user);
+  const hasProgress = user && state.currentModule > 1;
 
-  const handleStartFresh = () => {
-    clearJourney();
+  const handleStartFresh = async () => {
+    await resetJourney();
     navigate("/journey");
   };
 
@@ -41,7 +43,13 @@ const Index = () => {
           </p>
 
           <div className="flex flex-col items-center gap-3 pt-4">
-            {hasProgress ? (
+            {authLoading || journeyLoading ? (
+              <Loader2 className="h-6 w-6 animate-spin text-accent" />
+            ) : !user ? (
+              <Button variant="hero" size="lg" onClick={() => navigate("/login")} className="px-10 py-6 text-lg">
+                Sign In to Begin <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            ) : hasProgress ? (
               <>
                 <Button variant="hero" size="lg" onClick={() => navigate("/journey")} className="px-10 py-6 text-lg">
                   Continue Your Journey <ArrowRight className="ml-2 h-5 w-5" />

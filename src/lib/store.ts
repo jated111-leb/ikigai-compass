@@ -47,11 +47,14 @@ async function loadFromSupabase(userId: string): Promise<JourneyState | null> {
 }
 
 async function saveToSupabase(userId: string, state: JourneyState) {
-  await supabase.from('journeys').upsert({
-    user_id: userId,
-    state: state as unknown as Record<string, unknown>,
-    updated_at: new Date().toISOString(),
-  }, { onConflict: 'user_id' });
+  await supabase.from('journeys').upsert(
+    {
+      user_id: userId,
+      state: JSON.parse(JSON.stringify(state)),
+      updated_at: new Date().toISOString(),
+    } as any,
+    { onConflict: 'user_id' }
+  );
 }
 
 async function deleteFromSupabase(userId: string) {
