@@ -119,6 +119,28 @@ export const module5: ModuleData = {
             { id: "kegan-4-5", label: "Transitioning from 4 to 5", description: "I'm starting to hold multiple perspectives simultaneously. I see my own identity as more fluid and interconnected than I once did." },
           ],
         },
+        {
+          id: "m5-e4",
+          type: "freetext",
+          prompt:
+            "How did your family stand out from others in your community? What story did your family tell about itself — and how has that story shaped yours?",
+          guidance:
+            "Every family carries a narrative: 'We are the hardworking ones,' 'We are the creative ones,' 'We survive.' Your family's story is the first layer of your own identity. Which parts of it did you adopt? Which parts did you rebel against?",
+          placeholder:
+            "Describe your family's story and how it shaped your own...",
+        },
+        {
+          id: "m5-e5",
+          type: "freetext",
+          prompt:
+            "Are your beliefs and ethics rooted in deep introspection — or were they adopted from the larger narrative of your society, your family, your peers?",
+          guidance:
+            "This is the critical thinker's question. To find the superior and unique within yourself, you need to step away from the herd and question everything you held to be true. This fierce inquiry may lead to some alienation — but it is the essential starter to knowing who you truly are.",
+          placeholder:
+            "Examine which of your beliefs are truly yours vs. inherited...",
+          followUpPrompt:
+            "What is one belief you held for years that you now realize was never really yours? Where did it come from?",
+        },
       ],
     },
 
@@ -149,7 +171,7 @@ export const module5: ModuleData = {
       ],
       exercises: [
         {
-          id: "m5-e4",
+          id: "m5-e6",
           type: "timeline",
           prompt:
             "Build your life timeline. Add the key moments that shaped who you are — the events that changed your direction, opened your eyes, broke you down, or built you up.",
@@ -157,7 +179,7 @@ export const module5: ModuleData = {
             "Include: childhood memories that stuck, adolescent turning points, major life decisions, losses, discoveries, relationships that changed you, moments of clarity or confusion. For each event, tag it as positive, negative, or transformative.",
         },
         {
-          id: "m5-e5",
+          id: "m5-e7",
           type: "freetext",
           prompt:
             "Looking at your timeline — what patterns do you see? What themes repeat across different stages of your life?",
@@ -167,6 +189,16 @@ export const module5: ModuleData = {
             "Describe the patterns you see in your life story...",
           followUpPrompt:
             "If your life so far were a chapter in a larger story — what would the chapter title be? And what do you think the next chapter is about?",
+        },
+        {
+          id: "m5-e8",
+          type: "freetext",
+          prompt:
+            "Now look forward. What are your dreams for the future — the ones that would make your life truly amazing? List them freely, without filtering for what's 'realistic.'",
+          guidance:
+            "Knowing your personal dreams provides insight into who you are. This list will shift and alter over time — that's fine. Right now, just let yourself want what you want. Include everything: experiences, achievements, ways of living, relationships, contributions.",
+          placeholder:
+            "My dreams for the future...",
         },
       ],
     },
@@ -204,7 +236,7 @@ export const module5: ModuleData = {
       ],
       exercises: [
         {
-          id: "m5-e6",
+          id: "m5-e9",
           type: "card_select",
           prompt:
             "Browse the twelve archetypes below. Select the ones that resonate most strongly — the ones where you think: 'Yes, this is me.' Select up to 3.",
@@ -214,7 +246,7 @@ export const module5: ModuleData = {
           minSelections: 1,
         },
         {
-          id: "m5-e7",
+          id: "m5-e10",
           type: "freetext",
           prompt:
             "Why did you choose these archetypes? What about each one feels true to your experience?",
@@ -224,6 +256,16 @@ export const module5: ModuleData = {
             "Explain your connection to each archetype you selected...",
           followUpPrompt:
             "If these archetypes had to work together as a team inside you — what kind of mission would they naturally pursue?",
+        },
+        {
+          id: "m5-e11",
+          type: "freetext",
+          prompt:
+            "If you had to describe in three lines what makes you an original and unique being in the world — what would you say? Which of your qualities would you emphasize?",
+          guidance:
+            "Think about the intersection of your strengths, your experiences, and your archetype. What combination exists in you that exists in no one else? Intelligence, perseverance, helpfulness, humor, sensitivity, power, loyalty, creativity — what is your unique blend?",
+          placeholder:
+            "Describe what makes you unique in three lines...",
         },
       ],
     },
@@ -251,7 +293,19 @@ export const module5: ModuleData = {
       ],
       exercises: [
         {
-          id: "m5-e8",
+          id: "m5-e12",
+          type: "freetext",
+          prompt:
+            "Imagine your own eulogy. A close family member, a dear friend, and a colleague each speak about you. What qualities does your relative emphasize? How does your friend describe your human relationships? What does your colleague say about working with you?",
+          guidance:
+            "This exercise comes from Stephen Covey. It is not morbid — it is clarifying. By imagining what you want people to say about you at the end, you discover what truly matters to you now. Write what you would want them to honestly say.",
+          placeholder:
+            "Family member says...\nFriend says...\nColleague says...",
+          followUpPrompt:
+            "Is the person they are describing the person you are currently being? Where is the gap?",
+        },
+        {
+          id: "m5-e13",
           type: "freetext",
           prompt:
             "Based on everything you've explored — your passions, wounds, fears, the world's needs, your life story, and your archetype — who are you, really? Describe yourself as if introducing your deepest self to someone who truly wants to know.",
