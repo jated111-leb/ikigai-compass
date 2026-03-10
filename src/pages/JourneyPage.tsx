@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import { useJourney } from "@/lib/store";
 import { modules } from "@/lib/content";
 import { ModuleCard } from "@/components/ModuleCard";
@@ -17,7 +18,8 @@ const moduleThemeColors: Record<number, string> = {
 
 const JourneyPage = () => {
   const navigate = useNavigate();
-  const { state, isModuleUnlocked, getModuleState } = useJourney();
+  const { user } = useAuth();
+  const { state, isModuleUnlocked, getModuleState } = useJourney(user);
 
   const completedCount = modules.filter(m => getModuleState(m.id).completed).length;
   const overallProgress = (completedCount / modules.length) * 100;

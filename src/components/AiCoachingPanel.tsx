@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send, Key, AlertCircle, Loader2, Sparkles } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 import { useJourney } from "@/lib/store";
 import {
   streamCoachingResponse,
@@ -32,7 +33,8 @@ export function AiCoachingPanel({
   followUpPrompt,
   userResponse,
 }: AiCoachingPanelProps) {
-  const { state } = useJourney();
+  const { user } = useAuth();
+  const { state } = useJourney(user);
   const [messages, setMessages] = useState<Message[]>([]);
   const [streaming, setStreaming] = useState(false);
   const [started, setStarted] = useState(false);
