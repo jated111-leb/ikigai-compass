@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { loadJourney } from "@/lib/store";
 import { modules, worldNeedCategories, archetypes } from "@/lib/content";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Printer } from "lucide-react";
+import { Printer } from "lucide-react";
 
 const ExportPage = () => {
   const navigate = useNavigate();
@@ -30,18 +30,13 @@ const ExportPage = () => {
   const archetype = archetypes.find(a => a.id === journey.archetypeResult);
 
   return (
-    <div className="min-h-screen py-8 px-6">
+    <div className="py-8 px-6">
       <div className="max-w-2xl mx-auto">
         {/* Actions (hidden in print) */}
-        <div className="flex items-center justify-between mb-10 no-print">
-          <Button variant="ghost" size="sm" onClick={() => navigate("/journey")} className="gap-2">
-            <ArrowLeft className="h-4 w-4" /> Journey Map
+        <div className="flex justify-end mb-10 no-print">
+          <Button variant="warm" onClick={() => window.print()} className="gap-2">
+            <Printer className="h-4 w-4" /> Print / Save PDF
           </Button>
-          <div className="flex gap-2">
-            <Button variant="warm" onClick={() => window.print()} className="gap-2">
-              <Printer className="h-4 w-4" /> Print / Save PDF
-            </Button>
-          </div>
         </div>
 
         {/* Title */}

@@ -13,7 +13,7 @@ import { ArchetypeCard } from "@/components/ArchetypeCard";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Button } from "@/components/ui/button";
 import { archetypes } from "@/lib/content";
-import { ArrowLeft, ArrowRight, Check, Compass, Sparkles, AlertCircle, Key } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Sparkles, AlertCircle, Key } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import * as Icons from "lucide-react";
 import { streamSynthesis, hasApiKey, setApiKey } from "@/lib/ai-service";
@@ -134,23 +134,20 @@ const ModulePage = () => {
     return '';
   };
 
-  return (
-    <div className="min-h-screen py-8 px-6">
-      <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <Button variant="ghost" size="sm" onClick={() => navigate("/journey")} className="gap-2">
-            <ArrowLeft className="h-4 w-4" /> Journey Map
-          </Button>
-          <div className="flex items-center gap-2 text-accent">
-            <Compass className="h-4 w-4" />
-          </div>
-        </div>
+  // Module theme colors
+  const themeColors: Record<number, string> = { 1: '#d97706', 2: '#7c3aed', 3: '#dc2626', 4: '#059669', 5: '#2563eb', 6: '#d97706' };
+  const themeColor = themeColors[moduleId] || '#d97706';
 
+  return (
+    <div className="py-8 px-6">
+      <div className="max-w-2xl mx-auto">
         {/* Module header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-accent/15 text-accent flex items-center justify-center">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center"
+              style={{ backgroundColor: `${themeColor}15`, color: themeColor }}
+            >
               <IconComp className="h-5 w-5" />
             </div>
             <div>

@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import Index from "./pages/Index.tsx";
 import JourneyPage from "./pages/JourneyPage.tsx";
 import ModulePage from "./pages/ModulePage.tsx";
@@ -17,13 +19,19 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/journey" element={<JourneyPage />} />
-          <Route path="/module/:id" element={<ModulePage />} />
-          <Route path="/export" element={<ExportPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="min-h-screen flex flex-col">
+          <Header />
+          <main className="flex-1">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/journey" element={<JourneyPage />} />
+              <Route path="/module/:id" element={<ModulePage />} />
+              <Route path="/export" element={<ExportPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

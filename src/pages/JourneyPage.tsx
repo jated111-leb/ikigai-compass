@@ -4,7 +4,16 @@ import { modules } from "@/lib/content";
 import { ModuleCard } from "@/components/ModuleCard";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Compass } from "lucide-react";
+
+// Module theme colors from the data pack
+const moduleThemeColors: Record<number, string> = {
+  1: '#d97706',
+  2: '#7c3aed',
+  3: '#dc2626',
+  4: '#059669',
+  5: '#2563eb',
+  6: '#d97706',
+};
 
 const JourneyPage = () => {
   const navigate = useNavigate();
@@ -23,19 +32,8 @@ const JourneyPage = () => {
   const outwardModules = modules.filter(m => m.journeyPhase === 'outward');
 
   return (
-    <div className="min-h-screen py-8 px-6">
+    <div className="py-8 px-6">
       <div className="max-w-2xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <Button variant="ghost" size="sm" onClick={() => navigate("/")} className="gap-2">
-            <ArrowLeft className="h-4 w-4" /> Home
-          </Button>
-          <div className="flex items-center gap-2 text-accent">
-            <Compass className="h-5 w-5" />
-            <span className="font-serif font-semibold text-primary">Your Journey</span>
-          </div>
-        </div>
-
         {/* Progress */}
         <div className="mb-10">
           <ProgressBar value={overallProgress} label={`${completedCount} of ${modules.length} modules complete`} />
@@ -49,7 +47,7 @@ const JourneyPage = () => {
           </div>
           <div className="space-y-3">
             {inwardModules.map(m => (
-              <ModuleCard key={m.id} moduleId={m.id} title={m.title} description={m.description} icon={m.icon} status={getStatus(m.id)} />
+              <ModuleCard key={m.id} moduleId={m.id} title={m.title} description={m.description} icon={m.icon} status={getStatus(m.id)} themeColor={moduleThemeColors[m.id]} />
             ))}
           </div>
         </div>
@@ -62,7 +60,7 @@ const JourneyPage = () => {
           </div>
           <div className="space-y-3">
             {outwardModules.map(m => (
-              <ModuleCard key={m.id} moduleId={m.id} title={m.title} description={m.description} icon={m.icon} status={getStatus(m.id)} />
+              <ModuleCard key={m.id} moduleId={m.id} title={m.title} description={m.description} icon={m.icon} status={getStatus(m.id)} themeColor={moduleThemeColors[m.id]} />
             ))}
           </div>
         </div>

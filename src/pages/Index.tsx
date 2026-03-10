@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { loadJourney, clearJourney } from "@/lib/store";
 import { modules } from "@/lib/content";
 import { Button } from "@/components/ui/button";
-import { Compass, ArrowRight, RotateCcw } from "lucide-react";
+import { Logo } from "@/components/Logo";
+import { ArrowRight, RotateCcw } from "lucide-react";
 import * as Icons from "lucide-react";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel,
@@ -21,22 +22,22 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div>
       {/* Hero */}
-      <section className="min-h-[80vh] flex flex-col items-center justify-center px-6 text-center">
+      <section className="min-h-[70vh] flex flex-col items-center justify-center px-6 text-center">
         <div className="max-w-2xl mx-auto space-y-8">
-          <div className="flex items-center justify-center gap-2 text-accent">
-            <Compass className="h-8 w-8" />
+          <div className="flex justify-center">
+            <Logo size="lg" showText={false} />
           </div>
           <h1 className="text-5xl md:text-6xl font-serif font-bold text-primary leading-tight">
             Ikigai Journey
           </h1>
-          <p className="text-xl text-muted-foreground font-light leading-relaxed max-w-lg mx-auto">
-            Discover your purpose through guided self-exploration
+          <p className="text-lg text-accent font-serif italic">
+            A guided journey to discover your reason for being
           </p>
           <p className="text-foreground/70 leading-relaxed max-w-md mx-auto">
-            A contemplative journey through six modules that guide you from inner reflection 
-            to outer purpose — helping you find the intersection of passion, skill, and meaning.
+            Six modules that guide you from inner reflection
+            to outer purpose — helping you find the intersection of passion, wound, and meaning.
           </p>
 
           <div className="flex flex-col items-center gap-3 pt-4">
@@ -83,9 +84,14 @@ const Index = () => {
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
             {modules.map((mod) => {
               const IconComp = (Icons as any)[mod.icon] || Icons.Circle;
+              const themeColors: Record<number, string> = { 1: '#d97706', 2: '#7c3aed', 3: '#dc2626', 4: '#059669', 5: '#2563eb', 6: '#d97706' };
+              const color = themeColors[mod.id] || '#d97706';
               return (
                 <div key={mod.id} className="text-center space-y-3 p-6 rounded-xl bg-card/50 border border-border/40">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mx-auto">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto"
+                    style={{ backgroundColor: `${color}15`, color }}
+                  >
                     <IconComp className="h-5 w-5" />
                   </div>
                   <span className="text-xs text-muted-foreground font-medium">Module {mod.id}</span>
