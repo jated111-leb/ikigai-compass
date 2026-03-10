@@ -1,5 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
+import { supabase } from '@/integrations/supabase/client';
 import type { JourneyState, ExerciseData, TimelineEvent } from './types';
+import type { User } from '@supabase/supabase-js';
 
 const STORAGE_KEY = 'ikigai-journey';
 
@@ -15,7 +17,8 @@ const createInitialState = (): JourneyState => ({
   lastActiveAt: new Date().toISOString(),
 });
 
-export function loadJourney(): JourneyState | null {
+// localStorage helpers (fallback cache)
+function loadLocal(): JourneyState | null {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
@@ -24,25 +27,90 @@ export function loadJourney(): JourneyState | null {
   }
 }
 
-function saveJourney(state: JourneyState) {
-  state.lastActiveAt = new Date().toISOString();
+function saveLocal(state: JourneyState) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-export function clearJourney() {
+function clearLocal() {
   localStorage.removeItem(STORAGE_KEY);
 }
 
-export function useJourney() {
-  const [state, setState] = useState<JourneyState>(() => loadJourney() || createInitialState());
+// Supabase helpers
+async function loadFromSupabase(userId: string): Promise<JourneyState | null> {
+  const { data, error } = await supabase
+    .from('journeys')
+    .select('state')
+    .eq('user_id', userId)
+    .maybeSingle();
+  if (error || !data) return null;
+  return data.state as unknown as JourneyState;
+}
+
+async function saveToSupabase(userId: string, state: JourneyState) {
+  await supabase.from('journeys').upsert({
+    user_id: userId,
+    state: state as unknown as Record<string, unknown>,
+    updated_at: new Date().toISOString(),
+  }, { onConflict: 'user_id' });
+}
+
+async function deleteFromSupabase(userId: string) {
+  await supabase.from('journeys').delete().eq('user_id', userId);
+}
+
+// Public function to load journey (used by ExportPage, Index)
+export async function loadJourney(user: User | null): Promise<JourneyState | null> {
+  if (user) {
+    const remote = await loadFromSupabase(user.id);
+    if (remote) return remote;
+  }
+  return loadLocal();
+}
+
+export function clearJourney() {
+  clearLocal();
+}
+
+export function useJourney(user: User | null) {
+  const [state, setState] = useState<JourneyState>(createInitialState);
+  const [journeyLoading, setJourneyLoading] = useState(true);
+  const saveTimer = useRef<ReturnType<typeof setTimeout>>();
+  const userRef = useRef(user);
+  userRef.current = user;
+
+  // Load on mount / user change
+  useEffect(() => {
+    let cancelled = false;
+    setJourneyLoading(true);
+
+    (async () => {
+      const loaded = await loadJourney(user);
+      if (!cancelled) {
+        setState(loaded || createInitialState());
+        setJourneyLoading(false);
+      }
+    })();
+
+    return () => { cancelled = true; };
+  }, [user?.id]);
+
+  // Debounced Supabase sync
+  const syncToSupabase = useCallback((next: JourneyState) => {
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => {
+      const u = userRef.current;
+      if (u) saveToSupabase(u.id, next);
+    }, 1000);
+  }, []);
 
   const persist = useCallback((updater: (prev: JourneyState) => JourneyState) => {
     setState(prev => {
-      const next = updater(prev);
-      saveJourney(next);
+      const next = { ...updater(prev), lastActiveAt: new Date().toISOString() };
+      saveLocal(next); // immediate localStorage
+      syncToSupabase(next); // debounced remote
       return next;
     });
-  }, []);
+  }, [syncToSupabase]);
 
   const getModuleState = useCallback((moduleId: number) => {
     return state.modules[String(moduleId)] || { completed: false, currentStep: 0, exercises: {}, aiResponses: [] };
@@ -99,13 +167,15 @@ export function useJourney() {
     persist(prev => ({ ...prev, ikigaiStatement: statement }));
   }, [persist]);
 
-  const resetJourney = useCallback(() => {
-    clearJourney();
+  const resetJourney = useCallback(async () => {
+    clearLocal();
+    const u = userRef.current;
+    if (u) await deleteFromSupabase(u.id);
     setState(createInitialState());
   }, []);
 
   return {
-    state, getModuleState, isModuleUnlocked, saveExercise,
+    state, journeyLoading, getModuleState, isModuleUnlocked, saveExercise,
     completeModule, setWorldNeeds, setTimelineEvents,
     setArchetype, setIkigaiStatement, resetJourney,
   };
