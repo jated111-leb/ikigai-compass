@@ -112,18 +112,10 @@ export const module1: ModuleData = {
           id: "m1-e3",
           type: "freetext",
           prompt:
-            "When you walk into a bookstore, which section do you head for first? When you open a podcast app, what topics draw you in?",
+            "What topics do you naturally gravitate toward — in bookstores, podcasts, conversations? What could you explore for hours?",
           guidance:
-            "Your natural curiosities — the things you gravitate toward without being told to — are breadcrumbs from your deeper self.",
+            "Your natural curiosities — the things you gravitate toward without being told to — are breadcrumbs from your deeper self. Think about the subjects that light you up.",
           placeholder: "List the topics, genres, or subjects that pull you in...",
-        },
-        {
-          id: "m1-e4",
-          type: "freetext",
-          prompt: "What conversation topics light you up? What could you talk about for hours?",
-          guidance:
-            "Think about the times you've been in a conversation and completely lost track of time because the topic felt so alive.",
-          placeholder: "Describe the topics and what about them excites you...",
         },
       ],
     },
@@ -149,7 +141,7 @@ export const module1: ModuleData = {
       ],
       exercises: [
         {
-          id: "m1-e5",
+          id: "m1-e4",
           type: "freetext",
           prompt:
             "With what activities do you experience flow? When does your time fly?",
@@ -161,16 +153,7 @@ export const module1: ModuleData = {
             "What is it about this activity that pulls you in so completely? Is it the creation, the problem-solving, the connection, or something else?",
         },
         {
-          id: "m1-e6",
-          type: "freetext",
-          prompt:
-            "How would you choose to spend your time if you had no social and no professional obligations?",
-          guidance:
-            "Remove all external expectations. No one is watching. No one needs you to be anything. What would you do? This is how you know your true self.",
-          placeholder: "Describe your ideal, obligation-free days...",
-        },
-        {
-          id: "m1-e7",
+          id: "m1-e5",
           type: "freetext",
           prompt:
             "What do you find easy to do that others seem to struggle with?",
@@ -211,7 +194,7 @@ export const module1: ModuleData = {
       ],
       exercises: [
         {
-          id: "m1-e8",
+          id: "m1-e6",
           type: "freetext",
           prompt:
             "What did you love doing when you were a child? What did you dream of becoming?",
@@ -223,7 +206,7 @@ export const module1: ModuleData = {
             "Is there a thread connecting those childhood dreams to anything you still feel drawn to today?",
         },
         {
-          id: "m1-e9",
+          id: "m1-e7",
           type: "freetext",
           prompt:
             "Who were your heroes growing up? What people around you influenced you the most?",
@@ -232,7 +215,7 @@ export const module1: ModuleData = {
           placeholder: "List your heroes and what you admired about them...",
         },
         {
-          id: "m1-e10",
+          id: "m1-e8",
           type: "freetext",
           prompt:
             "What types of people did you especially NOT want to become? What forms of work repelled you?",
@@ -240,15 +223,6 @@ export const module1: ModuleData = {
             "What you reject is just as revealing as what you desire. Your aversions contain information about your authentic direction.",
           placeholder:
             "Describe the kinds of lives or careers that felt wrong to you...",
-        },
-        {
-          id: "m1-e11",
-          type: "freetext",
-          prompt:
-            "What attitudes did you have towards your dreams? Did you think they were achievable — or impossible?",
-          guidance:
-            "This question is about the relationship between you and your aspirations. Did you believe in them? Who or what made you doubt?",
-          placeholder: "Reflect on how you related to your own dreams...",
         },
       ],
     },
@@ -280,19 +254,7 @@ export const module1: ModuleData = {
       ],
       exercises: [
         {
-          id: "m1-e12",
-          type: "freetext",
-          prompt:
-            "Looking at the passions and activities you've described so far — what deeper aspiration do you think lies beneath them?",
-          guidance:
-            "Try to name the underlying pull. Is it beauty? Truth? Justice? Connection? Freedom? Creation? Healing? Mastery? Discovery? Love?",
-          placeholder:
-            "Look for the common thread beneath your passions...",
-          followUpPrompt:
-            "If you had to distill everything you've shared into one or two words — what are you really seeking through all of these activities?",
-        },
-        {
-          id: "m1-e13",
+          id: "m1-e9",
           type: "multiselect",
           prompt:
             "Which of these metapassions resonate most strongly with you? Select all that feel true.",
@@ -316,7 +278,7 @@ export const module1: ModuleData = {
           maxSelections: 4,
         },
         {
-          id: "m1-e14",
+          id: "m1-e10",
           type: "freetext",
           prompt:
             "Forget your job title. Ask yourself: what do you do that adds remarkable, distinctive value? What have you accomplished that you can unabashedly brag about?",
@@ -351,7 +313,7 @@ export const module1: ModuleData = {
       ],
       exercises: [
         {
-          id: "m1-e15",
+          id: "m1-e11",
           type: "freetext",
           prompt:
             "Looking at everything you've written in this module — what themes or patterns do you notice? What keeps showing up?",
