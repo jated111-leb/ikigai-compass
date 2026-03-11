@@ -18,10 +18,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
+
+      // Notify on every sign-in
+      if (event === 'SIGNED_IN' && session?.user?.email) {
+        supabase.functions.invoke('notify-login', {
+          body: { email: session.user.email, timestamp: new Date().toISOString() },
+        }).catch(() => {}); // fire and forget
+      }
     });
 
     supabase.auth.getSession().then(({ data: { session } }) => {
