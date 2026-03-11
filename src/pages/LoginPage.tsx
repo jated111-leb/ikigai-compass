@@ -5,6 +5,7 @@ import { Logo } from '@/components/Logo';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Mail, Loader2, CheckCircle } from 'lucide-react';
+import { isOnboardingComplete } from './OnboardingPage';
 
 const LoginPage = () => {
   const { user, loading } = useAuth();
@@ -22,7 +23,7 @@ const LoginPage = () => {
     );
   }
 
-  if (user) return <Navigate to="/journey" replace />;
+  if (user) return <Navigate to={isOnboardingComplete() ? "/journey" : "/onboarding"} replace />;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

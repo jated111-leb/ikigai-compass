@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/Logo";
 import { ArrowRight, RotateCcw, Loader2 } from "lucide-react";
 import * as Icons from "lucide-react";
+import { isOnboardingComplete } from "./OnboardingPage";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel,
   AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
@@ -77,7 +78,12 @@ const Index = () => {
                 </AlertDialog>
               </>
             ) : (
-              <Button variant="hero" size="lg" onClick={() => navigate("/journey")} className="px-10 py-6 text-lg">
+              <Button
+                variant="hero"
+                size="lg"
+                onClick={() => navigate(isOnboardingComplete() ? "/journey" : "/onboarding")}
+                className="px-10 py-6 text-lg"
+              >
                 Begin Your Journey <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             )}

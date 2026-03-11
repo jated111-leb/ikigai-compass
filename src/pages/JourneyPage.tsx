@@ -5,6 +5,8 @@ import { modules } from "@/lib/content";
 import { ModuleCard } from "@/components/ModuleCard";
 import { ProgressBar } from "@/components/ProgressBar";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
+import { isOnboardingComplete } from "./OnboardingPage";
 
 // Module theme colors from the data pack
 const moduleThemeColors: Record<number, string> = {
@@ -19,7 +21,21 @@ const moduleThemeColors: Record<number, string> = {
 const JourneyPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { state, isModuleUnlocked, getModuleState } = useJourney(user);
+  const { state, journeyLoading, isModuleUnlocked, getModuleState } = useJourney(user);
+
+  // Redirect first-time users to onboarding
+  if (!journeyLoading && state.currentModule <= 1 && !isOnboardingComplete()) {
+    navigate("/onboarding", { replace: true });
+    return null;
+  }
+
+  if (journeyLoading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <Loader2 className="h-6 w-6 animate-spin text-accent" />
+      </div>
+    );
+  }
 
   const completedCount = modules.filter(m => getModuleState(m.id).completed).length;
   const overallProgress = (completedCount / modules.length) * 100;
