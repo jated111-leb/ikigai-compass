@@ -222,6 +222,16 @@ export async function streamFollowUpResponse(
   return streamChat(messages, onChunk, { signal });
 }
 
+// ── Generic Completion (used by Mission Fit) ──
+
+export async function streamChatCompletion(
+  messages: ChatMessage[],
+  onChunk: (text: string) => void,
+  options?: { model?: string; maxTokens?: number; signal?: AbortSignal }
+): Promise<string> {
+  return streamChat(messages, onChunk, options);
+}
+
 // ── Module 6 Synthesis ──
 
 export async function streamSynthesis(
