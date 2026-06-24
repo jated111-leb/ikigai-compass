@@ -1,1 +1,7 @@
 project_id = "jhugycbaqdfdppfcwlta"
+
+# Trend-engine ingestion. JWT verification is off so it can be triggered by
+# cron / external schedulers; protect it instead with the INGEST_SECRET env
+# var (sent as the `x-ingest-key` header). It writes with the service role.
+[functions.ingest]
+verify_jwt = false
