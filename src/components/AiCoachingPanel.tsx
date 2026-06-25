@@ -162,17 +162,6 @@ export function AiCoachingPanel({
     }
   }, [followUp, streaming, messages, buildContext]);
 
-  // Save API key and retry
-  const handleSaveApiKey = useCallback(() => {
-    if (apiKeyInput.trim()) {
-      setApiKey(apiKeyInput.trim());
-      setApiKeyInput("");
-      setShowApiKeyForm(false);
-      setError(null);
-      // Trigger coaching after saving key
-      setTimeout(() => handleStart(), 100);
-    }
-  }, [apiKeyInput, handleStart]);
 
   // Don't show anything if user hasn't typed enough
   if (!userResponse || userResponse.trim().length < 10) return null;
