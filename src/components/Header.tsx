@@ -16,7 +16,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-sm border-b border-accent/20">
+    <header className="sticky top-0 z-40 bg-background/70 backdrop-blur-xl border-b border-accent/15">
       <div className="max-w-3xl mx-auto flex items-center justify-between px-6 py-3">
         <button onClick={() => navigate("/")} className="hover:opacity-80 transition-opacity">
           <Logo size="sm" />
