@@ -208,55 +208,46 @@ async function collectProductHunt(): Promise<RawCandidate[]> {
 }
 
 async function collectGoogleTrends(): Promise<RawCandidate[]> {
-  // Unofficial daily trending searches endpoint (no key required).
+  // Public Google Trends "Trending Now" RSS feed — no key required.
   const geos = ["US", "GB", "DE", "IN", "BR"];
   const out: RawCandidate[] = [];
   for (const geo of geos) {
     try {
-      const r = await fetch(
-        `https://trends.google.com/trends/api/dailytrends?hl=en-US&tz=0&geo=${geo}&ns=15`,
-        { headers: { "User-Agent": "Mozilla/5.0 ikigai-trend-engine" } },
-      );
+      const r = await fetch(`https://trends.google.com/trending/rss?geo=${geo}`, {
+        headers: { "User-Agent": "Mozilla/5.0 ikigai-trend-engine" },
+      });
       if (!r.ok) continue;
-      const text = await r.text();
-      // Response is prefixed with )]}',\n to prevent JSON hijacking.
-      const json = JSON.parse(text.replace(/^\)\]\}'\,?\n?/, ""));
-      const days = json?.default?.trendingSearchesDays ?? [];
-      for (const day of days) {
-        for (const t of (day.trendingSearches ?? [])) {
-          const query = t?.title?.query;
-          if (!query) continue;
-          const article = t?.articles?.[0];
-          const url = article?.url;
-          const dedupe = `gtrends:${geo}:${day.date}:${query}`;
-          out.push({
-            dedupe_key: dedupe,
-            url: url ?? `https://trends.google.com/trends/explore?geo=${geo}&q=${encodeURIComponent(query)}`,
-            title: query,
-            snippet: truncate(article?.title ? `${article.title} — ${article.snippet ?? ""}` : t?.formattedTraffic),
-            payload: {
-              geo,
-              date: day.date,
-              traffic: t?.formattedTraffic,
-              related: (t?.relatedQueries ?? []).map((q: any) => q.query),
-              article_source: article?.source,
-            },
-            published_at: day.date
-              ? new Date(`${day.date.slice(0,4)}-${day.date.slice(4,6)}-${day.date.slice(6,8)}T00:00:00Z`).toISOString()
-              : undefined,
-            signal_type: "search_interest",
-            keywords: keywordize(`${query} ${(t?.relatedQueries ?? []).map((q: any) => q.query).join(" ")}`),
-            metric_value: Number(String(t?.formattedTraffic ?? "0").replace(/[^0-9]/g, "")) || 0,
-            metric_unit: "searches",
-            observed_at: undefined,
-            geo_hint: geo,
-          } as any);
-        }
+      const xml = await r.text();
+      const items = xml.match(/<item>[\s\S]*?<\/item>/g) ?? [];
+      for (const item of items.slice(0, 25)) {
+        const title = (item.match(/<title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/)?.[1] ?? "").trim();
+        if (!title) continue;
+        const traffic = (item.match(/<ht:approx_traffic>([\s\S]*?)<\/ht:approx_traffic>/)?.[1] ?? "").trim();
+        const pub = (item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1] ?? "").trim();
+        const newsTitles = Array.from(item.matchAll(/<ht:news_item_title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/ht:news_item_title>/g)).map((m) => m[1].trim());
+        const newsSnippets = Array.from(item.matchAll(/<ht:news_item_snippet>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/ht:news_item_snippet>/g)).map((m) => m[1].trim());
+        const newsUrls = Array.from(item.matchAll(/<ht:news_item_url>([\s\S]*?)<\/ht:news_item_url>/g)).map((m) => m[1].trim());
+        const dateKey = pub ? new Date(pub).toISOString().slice(0, 10) : "";
+        out.push({
+          dedupe_key: `gtrends:${geo}:${dateKey}:${title.toLowerCase()}`,
+          url: newsUrls[0] ?? `https://trends.google.com/trends/explore?geo=${geo}&q=${encodeURIComponent(title)}`,
+          title,
+          snippet: truncate([traffic && `${traffic} searches`, newsTitles[0], newsSnippets[0]].filter(Boolean).join(" — ")),
+          payload: { geo, traffic, news_titles: newsTitles, news_urls: newsUrls },
+          published_at: pub ? new Date(pub).toISOString() : undefined,
+          signal_type: "search_interest",
+          keywords: keywordize(`${title} ${newsTitles.join(" ")}`),
+          metric_value: Number(String(traffic).replace(/[^0-9]/g, "")) || 0,
+          metric_unit: "searches",
+          observed_at: pub ? new Date(pub).toISOString() : undefined,
+          geo_hint: geo,
+        } as any);
       }
     } catch (_e) { /* skip geo */ }
   }
   return out;
 }
+
 
 const COLLECTORS: Record<string, () => Promise<RawCandidate[]>> = {
   "Hacker News (Algolia)": collectHackerNews,
