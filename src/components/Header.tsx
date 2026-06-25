@@ -30,6 +30,9 @@ export function Header() {
           {!loading && (
             user ? (
               <div className="flex items-center gap-2">
+                <Button variant="ghost" size="sm" onClick={() => navigate("/trends")} className="gap-1.5 text-muted-foreground">
+                  <Compass className="h-4 w-4" /> Trends
+                </Button>
                 <span className="text-xs text-muted-foreground hidden sm:inline max-w-[140px] truncate">
                   {user.email}
                 </span>
