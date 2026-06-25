@@ -59,6 +59,7 @@ const ModulePage = () => {
 
   const handleNext = () => {
     if (step < totalSteps - 1) {
+      setDirection(1);
       setStep(step + 1);
     }
   };
