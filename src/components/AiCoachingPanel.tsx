@@ -246,7 +246,7 @@ export function AiCoachingPanel({
       <div ref={messagesEndRef} />
 
       {/* Follow-up input */}
-      {messages.length > 0 && !showApiKeyForm && (
+      {messages.length > 0 && (
         <div className="flex gap-2">
           <Input
             value={followUp}
