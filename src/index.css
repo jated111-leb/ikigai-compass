@@ -54,6 +54,10 @@
     --module-completed: 150 45% 50%;
     --highlight: 38 92% 58%;
 
+    /* Per-module aura — set by ModulePage on entry */
+    --aura-hue: 38;
+    --aura-strength: 0.12;
+
     /* Mystical gradients & glows */
     --gradient-aurora: radial-gradient(ellipse at top, hsl(38 92% 58% / 0.18), transparent 55%),
                        radial-gradient(ellipse at bottom right, hsl(280 60% 40% / 0.18), transparent 55%),
@@ -70,34 +74,25 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    background-attachment: fixed;
+    transition: background 1.2s ease;
+  }
+
+  /* Module aura — tints the page background when entering a module */
+  body.has-aura {
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% 0%, hsl(var(--aura-hue) 80% 50% / var(--aura-strength)), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 100%, hsl(var(--aura-hue) 70% 45% / calc(var(--aura-strength) * 0.7)), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 0% 80%, hsl(var(--aura-hue) 60% 40% / calc(var(--aura-strength) * 0.5)), transparent 60%);
+  }
+  body:not(.has-aura) {
     background-image:
       radial-gradient(ellipse 80% 50% at 50% -10%, hsl(38 92% 58% / 0.12), transparent),
       radial-gradient(ellipse 60% 40% at 90% 30%, hsl(280 50% 40% / 0.10), transparent),
       radial-gradient(ellipse 60% 40% at 10% 70%, hsl(200 60% 35% / 0.08), transparent);
-    background-attachment: fixed;
   }
 
   h1, h2, h3, h4 { @apply font-serif; }
-}
-
-/* Subtle starfield over the night */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    radial-gradient(1px 1px at 20% 30%, hsl(38 60% 80% / 0.5), transparent 50%),
-    radial-gradient(1px 1px at 70% 10%, hsl(38 60% 80% / 0.4), transparent 50%),
-    radial-gradient(1px 1px at 40% 80%, hsl(38 60% 80% / 0.35), transparent 50%),
-    radial-gradient(1px 1px at 85% 60%, hsl(38 60% 80% / 0.45), transparent 50%),
-    radial-gradient(1.5px 1.5px at 15% 65%, hsl(38 60% 80% / 0.35), transparent 50%),
-    radial-gradient(1px 1px at 60% 45%, hsl(38 60% 80% / 0.3), transparent 50%),
-    radial-gradient(1px 1px at 90% 85%, hsl(38 60% 80% / 0.4), transparent 50%),
-    radial-gradient(1px 1px at 5% 20%, hsl(38 60% 80% / 0.35), transparent 50%);
-  background-size: 100% 100%;
-  animation: twinkle 8s ease-in-out infinite;
 }
 
 #root { position: relative; z-index: 1; }
@@ -106,11 +101,11 @@ body::before {
 @media print {
   nav, .no-print { display: none !important; }
   body { background: white !important; background-image: none !important; color: black !important; }
-  body::before { display: none !important; }
+  canvas { display: none !important; }
   .print-break { page-break-before: always; }
 }
 
-/* Animations */
+/* ===== Animations ===== */
 @keyframes breathe {
   0%, 100% { opacity: 0.4; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.15); }
@@ -122,11 +117,6 @@ body::before {
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-slide-in { animation: fadeSlideIn 0.5s ease-out both; }
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 0.95; }
-}
 
 @keyframes orbPulse {
   0%, 100% { transform: scale(1); opacity: 0.75; filter: blur(40px); }
@@ -140,9 +130,7 @@ body::before {
 }
 .animate-float { animation: floatSlow 7s ease-in-out infinite; }
 
-@keyframes spinSlow {
-  to { transform: rotate(360deg); }
-}
+@keyframes spinSlow { to { transform: rotate(360deg); } }
 .animate-spin-slow { animation: spinSlow 60s linear infinite; }
 
 @keyframes shimmer {
@@ -151,14 +139,10 @@ body::before {
 }
 .shimmer-text {
   background: linear-gradient(90deg,
-    hsl(var(--foreground)) 0%,
-    hsl(var(--accent)) 35%,
-    hsl(38 100% 80%) 50%,
-    hsl(var(--accent)) 65%,
-    hsl(var(--foreground)) 100%);
+    hsl(var(--foreground)) 0%, hsl(var(--accent)) 35%,
+    hsl(38 100% 80%) 50%, hsl(var(--accent)) 65%, hsl(var(--foreground)) 100%);
   background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
+  -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer 8s linear infinite;
 }
@@ -168,23 +152,11 @@ body::before {
   100% { transform: translateX(200%); }
 }
 .glow-sweep::after {
-  content: "";
-  position: absolute;
-  inset: 0;
+  content: ""; position: absolute; inset: 0;
   background: linear-gradient(110deg, transparent 30%, hsl(38 92% 70% / 0.35) 50%, transparent 70%);
-  transform: translateX(-100%);
-  pointer-events: none;
+  transform: translateX(-100%); pointer-events: none;
 }
 .glow-sweep:hover::after { animation: glowSweep 1.1s ease-out; }
-
-@keyframes constellationDraw {
-  from { stroke-dashoffset: 1000; opacity: 0; }
-  to { stroke-dashoffset: 0; opacity: 1; }
-}
-.constellation-line {
-  stroke-dasharray: 1000;
-  animation: constellationDraw 2.5s ease-out forwards;
-}
 
 .mystical-card {
   position: relative;
@@ -199,6 +171,79 @@ body::before {
   box-shadow: var(--shadow-glow);
 }
 
-.veil-overlay {
-  background: var(--gradient-veil);
+.veil-overlay { background: var(--gradient-veil); }
+
+/* ===== Ink-bleed reveal ===== */
+@keyframes inkBleed {
+  0% { opacity: 0; filter: blur(8px); letter-spacing: -0.02em; }
+  60% { opacity: 0.85; filter: blur(1px); }
+  100% { opacity: 1; filter: blur(0); letter-spacing: normal; }
 }
+.ink-bleed { animation: inkBleed 1.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.ink-bleed-stagger > * { animation: inkBleed 1.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.ink-bleed-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.ink-bleed-stagger > *:nth-child(2) { animation-delay: 0.20s; }
+.ink-bleed-stagger > *:nth-child(3) { animation-delay: 0.35s; }
+.ink-bleed-stagger > *:nth-child(4) { animation-delay: 0.50s; }
+.ink-bleed-stagger > *:nth-child(5) { animation-delay: 0.65s; }
+.ink-bleed-stagger > *:nth-child(6) { animation-delay: 0.80s; }
+.ink-bleed-stagger > *:nth-child(7) { animation-delay: 0.95s; }
+
+/* ===== Cursor-followed glow ===== */
+.cursor-glow {
+  position: relative;
+  isolation: isolate;
+}
+.cursor-glow::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(220px circle at var(--cx, 50%) var(--cy, 50%),
+    hsl(var(--accent) / 0.18), transparent 60%);
+  opacity: var(--cg, 0); transition: opacity 250ms ease;
+  pointer-events: none; z-index: 0;
+}
+.cursor-glow > * { position: relative; z-index: 1; }
+
+/* Hover tilt */
+.tilt-hover { transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1); transform-style: preserve-3d; }
+.tilt-hover:hover { transform: perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-2px); }
+
+/* ===== Drop cap ===== */
+.drop-cap::first-letter {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 4.2em; float: left; line-height: 0.85; padding: 0.08em 0.12em 0 0;
+  color: hsl(var(--accent));
+  text-shadow: 0 2px 16px hsl(var(--accent) / 0.4);
+  font-weight: 700;
+}
+
+/* Roman numeral chip */
+.roman {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-variant: small-caps; letter-spacing: 0.15em;
+}
+
+/* Kanji watermark */
+.kanji-watermark {
+  position: absolute; top: -20px; right: -10px;
+  font-size: 9rem; line-height: 1; opacity: 0.06;
+  color: hsl(var(--accent));
+  font-family: 'Noto Serif JP', 'Playfair Display', serif;
+  pointer-events: none; user-select: none;
+  font-weight: 700;
+}
+
+/* Stamp animation for sigil completion */
+@keyframes stamp {
+  0% { transform: scale(2.4) rotate(-12deg); opacity: 0; filter: blur(8px); }
+  60% { transform: scale(0.92) rotate(2deg); opacity: 1; filter: blur(0); }
+  80% { transform: scale(1.04) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+.animate-stamp { animation: stamp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
+/* Page-turn / unfold step transition (used additively with framer) */
+@keyframes parchmentUnfold {
+  from { opacity: 0; transform: perspective(1200px) rotateX(-12deg) translateY(20px); transform-origin: top center; }
+  to { opacity: 1; transform: perspective(1200px) rotateX(0) translateY(0); }
+}
+.animate-parchment { animation: parchmentUnfold 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
