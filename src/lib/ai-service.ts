@@ -3,7 +3,7 @@
 // No user-provided API keys. Streams from `ai-coach` function.
 // ============================================================
 
-import { aiSystemPrompts, masterSynthesisPrompt } from '@/data/ai-prompts/system-prompts';
+import { aiSystemPrompts, masterSynthesisPrompt, metaFramePrompt } from '@/data/ai-prompts/system-prompts';
 import { supabase } from '@/integrations/supabase/client';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
@@ -142,17 +142,23 @@ function buildSystemMessage(
   crossModuleContext: string
 ): string {
   const prompt = aiSystemPrompts.find(p => p.moduleId === moduleId);
-  if (!prompt) return 'You are a helpful coaching assistant.';
+  const moduleBlock = prompt
+    ? [
+        `\n\n## Module ${moduleId} — your role here:\n${prompt.role}`,
+        `\n\n## Module context:\n${prompt.context}`,
+        `\n\n## Module-specific instructions:\n${prompt.instructions}`,
+        `\n\n## Tone for this module:\n${prompt.tone}`,
+        `\n\n## Cross-module references:\n${prompt.crossModuleRefs}`,
+      ].join('')
+    : '';
 
   return [
-    prompt.role,
-    `\n\n## Context:\n${prompt.context}`,
-    `\n\n## Instructions:\n${prompt.instructions}`,
-    `\n\n## Tone:\n${prompt.tone}`,
-    `\n\n## Cross-Module References:\n${prompt.crossModuleRefs}`,
-    previousContext ? `\n\n## Previous responses in this module:\n${previousContext}` : '',
-    crossModuleContext ? `\n\n## Key insights from previous modules:\n${crossModuleContext}` : '',
+    metaFramePrompt,
+    moduleBlock,
+    previousContext ? `\n\n## Their previous responses in this module:\n${previousContext}` : '',
+    crossModuleContext ? `\n\n## What they shared in earlier modules:\n${crossModuleContext}` : '',
   ].join('');
+
 }
 
 // ── Coaching Response ──
@@ -175,15 +181,27 @@ export async function streamCoachingResponse(
     context.crossModuleContext || ''
   );
 
-  let userMessage = `The user just completed this exercise:\n\nQuestion: ${context.exercisePrompt}`;
+  // Modulate the ask based on where the user is in the journey.
+  // Early modules: listen + one question. Middle: connect threads. Final: synthesize.
+  const stance =
+    context.moduleId <= 3
+      ? `You are still LEARNING about this person. Do not diagnose them or offer a verdict. Briefly acknowledge something specific they actually wrote (quote a few of their own words if you can), then ask ONE precise follow-up question that invites them to go a layer deeper. Keep it to 2–3 sentences. Do not propose careers, identities, or purpose statements yet.`
+      : context.moduleId <= 4
+      ? `You may begin to gently CONNECT THREADS between what they just wrote and what they shared in earlier modules — but still more curiosity than conclusion. 3–4 sentences. End with a question that sharpens the connection.`
+      : context.moduleId === 5
+      ? `You may now NAME PATTERNS you have actually observed across their own words. Quote them. 3–5 sentences. Offer the pattern as an observation they can confirm or refine, not a verdict.`
+      : `This is the final module — SYNTHESIS is appropriate. Weave together their specific language from across the journey. Be precise, not flowery. 4–6 sentences.`;
+
+  let userMessage = `The user just responded to this prompt in Module ${context.moduleId}:\n\nPrompt: ${context.exercisePrompt}`;
   if (context.exerciseGuidance) {
-    userMessage += `\nGuidance provided: ${context.exerciseGuidance}`;
+    userMessage += `\nGuidance shown to them: ${context.exerciseGuidance}`;
   }
-  userMessage += `\n\nTheir response: "${context.userResponse}"`;
-  userMessage += `\n\nPlease provide a coaching response. Be specific to what they shared. Keep it concise (2-4 sentences).`;
-  if (context.followUpPrompt) {
-    userMessage += `\n\nIf appropriate, you may also weave in this follow-up question to deepen their reflection: "${context.followUpPrompt}"`;
+  userMessage += `\n\nTheir response: """${context.userResponse}"""`;
+  userMessage += `\n\n${stance}`;
+  if (context.followUpPrompt && context.moduleId >= 4) {
+    userMessage += `\n\nIf it fits naturally, you may also weave in this follow-up question: "${context.followUpPrompt}"`;
   }
+
 
   return streamChat(
     [

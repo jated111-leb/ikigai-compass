@@ -175,7 +175,8 @@ export function AiCoachingPanel({
           className="gap-2"
         >
           <Sparkles className="h-4 w-4" />
-          Get AI Coaching
+          {moduleId <= 3 ? "Reflect with the guide" : moduleId <= 5 ? "Connect the threads" : "Synthesize my Ikigai"}
+
         </Button>
       </div>
     );
@@ -186,8 +187,9 @@ export function AiCoachingPanel({
       <div className="flex items-center gap-2 mb-2">
         <div className="w-2 h-2 rounded-full bg-accent animate-breathe" />
         <span className="text-sm font-medium text-muted-foreground">
-          AI Coach
+          {moduleId <= 3 ? "Witness" : moduleId <= 5 ? "Threadkeeper" : "Synthesizer"}
         </span>
+
       </div>
 
 
