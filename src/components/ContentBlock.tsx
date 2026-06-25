@@ -7,7 +7,7 @@ interface ContentBlockProps {
 
 export function ContentBlock({ blocks }: ContentBlockProps) {
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 ink-bleed-stagger">
       {blocks.map((block, i) => {
         switch (block.type) {
           case 'quote':
