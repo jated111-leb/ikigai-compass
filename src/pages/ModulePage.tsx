@@ -18,6 +18,7 @@ import { ArrowLeft, ArrowRight, Check, Sparkles, AlertCircle, Key } from "lucide
 import { Input } from "@/components/ui/input";
 import * as Icons from "lucide-react";
 import { streamSynthesis, hasApiKey, setApiKey } from "@/lib/ai-service";
+import { AnimatePresence, motion } from "framer-motion";
 
 const ModulePage = () => {
   const { id } = useParams<{ id: string }>();
