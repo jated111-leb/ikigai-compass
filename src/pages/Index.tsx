@@ -53,7 +53,7 @@ const Index = () => {
           </div>
 
           <div className="space-y-3">
-            <p className="text-[10px] tracking-[0.5em] uppercase text-accent/80 font-medium">
+            <p className="text-[10px] tracking-[0.5em] uppercase text-accent/80 font-medium" style={{ fontFamily: '"Noto Serif JP", serif' }}>
               生き甲斐 · A Reason for Being
             </p>
             <h1 className="text-5xl md:text-7xl font-serif font-bold leading-[1.05] shimmer-text">
