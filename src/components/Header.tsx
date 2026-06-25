@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Logo } from "./Logo";
 import { Button } from "./ui/button";
-import { ArrowLeft, LogOut } from "lucide-react";
+import { ArrowLeft, LogOut, Compass } from "lucide-react";
 
 export function Header() {
   const navigate = useNavigate();
