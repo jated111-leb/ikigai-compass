@@ -13,6 +13,7 @@ import ModulePage from "./pages/ModulePage.tsx";
 import ExportPage from "./pages/ExportPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import OnboardingPage from "./pages/OnboardingPage.tsx";
+import TrendsPage from "./pages/TrendsPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
