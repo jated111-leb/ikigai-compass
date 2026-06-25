@@ -207,6 +207,57 @@ async function collectProductHunt(): Promise<RawCandidate[]> {
   }));
 }
 
+async function collectGoogleTrends(): Promise<RawCandidate[]> {
+  // Unofficial daily trending searches endpoint (no key required).
+  const geos = ["US", "GB", "DE", "IN", "BR"];
+  const out: RawCandidate[] = [];
+  for (const geo of geos) {
+    try {
+      const r = await fetch(
+        `https://trends.google.com/trends/api/dailytrends?hl=en-US&tz=0&geo=${geo}&ns=15`,
+        { headers: { "User-Agent": "Mozilla/5.0 ikigai-trend-engine" } },
+      );
+      if (!r.ok) continue;
+      const text = await r.text();
+      // Response is prefixed with )]}',\n to prevent JSON hijacking.
+      const json = JSON.parse(text.replace(/^\)\]\}'\,?\n?/, ""));
+      const days = json?.default?.trendingSearchesDays ?? [];
+      for (const day of days) {
+        for (const t of (day.trendingSearches ?? [])) {
+          const query = t?.title?.query;
+          if (!query) continue;
+          const article = t?.articles?.[0];
+          const url = article?.url;
+          const dedupe = `gtrends:${geo}:${day.date}:${query}`;
+          out.push({
+            dedupe_key: dedupe,
+            url: url ?? `https://trends.google.com/trends/explore?geo=${geo}&q=${encodeURIComponent(query)}`,
+            title: query,
+            snippet: truncate(article?.title ? `${article.title} — ${article.snippet ?? ""}` : t?.formattedTraffic),
+            payload: {
+              geo,
+              date: day.date,
+              traffic: t?.formattedTraffic,
+              related: (t?.relatedQueries ?? []).map((q: any) => q.query),
+              article_source: article?.source,
+            },
+            published_at: day.date
+              ? new Date(`${day.date.slice(0,4)}-${day.date.slice(4,6)}-${day.date.slice(6,8)}T00:00:00Z`).toISOString()
+              : undefined,
+            signal_type: "search_interest",
+            keywords: keywordize(`${query} ${(t?.relatedQueries ?? []).map((q: any) => q.query).join(" ")}`),
+            metric_value: Number(String(t?.formattedTraffic ?? "0").replace(/[^0-9]/g, "")) || 0,
+            metric_unit: "searches",
+            observed_at: undefined,
+            geo_hint: geo,
+          } as any);
+        }
+      }
+    } catch (_e) { /* skip geo */ }
+  }
+  return out;
+}
+
 const COLLECTORS: Record<string, () => Promise<RawCandidate[]>> = {
   "Hacker News (Algolia)": collectHackerNews,
   "GDELT": collectGDELT,
@@ -214,7 +265,9 @@ const COLLECTORS: Record<string, () => Promise<RawCandidate[]>> = {
   "News RSS": collectRSS,
   "YouTube Data API": collectYouTube,
   "Product Hunt": collectProductHunt,
+  "Google Trends": collectGoogleTrends,
 };
+
 
 async function runSource(source: Source) {
   if (!source.enabled) return { skipped: "disabled" };
