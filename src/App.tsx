@@ -27,8 +27,10 @@ const App = () => (
       <Sonner />
       <AuthProvider>
         <BrowserRouter>
+          <Starfield />
           <div className="min-h-screen flex flex-col">
             <Header />
+
             <main className="flex-1">
               <Routes>
                 <Route path="/" element={<Index />} />
