@@ -26,7 +26,7 @@ export function ModuleCard({ moduleId, title, description, icon, status, themeCo
       className={`group relative w-full text-left p-6 rounded-2xl overflow-hidden transition-all duration-500
         ${isLocked
           ? 'opacity-40 cursor-not-allowed bg-card/40 border border-border/40'
-          : 'mystical-card glow-sweep cursor-pointer'}`}
+          : 'mystical-card glow-sweep cursor-pointer cursor-glow tilt-hover'}`}
       style={
         !isLocked
           ? ({
