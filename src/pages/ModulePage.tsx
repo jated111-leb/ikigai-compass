@@ -368,6 +368,8 @@ const ModulePage = () => {
               </Button>
             )}
           </div>
+        </motion.div>
+        </AnimatePresence>
         </div>
       </div>
     </div>
