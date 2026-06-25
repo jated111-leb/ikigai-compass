@@ -90,12 +90,6 @@ export function AiCoachingPanel({
 
   // Generate initial coaching response
   const handleStart = useCallback(async () => {
-    if (!hasApiKey()) {
-      setShowApiKeyForm(true);
-      setStarted(true);
-      return;
-    }
-
     setStarted(true);
     setMessages([]);
     setStreaming(true);
@@ -117,16 +111,7 @@ export function AiCoachingPanel({
       setMessages([{ role: "assistant", content: fullText }]);
     } catch (err: any) {
       if (err.name === "AbortError") return;
-      if (err.message === "NO_API_KEY") {
-        setShowApiKeyForm(true);
-      } else if (err.message === "INVALID_API_KEY") {
-        setError(
-          "Invalid API key. Please check your key and try again."
-        );
-        setShowApiKeyForm(true);
-      } else {
-        setError(err.message || "Failed to get coaching response. Please try again.");
-      }
+      setError(err.message || "Failed to get coaching response. Please try again.");
     } finally {
       setStreaming(false);
     }
