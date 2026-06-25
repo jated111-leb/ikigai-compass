@@ -7,6 +7,8 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Starfield } from "@/components/Starfield";
+
 import Index from "./pages/Index.tsx";
 import JourneyPage from "./pages/JourneyPage.tsx";
 import ModulePage from "./pages/ModulePage.tsx";
@@ -25,8 +27,10 @@ const App = () => (
       <Sonner />
       <AuthProvider>
         <BrowserRouter>
+          <Starfield />
           <div className="min-h-screen flex flex-col">
             <Header />
+
             <main className="flex-1">
               <Routes>
                 <Route path="/" element={<Index />} />
