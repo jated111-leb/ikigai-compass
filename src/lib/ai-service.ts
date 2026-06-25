@@ -1,27 +1,20 @@
 // ============================================================
-// AI Service — OpenAI Integration for Coaching & Synthesis
+// AI Service — Lovable AI Gateway via Edge Function
+// No user-provided API keys. Streams from `ai-coach` function.
 // ============================================================
 
 import { aiSystemPrompts, masterSynthesisPrompt } from '@/data/ai-prompts/system-prompts';
+import { supabase } from '@/integrations/supabase/client';
 
-const API_URL = 'https://api.openai.com/v1/chat/completions';
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const FUNCTION_URL = `${SUPABASE_URL}/functions/v1/ai-coach`;
 
-// ── API Key Management ──
-
-function getApiKey(): string | null {
-  return (
-    (typeof import.meta !== 'undefined' && import.meta.env?.VITE_OPENAI_API_KEY) ||
-    localStorage.getItem('ikigai-openai-key') ||
-    null
-  );
-}
-
-export function setApiKey(key: string) {
-  localStorage.setItem('ikigai-openai-key', key);
-}
-
+// ── Back-compat shims (no longer needed but kept so callers don't break) ──
 export function hasApiKey(): boolean {
-  return !!getApiKey();
+  return true;
+}
+export function setApiKey(_key: string) {
+  // no-op: AI runs via Lovable AI Gateway server-side
 }
 
 // ── Types ──
@@ -46,47 +39,53 @@ interface ChatMessage {
 async function streamChat(
   messages: ChatMessage[],
   onChunk: (text: string) => void,
-  options?: { model?: string; maxTokens?: number; signal?: AbortSignal }
+  options?: { model?: string; signal?: AbortSignal }
 ): Promise<string> {
-  const apiKey = getApiKey();
-  if (!apiKey) throw new Error('NO_API_KEY');
-
-  const response = await fetch(API_URL, {
+  const response = await fetch(FUNCTION_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: options?.model || 'gpt-4o-mini',
+      model: options?.model,
       messages,
-      stream: true,
-      temperature: 0.7,
-      max_tokens: options?.maxTokens || 500,
     }),
     signal: options?.signal,
   });
 
   if (!response.ok) {
-    if (response.status === 401) throw new Error('INVALID_API_KEY');
-    const errorText = await response.text().catch(() => '');
-    throw new Error(`API_ERROR_${response.status}: ${errorText}`);
+    let msg = `API_ERROR_${response.status}`;
+    try {
+      const data = await response.json();
+      if (data?.error) msg = data.error;
+    } catch {
+      // ignore
+    }
+    if (response.status === 429) throw new Error('Rate limit exceeded. Please try again in a moment.');
+    if (response.status === 402) throw new Error('AI credits exhausted. Please add credits to continue.');
+    throw new Error(msg);
   }
 
-  const reader = response.body!.getReader();
+  if (!response.body) throw new Error('No response body from AI service.');
+
+  const reader = response.body.getReader();
   const decoder = new TextDecoder();
   let fullText = '';
+  let buffer = '';
 
   while (true) {
     const { done, value } = await reader.read();
     if (done) break;
 
-    const chunk = decoder.decode(value, { stream: true });
-    for (const line of chunk.split('\n')) {
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop() || '';
+
+    for (const line of lines) {
       const trimmed = line.trim();
-      if (!trimmed.startsWith('data: ')) continue;
-      const data = trimmed.slice(6);
-      if (data === '[DONE]') continue;
+      if (!trimmed.startsWith('data:')) continue;
+      const data = trimmed.slice(5).trim();
+      if (!data || data === '[DONE]') continue;
 
       try {
         const content = JSON.parse(data).choices?.[0]?.delta?.content;
@@ -95,7 +94,7 @@ async function streamChat(
           onChunk(fullText);
         }
       } catch {
-        // Skip malformed JSON chunks
+        // skip malformed
       }
     }
   }
@@ -135,7 +134,7 @@ export function buildCrossModuleContext(
   return context;
 }
 
-// ── Build System Message from Module Prompt ──
+// ── Build System Message ──
 
 function buildSystemMessage(
   moduleId: number,
@@ -163,7 +162,6 @@ export async function streamCoachingResponse(
   onChunk: (text: string) => void,
   signal?: AbortSignal
 ): Promise<string> {
-  // Build previous responses context
   let prevContext = '';
   if (context.previousResponses.length > 0) {
     prevContext = context.previousResponses
@@ -177,7 +175,6 @@ export async function streamCoachingResponse(
     context.crossModuleContext || ''
   );
 
-  // Build user message
   let userMessage = `The user just completed this exercise:\n\nQuestion: ${context.exercisePrompt}`;
   if (context.exerciseGuidance) {
     userMessage += `\nGuidance provided: ${context.exerciseGuidance}`;
@@ -232,7 +229,6 @@ export async function streamSynthesis(
   onChunk: (text: string) => void,
   signal?: AbortSignal
 ): Promise<string> {
-  // Build comprehensive user data summary
   let userData = '';
   for (let m = 1; m <= 6; m++) {
     const modData = allModuleData[String(m)];
@@ -267,6 +263,9 @@ export async function streamSynthesis(
     userData += `\n## Selected Archetype: ${archetypeResult}\n`;
   }
 
+  // Suppress unused warning
+  void supabase;
+
   return streamChat(
     [
       { role: 'system', content: masterSynthesisPrompt },
@@ -276,6 +275,6 @@ export async function streamSynthesis(
       },
     ],
     onChunk,
-    { model: 'gpt-4o', maxTokens: 1500, signal }
+    { model: 'google/gemini-2.5-pro', signal }
   );
 }
