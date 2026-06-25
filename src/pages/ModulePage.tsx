@@ -30,6 +30,7 @@ const ModulePage = () => {
 
   const modState = getModuleState(moduleId);
   const [step, setStep] = useState(modState.currentStep || 0);
+  const [direction, setDirection] = useState(1);
   const [synthesizing, setSynthesizing] = useState(false);
   const [synthesisText, setSynthesisText] = useState('');
   const [synthesisError, setSynthesisError] = useState<string | null>(null);
