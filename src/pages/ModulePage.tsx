@@ -18,6 +18,7 @@ import { ArrowLeft, ArrowRight, Check, Sparkles, AlertCircle, Key } from "lucide
 import { Input } from "@/components/ui/input";
 import * as Icons from "lucide-react";
 import { streamSynthesis, hasApiKey, setApiKey } from "@/lib/ai-service";
+import { AnimatePresence, motion } from "framer-motion";
 
 const ModulePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -29,6 +30,7 @@ const ModulePage = () => {
 
   const modState = getModuleState(moduleId);
   const [step, setStep] = useState(modState.currentStep || 0);
+  const [direction, setDirection] = useState(1);
   const [synthesizing, setSynthesizing] = useState(false);
   const [synthesisText, setSynthesisText] = useState('');
   const [synthesisError, setSynthesisError] = useState<string | null>(null);
@@ -57,6 +59,7 @@ const ModulePage = () => {
 
   const handleNext = () => {
     if (step < totalSteps - 1) {
+      setDirection(1);
       setStep(step + 1);
     }
   };
@@ -161,7 +164,16 @@ const ModulePage = () => {
         </div>
 
         {/* Step content */}
-        <div className="animate-fade-slide-in space-y-8" key={step}>
+        <AnimatePresence mode="wait" custom={direction}>
+        <motion.div
+          key={step}
+          custom={direction}
+          initial={{ opacity: 0, y: direction > 0 ? 24 : -24, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, y: direction > 0 ? -24 : 24, filter: "blur(6px)" }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="space-y-8"
+        >
           {/* Step title */}
           {currentStepData.title && (
             <h2 className="text-xl font-serif font-semibold text-foreground/90 mb-4">{currentStepData.title}</h2>
@@ -340,7 +352,7 @@ const ModulePage = () => {
           <div className="flex items-center justify-between pt-6 border-t border-border/40">
             <Button
               variant="ghost"
-              onClick={() => setStep(Math.max(0, step - 1))}
+              onClick={() => { setDirection(-1); setStep(Math.max(0, step - 1)); }}
               disabled={step === 0}
               className="gap-2"
             >
@@ -356,7 +368,8 @@ const ModulePage = () => {
               </Button>
             )}
           </div>
-        </div>
+        </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );
