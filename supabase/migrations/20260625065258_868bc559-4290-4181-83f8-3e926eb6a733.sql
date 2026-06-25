@@ -1,0 +1,1 @@
+ALTER TABLE public.signals ADD CONSTRAINT signals_raw_signal_id_key UNIQUE (raw_signal_id);

@@ -327,7 +327,7 @@ export type Database = {
           {
             foreignKeyName: "signals_raw_signal_id_fkey"
             columns: ["raw_signal_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "raw_signals"
             referencedColumns: ["id"]
           },
