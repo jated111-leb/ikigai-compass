@@ -352,7 +352,7 @@ const ModulePage = () => {
           <div className="flex items-center justify-between pt-6 border-t border-border/40">
             <Button
               variant="ghost"
-              onClick={() => setStep(Math.max(0, step - 1))}
+              onClick={() => { setDirection(-1); setStep(Math.max(0, step - 1)); }}
               disabled={step === 0}
               className="gap-2"
             >
