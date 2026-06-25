@@ -2,7 +2,7 @@
 
 A trend is described along **independent facets**, not one rigid tree. Each facet is a set
 of `taxonomy_nodes` (a self-referencing hierarchy), so a trend can carry one node from
-several facets at once (e.g. *consumer* × *health* × *MENA* × *emerging*).
+several facets at once (e.g. *consumer* × *health* × *Europe* × *emerging*).
 
 ## Facets
 
@@ -47,9 +47,11 @@ The underlying human need a trend taps. Slower-moving than JTBD.
   `meaning-purpose`, `convenience`, `autonomy`, `novelty`, `connection`.
 
 ### Facet E — Geography
-- World regions → countries, with **first-class MENA / Iraq / GCC** nodes because they
-  drive a relevance bonus in scoring (see [`04-scoring.md`](./04-scoring.md)).
-- `global`, `mena`, `iraq`, `gcc`, `levant`, `north-africa`, plus standard regions.
+- World regions → countries. This is a **global** app: no region is privileged. A
+  region focus (if the user expresses one) drives an even-handed relevance bonus in
+  scoring (see [`04-scoring.md`](./04-scoring.md)).
+- `global`, `africa`, `asia`, `europe`, `north-america`, `south-america`, `oceania`,
+  `middle-east`, expandable to countries.
 
 ### Facet F — Maturity stage
 Where the trend sits on the adoption curve.
@@ -73,9 +75,9 @@ Stored as a numeric on the trend, derived during scoring:
 
 ## Why facets, not one tree
 
-A single hierarchy forces false choices ("is a vertical-farming startup in Iraq a
-*sustainability* trend or a *startup* trend or a *MENA* trend?"). Facets let it be all of
-them, which is exactly what makes relevance scoring against a user's multi-dimensional
+A single hierarchy forces false choices ("is a vertical-farming startup a
+*sustainability* trend or a *startup* trend or a *regional* trend?"). Facets let it be all
+of them, which is exactly what makes relevance scoring against a user's multi-dimensional
 Ikigai possible.
 
 ## Seeding the taxonomy

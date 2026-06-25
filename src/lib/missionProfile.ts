@@ -33,12 +33,17 @@ const STOPWORDS = new Set([
   'world', 'people', 'want', 'make', 'making', 'help', 'helping', 'life', 'living',
 ]);
 
+// Optional: detect a region focus mentioned in free text. Global and
+// even-handed — no region is privileged. Maps to the geo taxonomy keys.
 const GEO_TERMS: Record<string, string> = {
-  iraq: 'iraq', baghdad: 'iraq', kurdistan: 'iraq', erbil: 'iraq',
-  mena: 'mena', 'middle east': 'mena', 'north africa': 'mena',
-  gcc: 'gcc', gulf: 'gcc', uae: 'gcc', dubai: 'gcc', 'abu dhabi': 'gcc',
-  saudi: 'gcc', qatar: 'gcc', kuwait: 'gcc', bahrain: 'gcc', oman: 'gcc',
-  lebanon: 'levant', levant: 'levant', jordan: 'levant', syria: 'levant',
+  africa: 'africa', nigeria: 'africa', kenya: 'africa', 'south africa': 'africa', egypt: 'africa',
+  asia: 'asia', india: 'asia', china: 'asia', 'southeast asia': 'asia', japan: 'asia', indonesia: 'asia',
+  europe: 'europe', 'european union': 'europe', uk: 'europe', germany: 'europe', france: 'europe',
+  'north america': 'north-america', usa: 'north-america', 'united states': 'north-america',
+  canada: 'north-america', mexico: 'north-america',
+  'south america': 'south-america', brazil: 'south-america', argentina: 'south-america',
+  oceania: 'oceania', australia: 'oceania', 'new zealand': 'oceania',
+  'middle east': 'middle-east', gulf: 'middle-east',
 };
 
 function toPhrase(title: string): string {

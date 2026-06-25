@@ -51,12 +51,14 @@ opportunity = 100 * sigmoid(
       0.35 * z(demand_signal)       # consumer/search/review demand present
     - 0.25 * z(saturation)          # many incumbents / high ad_volume / mainstream maturity ⇒ less room
     + 0.20 * z(funding_velocity)    # capital flowing in = validated but also competitive
-    + 0.20 * z(whitespace_geo)      # demand exists but few local players (esp. MENA/Iraq/GCC)
+    + 0.20 * z(whitespace_geo)      # demand exists but few players in the user's region (if any)
 )
 ```
 
-`whitespace_geo` is what makes this useful for a MENA-focused founder: a trend that's
-mainstream globally but absent locally is a high-opportunity *transfer* play.
+`whitespace_geo` is optional and global: if (and only if) a user expresses a region
+focus, a trend that's mainstream elsewhere but absent in that region scores as a
+high-opportunity *transfer* play. With no region focus it contributes nothing — the app
+is global by default.
 
 ## 4. Relevance — "does this fit THIS user's mission"
 
@@ -77,10 +79,11 @@ normalized. Because `sector_weights`/`need_weights` come straight from the user'
 answers, a "sustainability + community" person and a "fintech + status" person see very
 different top trends from the same database.
 
-### Geo bonus
-If the trend's `geo` nodes intersect `mission.geo_focus` (e.g. user focuses on Iraq and the
-trend is tagged `mena`/`iraq`), add a bounded bonus:
-`relevance = min(100, relevance + 12 * geo_match_strength)`.
+### Geo bonus (optional)
+If the user expressed a region focus and the trend's `geo` nodes intersect
+`mission.geo_focus`, add a bounded bonus:
+`relevance = min(100, relevance + 12 * geo_match_strength)`. No region is weighted above
+any other; users with no focus get no geo effect.
 
 ## 5. Final match ranking (the feed)
 

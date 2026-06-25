@@ -91,7 +91,7 @@ ingestion_runs  (observability)
 | `id` | uuid PK | |
 | `facet` | enum `taxonomy_facet` | `sector`/`need`/`geo` |
 | `parent_id` | uuid FK self | null = root |
-| `key` | text | stable slug, e.g. `mena`, `sustainable-world` |
+| `key` | text | stable slug, e.g. `europe`, `healthier-world` |
 | `label` | text | |
 | `description` | text | |
 | `status` | enum | `proposed`/`approved` (human gate) |
@@ -115,7 +115,7 @@ ingestion_runs  (observability)
 | `keywords` | text[] | extracted from `journeys.state` |
 | `sector_weights` | jsonb | `{ "sustainable-world": 0.8, ... }` |
 | `need_weights` | jsonb | |
-| `geo_focus` | text[] | e.g. `['iraq','mena']` |
+| `geo_focus` | text[] | optional region focus, e.g. `['europe']`; empty = global |
 | `embedding` | vector(1536) | mission vector for similarity |
 | `derived_from` | jsonb | which modules/answers fed it (audit) |
 | `updated_at` | timestamptz | |

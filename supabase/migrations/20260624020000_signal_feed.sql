@@ -60,10 +60,12 @@ AS $$
       ts.name AS source_name,
       -- Momentum: within-type percentile of the metric (so stars/upvotes/
       -- articles are comparable) blended with recency within the window.
-      ( 0.6 * percent_rank() OVER (
+      -- Cast to numeric: percent_rank() is double precision, and round(double,int)
+      -- doesn't exist in Postgres.
+      (( 0.6 * percent_rank() OVER (
                 PARTITION BY r.signal_type ORDER BY COALESCE(r.metric_value, 0))
       + 0.4 * percent_rank() OVER (ORDER BY r.effective_at)
-      ) * 100 AS momentum_score,
+      ) * 100)::numeric AS momentum_score,
       -- Relevance: share of the user's mission keywords that appear in the
       -- signal text/keywords, with a small sector-term and geo bonus.
       (
