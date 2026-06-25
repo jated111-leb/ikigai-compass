@@ -96,7 +96,7 @@ A classification pass (see [`02-taxonomy.md`](./02-taxonomy.md)) fills, per tren
 - trend theme & one-line thesis
 - consumer need / JTBD
 - sector(s) and world-need category (reusing the app's existing taxonomy)
-- geography (with explicit MENA / Iraq / GCC tagging)
+- geography (global region tagging; no region privileged)
 - maturity stage (emerging → scaling → mainstream → declining)
 - evidence strength
 - commercial-opportunity hypothesis

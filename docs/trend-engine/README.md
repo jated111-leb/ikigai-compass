@@ -30,10 +30,13 @@ The schema lives in [`supabase/migrations/20260624000000_trend_engine.sql`](../.
 | Signal collectors (GitHub, HN, GDELT, RSS, Google Trends, Reddit, YouTube, Product Hunt) | [`supabase/functions/ingest/`](../../supabase/functions/ingest/) | ✅ keyless run now; credentialed gate on secrets |
 | Mission-profile derivation (Ikigai → matchable profile) | [`src/lib/missionProfile.ts`](../../src/lib/missionProfile.ts) | ✅ |
 | Personalized feed UI (`/trends`) + `ranked_signals_for_me` RPC | [`src/pages/TrendsPage.tsx`](../../src/pages/TrendsPage.tsx), `supabase/migrations/20260624020000_signal_feed.sql` | ✅ |
-| Clustering signals → enriched `trends` (embeddings + LLM taxonomy) | — | ⏳ next layer |
+| Clustering signals → enriched `trends` (themes + scoring) + embedding-free `ranked_trends_for_me` | `supabase/migrations/20260624030000_trend_enrichment.sql` | ✅ |
+| Scheduling (pg_cron: hourly enrichment + daily ingestion) | `supabase/migrations/20260624040000_trend_cron.sql` | ✅ |
+| Embedding/LLM clustering + JTBD/need classification | — | ⏳ next layer |
 
-> The collectors fill `signals`; until the clustering/enrichment layer exists, the
-> app's Trends page ranks signals directly against the user's mission.
+> The collectors fill `signals`; `build_trends_from_signals()` clusters them into
+> published `trends` by curated theme. Swapping theme-matching for embedding clusters +
+> LLM taxonomy is the next layer — the table shapes don't change.
 
 ## How it connects to the existing app
 

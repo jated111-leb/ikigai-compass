@@ -51,9 +51,17 @@ Edge runtime.
 
 ## Schedule
 
-Trigger on a schedule with `pg_cron` (or any external scheduler) hitting the
-endpoint with the `x-ingest-key` header. A daily `source=all` pull is a
-reasonable default; raise frequency for fast-moving sources as needed.
+`supabase/migrations/20260624040000_trend_cron.sql` wires this up with `pg_cron`:
+- **enrichment** (`build_trends_from_signals`) runs hourly — scheduled automatically.
+- **ingestion** needs the project URL + `INGEST_SECRET`, so register it once after deploy
+  (keeps secrets out of the repo):
+
+  ```sql
+  select public.schedule_trend_ingestion(
+    'https://<project-ref>.supabase.co', '<INGEST_SECRET>', '0 5 * * *');
+  ```
+
+Any external scheduler hitting the endpoint with the `x-ingest-key` header works too.
 
 ## Deploy
 
@@ -61,8 +69,10 @@ reasonable default; raise frequency for fast-moving sources as needed.
 supabase functions deploy ingest
 ```
 
-## Next layer
+## From signals to trends
 
-These collectors fill `signals`. Clustering signals into enriched `trends`
-(embeddings + LLM taxonomy/scoring) is the next stage; until then the app's
-Trends page ranks signals directly via the `ranked_signals_for_me` RPC.
+These collectors fill `signals`. `build_trends_from_signals()` (in the enrichment
+migration) clusters them into published `trends` by curated theme and scores them; the
+app surfaces both — clustered trends via `ranked_trends_for_me` and the raw feed via
+`ranked_signals_for_me`. Swapping theme-matching for embedding clusters + LLM taxonomy is
+the next stage and doesn't change the table shapes.

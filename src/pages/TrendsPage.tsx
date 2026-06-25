@@ -26,6 +26,20 @@ interface FeedRow {
   match_score: number;
 }
 
+interface TrendRow {
+  trend_id: string;
+  title: string;
+  thesis: string | null;
+  trend_type: string;
+  maturity_stage: string;
+  signal_count: number;
+  momentum_score: number;
+  opportunity_score: number;
+  evidence_score: number;
+  relevance_score: number;
+  match_score: number;
+}
+
 const SIGNAL_LABEL: Record<string, string> = {
   search_interest: "Search",
   news_volume: "News",
@@ -92,6 +106,18 @@ const TrendsPage = () => {
     },
   });
 
+  // Clustered, enriched trends (built by build_trends_from_signals).
+  const { data: trends } = useQuery({
+    queryKey: ["trend-clusters", user?.id],
+    enabled: !!user && profileReady,
+    queryFn: async (): Promise<TrendRow[]> => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data, error } = await (supabase.rpc as any)("ranked_trends_for_me", { max_rows: 8 });
+      if (error) throw error;
+      return (data ?? []) as TrendRow[];
+    },
+  });
+
   if (journeyLoading || (!profileReady && !!user)) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
@@ -137,10 +163,38 @@ const TrendsPage = () => {
           </Card>
         )}
 
+        {/* Clustered trends */}
+        {trends && trends.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-sm font-medium text-muted-foreground mb-3">Top trends for you</h2>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {trends.map((t) => (
+                <Card key={t.trend_id} className="p-4 hover:border-accent/40 transition-colors">
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <h3 className="font-serif font-semibold text-primary leading-snug">{t.title}</h3>
+                    <div className="text-right shrink-0">
+                      <div className="text-base font-bold text-accent tabular-nums leading-none">{Math.round(t.match_score)}</div>
+                      <div className="text-[10px] text-muted-foreground uppercase tracking-wide">match</div>
+                    </div>
+                  </div>
+                  {t.thesis && <p className="text-sm text-muted-foreground mb-2 line-clamp-2">{t.thesis}</p>}
+                  <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-muted-foreground">
+                    <Badge variant="outline" className="text-[10px]">{t.trend_type}</Badge>
+                    <Badge variant="outline" className="text-[10px]">{t.maturity_stage}</Badge>
+                    <span>· {t.signal_count} signals</span>
+                    <span>· momentum {Math.round(t.momentum_score)}</span>
+                    <span>· opportunity {Math.round(t.opportunity_score)}</span>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="flex justify-between items-center mb-4">
-          <p className="text-sm text-muted-foreground">
-            {data ? `${data.length} signals` : ""}
-          </p>
+          <h2 className="text-sm font-medium text-muted-foreground">
+            Live signals{data ? ` · ${data.length}` : ""}
+          </h2>
           <Button variant="ghost" size="sm" onClick={() => refetch()} disabled={isRefetching}>
             {isRefetching ? <Loader2 className="h-4 w-4 animate-spin" /> : "Refresh"}
           </Button>
