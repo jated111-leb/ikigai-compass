@@ -192,34 +192,6 @@ export function AiCoachingPanel({
         </span>
       </div>
 
-      {/* API Key Form */}
-      {showApiKeyForm && (
-        <div className="bg-background/60 rounded-lg p-4 space-y-3">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Key className="h-4 w-4" />
-            <span>Enter your OpenAI API key to enable AI coaching</span>
-          </div>
-          <div className="flex gap-2">
-            <Input
-              type="password"
-              value={apiKeyInput}
-              onChange={(e) => setApiKeyInput(e.target.value)}
-              placeholder="sk-..."
-              className="bg-background"
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleSaveApiKey();
-              }}
-            />
-            <Button variant="warm" size="sm" onClick={handleSaveApiKey}>
-              Save
-            </Button>
-          </div>
-          <p className="text-xs text-muted-foreground">
-            Your key is stored locally in your browser and never sent to our
-            servers.
-          </p>
-        </div>
-      )}
 
       {/* Error */}
       {error && (
