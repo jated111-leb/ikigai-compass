@@ -1,14 +1,12 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Key, AlertCircle, Loader2, Sparkles } from "lucide-react";
+import { Send, AlertCircle, Loader2, Sparkles } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useJourney } from "@/lib/store";
 import {
   streamCoachingResponse,
   streamFollowUpResponse,
-  hasApiKey,
-  setApiKey,
   buildCrossModuleContext,
   type CoachingContext,
 } from "@/lib/ai-service";
