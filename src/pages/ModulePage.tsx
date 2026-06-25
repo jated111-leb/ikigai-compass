@@ -164,7 +164,16 @@ const ModulePage = () => {
         </div>
 
         {/* Step content */}
-        <div className="animate-fade-slide-in space-y-8" key={step}>
+        <AnimatePresence mode="wait" custom={direction}>
+        <motion.div
+          key={step}
+          custom={direction}
+          initial={{ opacity: 0, y: direction > 0 ? 24 : -24, filter: "blur(6px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, y: direction > 0 ? -24 : 24, filter: "blur(6px)" }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="space-y-8"
+        >
           {/* Step title */}
           {currentStepData.title && (
             <h2 className="text-xl font-serif font-semibold text-foreground/90 mb-4">{currentStepData.title}</h2>
