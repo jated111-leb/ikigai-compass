@@ -38,8 +38,6 @@ export function AiCoachingPanel({
   const [started, setStarted] = useState(false);
   const [followUp, setFollowUp] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [apiKeyInput, setApiKeyInput] = useState("");
-  const [showApiKeyForm, setShowApiKeyForm] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
