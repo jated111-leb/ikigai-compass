@@ -2,9 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Logo } from "./Logo";
 import { Button } from "./ui/button";
-import { AmbientSound } from "./AmbientSound";
 import { ArrowLeft, LogOut, Compass } from "lucide-react";
-
 
 export function Header() {
   const navigate = useNavigate();
@@ -23,15 +21,13 @@ export function Header() {
         <button onClick={() => navigate("/")} className="hover:opacity-80 transition-opacity">
           <Logo size="sm" />
         </button>
-        <div className="flex items-center gap-2">
-          <AmbientSound />
+        <div className="flex items-center gap-3">
           {!isHome && (
             <Button variant="ghost" size="sm" onClick={() => navigate(-1)} className="gap-1.5 text-muted-foreground">
               <ArrowLeft className="h-4 w-4" /> Back
             </Button>
           )}
           {!loading && (
-
             user ? (
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="sm" onClick={() => navigate("/trends")} className="gap-1.5 text-muted-foreground">

@@ -4,9 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useJourney } from "@/lib/store";
 import { modules, worldNeedCategories, archetypes } from "@/lib/content";
 import { Button } from "@/components/ui/button";
-import { ConstellationHero } from "@/components/ConstellationHero";
 import { Printer, Loader2 } from "lucide-react";
-
 
 const ExportPage = () => {
   const navigate = useNavigate();
@@ -52,9 +50,6 @@ const ExportPage = () => {
           </Button>
         </div>
 
-        {/* Constellation hero */}
-        <ConstellationHero />
-
         {/* Title */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-serif font-bold text-primary mb-2">My Ikigai Journey</h1>
@@ -62,7 +57,6 @@ const ExportPage = () => {
             Started {new Date(journey.startedAt).toLocaleDateString()}
           </p>
         </div>
-
 
         {/* Ikigai statement */}
         {journey.ikigaiStatement && (

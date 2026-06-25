@@ -4,12 +4,9 @@ import { useJourney } from "@/lib/store";
 import { modules } from "@/lib/content";
 import { ModuleCard } from "@/components/ModuleCard";
 import { ProgressBar } from "@/components/ProgressBar";
-import { Sigil } from "@/components/Sigil";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { isOnboardingComplete } from "./OnboardingPage";
-import { ROMAN } from "@/lib/module-meta";
-
 
 // Module theme colors from the data pack
 const moduleThemeColors: Record<number, string> = {
@@ -57,31 +54,8 @@ const JourneyPage = () => {
       <div className="max-w-2xl mx-auto">
         {/* Progress */}
         <div className="mb-10">
-          <ProgressBar value={overallProgress} label={`${completedCount} of ${modules.length} chapters sealed`} />
+          <ProgressBar value={overallProgress} label={`${completedCount} of ${modules.length} modules complete`} />
         </div>
-
-        {/* Sigil collection — appears once at least one chapter is sealed */}
-        {completedCount > 0 && (
-          <div className="mb-12 rounded-2xl border border-accent/15 bg-background/40 p-5 cursor-glow">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-serif text-base text-primary">Your seals</h3>
-              <span className="text-xs text-muted-foreground uppercase tracking-[0.2em]">
-                <span className="roman">{ROMAN[completedCount] ?? completedCount}</span> of <span className="roman">{ROMAN[modules.length]}</span>
-              </span>
-            </div>
-            <div className="grid grid-cols-6 gap-2 place-items-center">
-              {modules.map(m => {
-                const done = getModuleState(m.id).completed;
-                return (
-                  <div key={m.id} className={done ? "" : "opacity-15 grayscale"}>
-                    <Sigil moduleId={m.id} size={56} glow={done} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
 
         {/* Inward Journey */}
         <div className="mb-10">

@@ -7,8 +7,6 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { StarField } from "@/components/StarField";
-import { useCursorGlow } from "@/hooks/useCursorGlow";
 import Index from "./pages/Index.tsx";
 import JourneyPage from "./pages/JourneyPage.tsx";
 import ModulePage from "./pages/ModulePage.tsx";
@@ -18,33 +16,7 @@ import OnboardingPage from "./pages/OnboardingPage.tsx";
 import TrendsPage from "./pages/TrendsPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
-
 const queryClient = new QueryClient();
-
-const AppShell = () => {
-  useCursorGlow();
-  return (
-    <BrowserRouter>
-      <StarField />
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />
-            <Route path="/journey" element={<ProtectedRoute><JourneyPage /></ProtectedRoute>} />
-            <Route path="/module/:id" element={<ProtectedRoute><ModulePage /></ProtectedRoute>} />
-            <Route path="/export" element={<ProtectedRoute><ExportPage /></ProtectedRoute>} />
-            <Route path="/trends" element={<ProtectedRoute><TrendsPage /></ProtectedRoute>} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
-  );
-};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -52,11 +24,27 @@ const App = () => (
       <Toaster />
       <Sonner />
       <AuthProvider>
-        <AppShell />
+        <BrowserRouter>
+          <div className="min-h-screen flex flex-col">
+            <Header />
+            <main className="flex-1">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/onboarding" element={<ProtectedRoute><OnboardingPage /></ProtectedRoute>} />
+                <Route path="/journey" element={<ProtectedRoute><JourneyPage /></ProtectedRoute>} />
+                <Route path="/module/:id" element={<ProtectedRoute><ModulePage /></ProtectedRoute>} />
+                <Route path="/export" element={<ProtectedRoute><ExportPage /></ProtectedRoute>} />
+                <Route path="/trends" element={<ProtectedRoute><TrendsPage /></ProtectedRoute>} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </BrowserRouter>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
 
 export default App;
-
