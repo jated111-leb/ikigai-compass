@@ -80,27 +80,72 @@
   h1, h2, h3, h4 { @apply font-serif; }
 }
 
-/* Subtle starfield over the night */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    radial-gradient(1px 1px at 20% 30%, hsl(38 60% 80% / 0.5), transparent 50%),
-    radial-gradient(1px 1px at 70% 10%, hsl(38 60% 80% / 0.4), transparent 50%),
-    radial-gradient(1px 1px at 40% 80%, hsl(38 60% 80% / 0.35), transparent 50%),
-    radial-gradient(1px 1px at 85% 60%, hsl(38 60% 80% / 0.45), transparent 50%),
-    radial-gradient(1.5px 1.5px at 15% 65%, hsl(38 60% 80% / 0.35), transparent 50%),
-    radial-gradient(1px 1px at 60% 45%, hsl(38 60% 80% / 0.3), transparent 50%),
-    radial-gradient(1px 1px at 90% 85%, hsl(38 60% 80% / 0.4), transparent 50%),
-    radial-gradient(1px 1px at 5% 20%, hsl(38 60% 80% / 0.35), transparent 50%);
-  background-size: 100% 100%;
-  animation: twinkle 8s ease-in-out infinite;
-}
+/* Starfield is rendered by <Starfield /> for parallax; keep body clean */
 
 #root { position: relative; z-index: 1; }
+
+/* Parallax starfield layers */
+.starfield-layer {
+  position: absolute;
+  top: -20vh;
+  left: 0;
+  right: 0;
+  height: 220vh;
+  will-change: transform;
+}
+.starfield-far {
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, hsl(38 60% 85% / 0.55), transparent 60%),
+    radial-gradient(1px 1px at 78% 8%, hsl(38 60% 85% / 0.45), transparent 60%),
+    radial-gradient(1px 1px at 42% 62%, hsl(38 60% 85% / 0.4), transparent 60%),
+    radial-gradient(1px 1px at 88% 48%, hsl(38 60% 85% / 0.5), transparent 60%),
+    radial-gradient(1px 1px at 6% 88%, hsl(38 60% 85% / 0.45), transparent 60%),
+    radial-gradient(1px 1px at 64% 92%, hsl(38 60% 85% / 0.4), transparent 60%);
+  background-size: 100% 100%;
+  animation: drift-far 180s linear infinite, twinkle 9s ease-in-out infinite;
+  opacity: 0.85;
+}
+.starfield-mid {
+  background-image:
+    radial-gradient(1.2px 1.2px at 22% 34%, hsl(38 70% 88% / 0.7), transparent 60%),
+    radial-gradient(1.4px 1.4px at 70% 24%, hsl(38 70% 88% / 0.65), transparent 60%),
+    radial-gradient(1.2px 1.2px at 48% 78%, hsl(38 70% 88% / 0.6), transparent 60%),
+    radial-gradient(1.4px 1.4px at 92% 70%, hsl(38 70% 88% / 0.7), transparent 60%),
+    radial-gradient(1.2px 1.2px at 14% 56%, hsl(38 70% 88% / 0.6), transparent 60%);
+  background-size: 100% 100%;
+  animation: drift-mid 120s linear infinite, twinkle 6s ease-in-out infinite;
+  opacity: 0.9;
+}
+.starfield-near {
+  background-image:
+    radial-gradient(1.8px 1.8px at 30% 12%, hsl(38 90% 92% / 0.9), transparent 65%),
+    radial-gradient(2px 2px at 82% 40%, hsl(38 90% 92% / 0.85), transparent 65%),
+    radial-gradient(1.8px 1.8px at 18% 72%, hsl(38 90% 92% / 0.9), transparent 65%),
+    radial-gradient(2px 2px at 58% 96%, hsl(38 90% 92% / 0.8), transparent 65%);
+  background-size: 100% 100%;
+  animation: drift-near 80s linear infinite, twinkle 4.5s ease-in-out infinite;
+  opacity: 1;
+}
+.starfield-aurora {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, hsl(38 92% 58% / 0.10), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 30%, hsl(280 50% 40% / 0.08), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 10% 70%, hsl(200 60% 35% / 0.06), transparent 60%);
+}
+
+@keyframes drift-far {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: -8% 6%; }
+}
+@keyframes drift-mid {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 12% -10%; }
+}
+@keyframes drift-near {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: -18% 14%; }
+}
+
 
 /* Print styles */
 @media print {
