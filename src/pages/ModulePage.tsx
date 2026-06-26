@@ -174,7 +174,13 @@ const ModulePage = () => {
               <h1 className="text-2xl font-serif font-bold text-primary">{moduleContent.title}</h1>
             </div>
           </div>
-          <ProgressBar value={progressValue} label={progressLabel} size="sm" />
+          {isQuestionStep(currentStepData) ? (
+            <ProgressBar value={progressValue} label={progressLabel} size="sm" />
+          ) : (
+            <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-medium pt-1">
+              A pause to read
+            </div>
+          )}
         </div>
 
 
