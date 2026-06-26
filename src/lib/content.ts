@@ -47,7 +47,8 @@ function convertModule(mod: ModuleData): ModuleContent {
     });
   }
 
-  // Flatten: each exercise in each data step becomes its own UI step
+  // Flatten: each exercise in each data step becomes its own UI step.
+  // If a step has both content AND exercises, the content becomes its own intro slide first.
   for (const dataStep of mod.steps) {
     const contentBlocks = dataStep.contentBlocks.map(convertContentBlock);
 
@@ -55,12 +56,15 @@ function convertModule(mod: ModuleData): ModuleContent {
       // Step with content only
       steps.push({ title: dataStep.title, content: contentBlocks });
     } else {
-      // First exercise gets the step's content blocks
+      // Split: intro content gets its own slide, then each exercise is a separate slide
+      if (contentBlocks.length > 0) {
+        steps.push({ title: dataStep.title, content: contentBlocks });
+      }
       dataStep.exercises.forEach((ex, idx) => {
         const exerciseType = ex.type === 'card_select' ? 'cardselect' : ex.type;
         steps.push({
-          title: idx === 0 ? dataStep.title : undefined,
-          content: idx === 0 ? contentBlocks : [],
+          title: contentBlocks.length === 0 && idx === 0 ? dataStep.title : undefined,
+          content: [],
           exercise: {
             type: exerciseType as any,
             prompt: ex.prompt,
@@ -73,6 +77,7 @@ function convertModule(mod: ModuleData): ModuleContent {
       });
     }
   }
+
 
   return {
     id: mod.id,
