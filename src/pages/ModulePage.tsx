@@ -158,6 +158,82 @@ const ModulePage = () => {
   const themeColors: Record<number, string> = { 1: '#d97706', 2: '#7c3aed', 3: '#dc2626', 4: '#059669', 5: '#2563eb', 6: '#d97706' };
   const themeColor = themeColors[moduleId] || '#d97706';
 
+  if (isChapterOpening) {
+    return (
+      <div className="min-h-[calc(100vh-4rem)] px-6 py-12 flex items-center">
+        <div className="max-w-2xl mx-auto w-full">
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={`cover-${step}`}
+              initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -24, filter: "blur(8px)" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center space-y-10"
+            >
+              {/* Chapter eyebrow */}
+              <div className="flex flex-col items-center gap-6">
+                <div
+                  className="relative w-20 h-20 rounded-full flex items-center justify-center"
+                  style={{
+                    background: `radial-gradient(circle, ${themeColor}25 0%, ${themeColor}05 70%, transparent 100%)`,
+                    color: themeColor,
+                  }}
+                >
+                  <div
+                    className="absolute inset-0 rounded-full animate-pulse"
+                    style={{ boxShadow: `0 0 60px ${themeColor}40` }}
+                  />
+                  <IconComp className="h-8 w-8 relative" />
+                </div>
+                <div className="space-y-3">
+                  <div
+                    className="text-[10px] tracking-[0.4em] uppercase font-medium"
+                    style={{ color: themeColor }}
+                  >
+                    Chapter {moduleId} {moduleId <= 3 ? "· Inward" : "· Outward"}
+                  </div>
+                  <h1 className="text-4xl sm:text-5xl font-serif font-bold text-primary leading-tight">
+                    {moduleContent.title}
+                  </h1>
+                  {currentStepData.title && currentStepData.title !== moduleContent.title && (
+                    <p className="text-base font-serif italic text-muted-foreground pt-2">
+                      {currentStepData.title}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Ornate divider */}
+              <div className="flex items-center justify-center gap-3 opacity-60">
+                <div className="h-px w-12 bg-gradient-to-r from-transparent to-accent/60" />
+                <div className="w-1.5 h-1.5 rounded-full bg-accent/70" />
+                <div className="h-px w-12 bg-gradient-to-l from-transparent to-accent/60" />
+              </div>
+
+              {/* Intro content */}
+              {currentStepData.content.length > 0 && (
+                <div className="text-left">
+                  <ContentBlock blocks={currentStepData.content} />
+                </div>
+              )}
+
+              {/* Begin CTA */}
+              <div className="pt-4">
+                <Button variant="hero" size="lg" onClick={handleNext} className="gap-2 px-8">
+                  Begin this chapter <ArrowRight className="h-4 w-4" />
+                </Button>
+                <div className="mt-4 text-[10px] tracking-[0.3em] uppercase text-muted-foreground">
+                  {totalQuestions} reflection{totalQuestions === 1 ? "" : "s"} ahead
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="py-8 px-6">
       <div className="max-w-2xl mx-auto">
