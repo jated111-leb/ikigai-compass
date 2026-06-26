@@ -51,6 +51,21 @@ const ModulePage = () => {
   const isLastStep = step === totalSteps - 1;
   const IconComp = (Icons as any)[moduleContent.icon] || Icons.Circle;
 
+  // Distinguish reflection (intro/content-only) slides from question slides
+  const isQuestionStep = (s: typeof currentStepData) => !!s.exercise;
+  const questionSteps = moduleContent.steps.filter(isQuestionStep);
+  const totalQuestions = questionSteps.length;
+  const currentQuestionIndex = isQuestionStep(currentStepData)
+    ? moduleContent.steps.slice(0, step + 1).filter(isQuestionStep).length
+    : moduleContent.steps.slice(0, step).filter(isQuestionStep).length;
+  const progressValue = isQuestionStep(currentStepData)
+    ? (currentQuestionIndex / totalQuestions) * 100
+    : Math.min(100, ((currentQuestionIndex + 0.5) / totalQuestions) * 100);
+  const progressLabel = isQuestionStep(currentStepData)
+    ? `Question ${currentQuestionIndex} of ${totalQuestions}`
+    : `A pause · before question ${Math.min(totalQuestions, currentQuestionIndex + 1)}`;
+
+
   const exerciseData = modState.exercises[String(step)] || {} as any;
 
   const handleExerciseSave = (data: any) => {
@@ -160,8 +175,9 @@ const ModulePage = () => {
               <h1 className="text-2xl font-serif font-bold text-primary">{moduleContent.title}</h1>
             </div>
           </div>
-          <ProgressBar value={((step + 1) / totalSteps) * 100} label={`Step ${step + 1} of ${totalSteps}`} size="sm" />
+          <ProgressBar value={progressValue} label={progressLabel} size="sm" />
         </div>
+
 
         {/* Step content */}
         <AnimatePresence mode="wait" custom={direction}>
@@ -174,10 +190,22 @@ const ModulePage = () => {
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           className="space-y-8"
         >
+          {/* Slide kind marker */}
+          <div className="flex items-center gap-2 -mb-2">
+            <span
+              className="inline-block w-1.5 h-1.5 rounded-full"
+              style={{ backgroundColor: isQuestionStep(currentStepData) ? themeColor : 'hsl(var(--muted-foreground))', opacity: isQuestionStep(currentStepData) ? 0.9 : 0.5 }}
+            />
+            <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-medium">
+              {isQuestionStep(currentStepData) ? 'Reflection question' : 'A pause to read'}
+            </span>
+          </div>
+
           {/* Step title */}
           {currentStepData.title && (
             <h2 className="text-xl font-serif font-semibold text-foreground/90 mb-4">{currentStepData.title}</h2>
           )}
+
 
           {/* Content zone */}
           {currentStepData.content.length > 0 && (
