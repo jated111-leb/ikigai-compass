@@ -2,3 +2,11 @@ project_id = "jhugycbaqdfdppfcwlta"
 
 [functions.ai-coach]
 verify_jwt = false
+
+# Cron-invoked via net.http_post with an x-ingest-key header (not a user JWT),
+# so JWT verification must be off; the functions check INGEST_SECRET themselves.
+[functions.ingest]
+verify_jwt = false
+
+[functions.enrich]
+verify_jwt = false
