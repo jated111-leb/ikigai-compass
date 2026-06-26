@@ -51,6 +51,21 @@ const ModulePage = () => {
   const isLastStep = step === totalSteps - 1;
   const IconComp = (Icons as any)[moduleContent.icon] || Icons.Circle;
 
+  // Distinguish reflection (intro/content-only) slides from question slides
+  const isQuestionStep = (s: typeof currentStepData) => !!s.exercise;
+  const questionSteps = moduleContent.steps.filter(isQuestionStep);
+  const totalQuestions = questionSteps.length;
+  const currentQuestionIndex = isQuestionStep(currentStepData)
+    ? moduleContent.steps.slice(0, step + 1).filter(isQuestionStep).length
+    : moduleContent.steps.slice(0, step).filter(isQuestionStep).length;
+  const progressValue = isQuestionStep(currentStepData)
+    ? (currentQuestionIndex / totalQuestions) * 100
+    : Math.min(100, ((currentQuestionIndex + 0.5) / totalQuestions) * 100);
+  const progressLabel = isQuestionStep(currentStepData)
+    ? `Question ${currentQuestionIndex} of ${totalQuestions}`
+    : `A pause · before question ${Math.min(totalQuestions, currentQuestionIndex + 1)}`;
+
+
   const exerciseData = modState.exercises[String(step)] || {} as any;
 
   const handleExerciseSave = (data: any) => {
