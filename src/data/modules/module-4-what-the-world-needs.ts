@@ -82,7 +82,7 @@ export const module4: ModuleData = {
           id: "m4-s1-c2",
           type: "paragraph",
           content:
-            "This perspective helps us step outside the stories we have been told about what matters and what is 'just how things are.' Many of humanity's greatest problems persist not because they are unsolvable, but because we have normalized them.",
+            "This perspective helps us step outside the stories we have been told about what matters and what is 'just how things are.' Many of humanity's greatest problems persist not because they are unsolvable, but because we have normalized them. This is the double-vision strategy: looking at your immediate world from a great distance — zooming out to the scale of human history, the history of the earth, even the fourteen-billion-year history of the cosmos. From far enough away, what is broken stops looking inevitable and starts looking like a choice. Humility is the doorway: the ego likes to imagine itself the center of the universe, and a wider lens gently unseats it.",
         },
         {
           id: "m4-s1-c3",
@@ -98,19 +98,19 @@ export const module4: ModuleData = {
           prompt:
             "If you were seeing Earth for the first time, with fresh eyes — what would strike you as most urgently wrong? What would you want to fix first?",
           guidance:
-            "Drop all familiarity. Pretend you've never been told 'that's just how it is.' What would genuinely shock you?",
+            "Imagine you were sent to observe Earth for a full year, tasked with writing a short report on what you find — its top wonders and its top wounds, and whether your kind should approach humans at all. What would make the list? Drop all familiarity. Pretend no one ever told you 'that's just how it is.' What would genuinely shock a clear pair of eyes?",
           placeholder:
             "Describe what you'd see with alien eyes...",
           followUpPrompt:
-            "Why do you think this particular issue stands out to you? Is there a connection to what you explored in the Inward Journey?",
+            "Why do you think this particular issue stands out to YOU — out of everything you could have named? The thing you cannot stop seeing is rarely random; it is usually pointing back at something in your own story. Is there a connection to what you explored in the Inward Journey?",
         },
         {
           id: "m4-e2",
           type: "freetext",
           prompt:
-            "Name three specific changes you want to see in your society — in your community, your country, or the world at large. For each, describe what would be different if this change happened.",
+            "Name three specific changes you want to see in your society — in your community, your country, or the world at large. For each, describe how the world would actually be different if this change happened.",
           guidance:
-            "Be specific. Not 'better education' but 'every child has access to a mentor who believes in them.' Not 'less inequality' but 'no one in my city sleeps hungry.' The more specific your vision, the more actionable it becomes.",
+            "Be specific. Not 'better education' but 'every child has access to a mentor who believes in them.' Not 'less inequality' but 'no one in my city sleeps hungry.' The more specific your vision, the more actionable it becomes. Nick Seneca Jankel offers a reframe worth holding as you write: if you had been placed on this planet to use all of your insights, experiences, and gifts to bring more love into the world, what would you actually do each day? Let that question pull the vague into the concrete.",
           placeholder:
             "Change 1: ... What would be different: ...\nChange 2: ... What would be different: ...\nChange 3: ... What would be different: ...",
         },
@@ -149,7 +149,7 @@ export const module4: ModuleData = {
           prompt:
             "Explore the five categories below and select the topics that resonate with you. Click on a category to expand it, then toggle 'This resonates with me' on any sub-topic that moves you.",
           guidance:
-            "You can select as many as feel true. The AI will help you find patterns in your selections later.",
+            "Let two questions guide your hand rather than your sense of duty: What do you find the most beauty in? And what are you most moved by? Don't select what you think you should care about — select what quietly tugs at you, even if you can't yet explain why. You can choose as many as feel true. The AI will help you find the pattern in your selections later.",
         },
       ],
     },
@@ -186,7 +186,7 @@ export const module4: ModuleData = {
           prompt:
             "Looking at the world-need topics you selected — what connections do you see to your passions from Module 1 and your wounds from Module 2?",
           guidance:
-            "The pattern may already be emerging. What you love, what has hurt you, and what the world needs are often three expressions of the same deeper call.",
+            "The pattern may already be emerging. What you love, what has hurt you, and what the world needs are often three expressions of the same deeper call. Notice the symmetry: the things you find beautiful and the places those same things are neglected tend to be the same things. Animals are beautiful — and their devastation bothers those who love them. Children are luminous — and broken schooling bothers those who see it. Your pain at the state of the world is not dysfunction; it is your moral compass pointing at where you are needed.",
           placeholder:
             "Describe the connections you see between your inner world and the world's needs...",
           followUpPrompt:
@@ -198,7 +198,7 @@ export const module4: ModuleData = {
           prompt:
             "What problem in the world do you feel most equipped to contribute to — not because you have all the answers, but because you understand the terrain?",
           guidance:
-            "Think about specific knowledge — the kind you can't be trained for, that comes from your unique combination of experience, curiosity, and passion.",
+            "Joanna Macy draws a distinction worth sitting with. The first question — 'What can I do?' — opens us to the world's pain and surveys our capacities and connections. The deeper question is 'What do I feel called to contribute?' — which recognizes that each of us is especially sensitive to some forms of suffering and inspired by some kinds of action. You are far more likely to be sustained, energized, and impassioned by the response that genuinely calls you. So think about specific knowledge — the kind you cannot be trained for, that comes from your particular combination of experience, curiosity, and pain.",
           placeholder:
             "Describe the problem and why you feel called to it...",
         },

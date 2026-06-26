@@ -38,8 +38,9 @@ export const module1: ModuleData = {
       id: "m1-intro-4",
       type: "quote",
       quote: {
-        text: "Ask yourself what makes you come alive, and go and do more of that, because what the world needs is more of us, all of us to come alive!",
-        author: "Howard Thurman",
+        text: "Don't ask what the world needs. Ask what makes you come alive, and go do it. Because what the world needs is people who have come alive.",
+        author: "Attributed to Howard Thurman",
+        source: "First recorded in Gil Bailie, Violence Unveiled, 1995",
       },
     },
     {
@@ -82,7 +83,7 @@ export const module1: ModuleData = {
           id: "m1-s1-c3",
           type: "quote",
           quote: {
-            text: "Follow your bliss. If you do, you will find yourself following the path that has always been there deep within.",
+            text: "If you follow your bliss, you put yourself on a kind of track that has been there all the while, waiting for you, and the life that you ought to be living is the one you are living.",
             author: "Joseph Campbell",
             source: "The Power of Myth, 1988",
           },
@@ -100,7 +101,7 @@ export const module1: ModuleData = {
           type: "freetext",
           prompt: "What is it that really keeps you alive — and not just makes a living?",
           guidance:
-            "Don't think about job titles or what's practical. Think about what fills you with energy. What would you do even if nobody paid you?",
+            "Don't think about job titles or what's practical. Notice the difference between pleasure and aliveness — they are not the same thing. Pleasure soothes a lack and then fades, often leaving a faint emptiness behind. Aliveness usually costs something, asks effort, and leaves you more yourself rather than less. The Greeks pointed at it with the word eudaimonia — a life lived in accord with one's daimon. So ask not what sedates you, but what wakes you: what would you keep doing even if nobody paid you, simply because the doing is alive?",
           placeholder:
             "Write freely here. There are no wrong answers...",
           followUpPrompt:
@@ -152,7 +153,7 @@ export const module1: ModuleData = {
           prompt:
             "With what activities do you experience flow? When does your time fly?",
           guidance:
-            "Think of an activity where you feel fully engaged and won't be thinking about anything else while doing it. Where challenge meets your skill and you lose yourself.",
+            "Csikszentmihalyi found that the best moments of a life usually occur 'when a person's body or mind is stretched to its limits in a voluntary effort to accomplish something difficult and worthwhile' — not in rest, but in absorption. Flow arrives only when a real challenge meets a real skill, which is exactly why it points at your nature: the activities that reliably pull you under are a map of where your capacities and your hungers already align. Think of where you feel fully engaged, where the self temporarily dissolves into the work.",
           placeholder:
             "Describe activities where you lose track of time...",
           followUpPrompt:
@@ -205,7 +206,7 @@ export const module1: ModuleData = {
           prompt:
             "What did you love doing when you were a child? What did you dream of becoming?",
           guidance:
-            "Go back before the world told you what was realistic. What did you naturally gravitate toward? What did you pretend to be?",
+            "Go back before the world told you what was realistic. James Hillman called it the acorn: each of us arrives carrying a unique pattern, the way an oak is already folded inside an acorn — and the strange, early, persistent passions are that pattern pressing toward its form. Robert Greene names the same thing your 'primal inclination,' clearest in childhood before any future was at stake. So ask not what you were good at as a child, but what you lost yourself in — what you reached for when no one was grading you.",
           placeholder:
             "Recall your childhood fascinations and dreams...",
           followUpPrompt:

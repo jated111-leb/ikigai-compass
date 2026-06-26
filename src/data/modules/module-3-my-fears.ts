@@ -82,7 +82,7 @@ export const module3: ModuleData = {
           prompt:
             "What real, practical difficulties stand between you and the life you described in Module 1? Be specific.",
           guidance:
-            "These are the genuine constraints — not the stories. Financial obligations, location, health, dependents, time. Name them honestly.",
+            "Not every limit is a lie. Some walls are real — a body's actual capacity, an obligation you have freely chosen, the hours the day actually contains — and honesty about these is not defeat; it is the ground beneath any serious plan. But many of the walls we live behind were painted onto open air long ago, and we stopped testing them because testing them felt dangerous. For now, name only the genuine constraints — not the stories. Financial obligations, location, health, dependents, time. We will separate the real walls from the painted ones as we go.",
           placeholder:
             "List the real, tangible obstacles you face...",
         },
@@ -92,11 +92,11 @@ export const module3: ModuleData = {
           prompt:
             "What beliefs do you hold about yourself that might be limiting you? What stories do you repeat about what you can or cannot do?",
           guidance:
-            "These often start with 'I'm not...', 'I can't...', 'I'm too...', 'It's too late to...'. Write them down exactly as your inner voice says them.",
+            "Robert Kegan drew a line that, once seen, is hard to unsee: the difference between a belief you have and a belief that has you. A belief you can hold at arm's length and turn over — that one you have. A belief you cannot see because you are looking through it — that one has you. This is why a limiting belief almost never announces itself as a belief; it arrives wearing the clothes of plain fact: 'this is just how the world is, this is just who I am.' So write them down exactly as your inner voice says them — and notice which ones you've never once questioned.",
           placeholder:
             "Write down the limiting beliefs as they sound in your head...",
           followUpPrompt:
-            "For each belief you listed — when did you first start believing this? Who told you this, or what experience made you accept it as fact?",
+            "For each belief you listed — when did you first start believing this? Say it aloud, then ask: whose voice is that? Where did you first hear it, and what were they afraid of when they taught it to you?",
         },
         {
           id: "m3-e3",
@@ -104,7 +104,7 @@ export const module3: ModuleData = {
           prompt:
             "Have you ever been close to a breakthrough — close to pursuing something meaningful — and pulled back? What happened?",
           guidance:
-            "This is the territory of psychological resistance. The moment where you could have leaped but didn't. Not because of practical reasons, but because something inside stopped you.",
+            "Steven Pressfield gave this force a name — Resistance — and noticed it is not random: the more an act matters to the life you are actually meant to live, the more Resistance you feel before it. Seen this way, the pull-back is a compass needle swinging toward true north. Kegan and Lahey found something just as dignified underneath self-sabotage: beside the goal you announce sits a hidden, competing commitment — one foot on the gas, one foot on the brake — and the brake is usually not laziness but loyalty to something you are quietly afraid to lose. The moment you could have leaped but didn't is rich data. What stopped you — and what was it protecting?",
           placeholder:
             "Describe times you pulled back from your own potential...",
         },
@@ -133,7 +133,7 @@ export const module3: ModuleData = {
           id: "m3-s2-c3",
           type: "framework",
           content:
-            "Psychologist Abraham Maslow identified a pattern he called the Jonas Complex — named after the biblical Jonah who fled from his calling. It describes the fear of success: the unconscious avoidance of your own greatness. Many people are not afraid of failing — they are afraid of what happens if they actually succeed. New responsibilities, jealousy from others, loss of current identity, and the terrifying weight of living up to your potential. The Jonas Complex is one of the most common and least recognized obstacles to pursuing your mission.",
+            "Psychologist Abraham Maslow identified a pattern he called the Jonah complex — named after the biblical Jonah who fled from his calling. It describes the fear of success: the unconscious avoidance of your own greatness. As Maslow put it, 'we fear our highest possibilities, as well as our lowest ones' — we thrill to the godlike potential we glimpse in our best moments, and yet we simultaneously 'shiver with weakness, awe, and fear' before those very same possibilities. Many people are not afraid of failing — they are afraid of what happens if they actually succeed: new responsibilities, jealousy from others, loss of current identity, and the terrifying weight of living up to their potential. The Jonah complex is one of the most common and least recognized obstacles to pursuing your mission.",
         },
       ],
       exercises: [
@@ -161,7 +161,7 @@ export const module3: ModuleData = {
           prompt:
             "Choose the fear that feels strongest right now. Describe it fully. When does it show up? How does it control your decisions?",
           guidance:
-            "Give this fear a full voice. Let it speak. The more clearly you see it, the less power it has over you.",
+            "Give this fear a full voice. Let it speak. And consider that some fear is not about danger at all. Marianne Williamson named it — in the passage so often misattributed to Mandela: 'Our deepest fear is not that we are inadequate. Our deepest fear is that we are powerful beyond measure.' Sometimes what we are most afraid of is our own size, because to let our real capacity show is to be on the hook for living up to it. The more clearly you see the fear, the less power it has over you.",
           placeholder:
             "Describe your strongest fear in detail — when it appears, what it says, what it stops you from doing...",
           followUpPrompt:
@@ -272,7 +272,7 @@ export const module3: ModuleData = {
           prompt:
             "What is the cost of NOT pursuing your purpose? If you let fear win — if you stay safe — what do you lose?",
           guidance:
-            "Sometimes we focus so much on the risk of action that we forget the risk of inaction. What is the price of staying where you are?",
+            "Jung observed that 'when an inner situation is not made conscious, it happens outside, as fate.' The fear you refuse to face does not stay quietly where you left it — it arranges your life from behind, and you come to call the result your circumstances, your luck, your fate. Sometimes we focus so much on the risk of action that we forget the risk of inaction. What is the price of staying where you are?",
           placeholder:
             "Describe what you lose if fear wins...",
           followUpPrompt:
