@@ -60,10 +60,9 @@ const ModulePage = () => {
     : moduleContent.steps.slice(0, step).filter(isQuestionStep).length;
   const progressValue = isQuestionStep(currentStepData)
     ? (currentQuestionIndex / totalQuestions) * 100
-    : Math.min(100, ((currentQuestionIndex + 0.5) / totalQuestions) * 100);
-  const progressLabel = isQuestionStep(currentStepData)
-    ? `Question ${currentQuestionIndex} of ${totalQuestions}`
-    : `A pause · before question ${Math.min(totalQuestions, currentQuestionIndex + 1)}`;
+    : 0;
+  const progressLabel = `Reflection question ${Math.max(1, currentQuestionIndex)} of ${totalQuestions}`;
+
 
 
   const exerciseData = modState.exercises[String(step)] || {} as any;
