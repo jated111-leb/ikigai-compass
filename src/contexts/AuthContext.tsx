@@ -24,11 +24,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(session?.user ?? null);
       setLoading(false);
 
-      if (event === 'SIGNED_IN' && session?.user?.email) {
-        supabase.functions.invoke('notify-login', {
-          body: { email: session.user.email, timestamp: new Date().toISOString() },
-        }).catch(() => {});
-      }
     });
 
     supabase.auth.getSession().then(({ data: { session } }) => {
