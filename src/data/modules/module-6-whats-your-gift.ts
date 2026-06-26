@@ -85,7 +85,7 @@ export const module6: ModuleData = {
           type: "freetext",
           prompt: "What is the problem you are seeing in the world?",
           guidance:
-            "Draw on Module 4 (What the World Needs) and Module 2 (What Bothers You). Name the specific problem that calls to you.",
+            "Draw on Module 4 (What the World Needs) and Module 2 (What Bothers You). Name the specific problem that calls to you. Don't shrink it prematurely out of modesty: the bigger the problem you are willing to stand in front of, the more meaning you will tend to feel — and the more work you do toward it, the more meaning still. Name the real size of the thing first; we will narrow the angle of attack later.",
           placeholder: "Name the problem...",
         },
         {
@@ -93,7 +93,7 @@ export const module6: ModuleData = {
           type: "freetext",
           prompt: "What are you intending to fix or contribute to?",
           guidance:
-            "Not the entire problem — your specific piece of it. What is your angle of contribution?",
+            "Not the entire problem — your specific piece of it. What is your angle of contribution? Teal Swan offers a way to hear this question: your purpose is really about what you are meant to give. Each being that is born is like a gift handed from the universe at large to the rest of existence — and it is only by considering what we are here to give, and what we want others to take away from us, that we find our purpose. So this is the moment to convert virtuous intent into something concrete and beneficial: what, exactly, is yours to give?",
           placeholder: "Describe your intended contribution...",
         },
         {
@@ -102,7 +102,7 @@ export const module6: ModuleData = {
           prompt:
             "Why are you doing this? And why is that? And why is that?",
           guidance:
-            "Ask yourself 'why' at least three times. Each answer peels back a layer. The third 'why' usually reveals the real reason.",
+            "Ask yourself 'why' at least three times. Each answer peels back a layer. The third 'why' usually reveals the real reason. Viktor Frankl noticed something paradoxical here: meaning is rarely found by pursuing it head-on. It arrives as a side-effect of giving ourselves to something, or someone, beyond ourselves — what he called dereflection, turning the focus away from oneself. So don't be surprised if your deepest 'why' stops being about you at all, and points outward, toward others.",
           placeholder:
             "Layer 1: I'm doing this because...\nLayer 2: And that matters because...\nLayer 3: And at the deepest level, it's because...",
           followUpPrompt:
@@ -122,7 +122,7 @@ export const module6: ModuleData = {
           type: "freetext",
           prompt: "What would the best version of yourself look like?",
           guidance:
-            "Imagine yourself fully expressed, fully alive, fully contributing. Not perfect — but real and purposeful. What does that look like?",
+            "Imagine yourself fully expressed, fully alive, fully contributing. Not perfect — but real and purposeful. Scott Barry Kaufman is careful about what 'best self' actually means: healthy transcendence is not standing above the whole or feeling superior to it. It is becoming a harmonious part of the whole — harnessing all that you are in the service of realizing the best version of yourself, so that you can help raise the bar for the whole of humanity. The most fulfilled people tend to be low in ego and high in transcendence. What does that look like, in you?",
           placeholder: "Describe your best, most authentic self...",
         },
         {
@@ -131,7 +131,7 @@ export const module6: ModuleData = {
           prompt:
             "How are you different from other people working on similar things?",
           guidance:
-            "This is about your specific knowledge — the kind that cannot be trained for. What unique combination of experience, perspective, and passion do you bring?",
+            "Innovators understand that it is necessary to believe in order to see — they believe in what does not yet exist, and so they perceive what most people cannot. An entrepreneur is almost always moved by noticing a gap in reality that no one else quite sees; the narrative gets completed through an act of personal imagination. Your difference is not a credential. It is the specific gap only you can see, and the specific knowledge — won from lived experience, not training — that lets you see it. What is that unique combination of experience, perspective, and passion you bring?",
           placeholder: "Describe your unique angle...",
         },
         {
@@ -190,7 +190,7 @@ export const module6: ModuleData = {
           prompt:
             "Coherence: What larger whole do you want to be part of? What community, cause, or mission is greater than yourself but needs exactly what you carry?",
           guidance:
-            "Purpose is never purely individual. It always connects you to something larger. What is that larger thing for you?",
+            "Purpose is never purely individual. It always connects you to something larger. Systems thinkers describe the shift underway in our time as a move from seeing yourself as an 'Observer' standing apart from the world, to a relational 'exchange of consciousness' in which everything is connected to everything else. In a genuine whole, the whole becomes more than the sum of its parts — and each part becomes more itself for belonging to it. What is that larger thing for you, the one that would make you more yourself by joining it?",
           placeholder: "Reflect on where you belong...",
           followUpPrompt:
             "If sovereignty, right relationship, and coherence were all fully alive in you — what would your life look like? What would you be doing?",
@@ -244,7 +244,7 @@ export const module6: ModuleData = {
           prompt:
             "Complete this sentence: 'No matter what happens in my life, I will always...' — What is the one commitment you would make to yourself that nothing could shake?",
           guidance:
-            "This is not about career or achievement. It is about the way you show up in the world — the non-negotiable core of who you are. Steve Jobs said: 'Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do.' What will you always do, no matter what?",
+            "This is not about career or achievement. It is about the way you show up in the world — the non-negotiable core of who you are. Sit with the hardest version of the question: even under the worst-case scenario, can you find in yourself a 'no matter what' commitment? Can you still tap into the well of uncaused, unreasonable happiness? Can you still relate to your fellow humans, and to all of life, with care and love? Can you still — to the fullest extent possible — remain present as a force for good in every moment? A 'no matter what' commitment resolves all dilemmas, because it does not depend on the outcome. What is yours?",
           placeholder:
             "No matter what happens, I will always...",
         },

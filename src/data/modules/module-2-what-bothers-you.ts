@@ -184,7 +184,7 @@ export const module2: ModuleData = {
           prompt:
             "Awareness of your pain is the ultimate tool in changing your attitude. What has your suffering taught you? What strength or sensitivity has it given you?",
           guidance:
-            "Pain that has been processed becomes wisdom. What do you understand now that you could not have understood without going through what you went through?",
+            "Joseph Campbell said: 'Where you stumble and fall, there you will find gold.' This inverts the logic of self-improvement, which trains us to route around our weak places and hide our limp. But be honest rather than tidy — this is not 'everything happens for a reason' used as an anesthetic. The wound was real and the meaning is not a consolation prize. Frankl's claim was narrower and truer: suffering 'ceases to be suffering at the moment it finds a meaning.' What do you understand now that you could not have understood without going through what you went through?",
           placeholder:
             "Describe the gifts that have come from your difficult experiences...",
         },
@@ -241,7 +241,7 @@ export const module2: ModuleData = {
           prompt:
             "What parts of yourself have you hidden, denied, or pushed away because they felt unacceptable?",
           guidance:
-            "These might be emotions (anger, jealousy, ambition, vulnerability), behaviors (being loud, being selfish, being lazy), or desires (wanting power, wanting attention, wanting solitude). Name them.",
+            "Robert Bly offered the clearest picture of how this happens: we are born radiating energy in every direction, and then, one disapproving glance at a time, we put the unwelcome parts into an invisible bag we drag behind us. By adulthood the bag is long and the radiant self is a thin slice. The things at the very bottom — banished earliest and hardest — are rarely monstrous. They are usually our aliveness. So look in the bag. These might be emotions (anger, jealousy, ambition, vulnerability), behaviors (being loud, being selfish, being lazy), or desires (wanting power, wanting attention, wanting solitude). Name them.",
           placeholder:
             "Describe the qualities you've suppressed...",
         },
@@ -261,7 +261,7 @@ export const module2: ModuleData = {
           prompt:
             "Is there someone who gets on your nerves, irritates you, or annoys you to the point of obsession? Describe what about them bothers you — then ask: could this be a part of my own shadow that I am projecting onto them?",
           guidance:
-            "Monbourquette calls this shadow projection. The traits that trigger us most intensely in others are often the traits we have disowned in ourselves. The person who irritates you is holding up a mirror. What do you see?",
+            "Monbourquette calls this shadow projection. Jung put it without comfort: 'Projections change the world into the replica of one's own unknown face.' The tell is the charge — not everything you dislike is a projection (some things are simply wrong and deserve disliking), but disproportion is the signature of the disowned. When the disdain lingers for hours, out of all proportion, you are usually meeting something of your own across the room. As Hesse wrote in Demian: 'What isn't part of ourselves doesn't disturb us.' The person who irritates you is holding up a mirror. What do you see?",
           placeholder:
             "Describe the person and the trait that bothers you, then explore whether it's your own shadow...",
           followUpPrompt:
