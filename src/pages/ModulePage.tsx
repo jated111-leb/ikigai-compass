@@ -62,6 +62,7 @@ const ModulePage = () => {
     ? (currentQuestionIndex / totalQuestions) * 100
     : 0;
   const progressLabel = `Reflection question ${Math.max(1, currentQuestionIndex)} of ${totalQuestions}`;
+  const isChapterOpening = step === 0 && !isQuestionStep(currentStepData);
 
 
 
