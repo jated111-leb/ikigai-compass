@@ -60,10 +60,9 @@ const ModulePage = () => {
     : moduleContent.steps.slice(0, step).filter(isQuestionStep).length;
   const progressValue = isQuestionStep(currentStepData)
     ? (currentQuestionIndex / totalQuestions) * 100
-    : Math.min(100, ((currentQuestionIndex + 0.5) / totalQuestions) * 100);
-  const progressLabel = isQuestionStep(currentStepData)
-    ? `Question ${currentQuestionIndex} of ${totalQuestions}`
-    : `A pause · before question ${Math.min(totalQuestions, currentQuestionIndex + 1)}`;
+    : 0;
+  const progressLabel = `Reflection question ${Math.max(1, currentQuestionIndex)} of ${totalQuestions}`;
+
 
 
   const exerciseData = modState.exercises[String(step)] || {} as any;
@@ -175,7 +174,13 @@ const ModulePage = () => {
               <h1 className="text-2xl font-serif font-bold text-primary">{moduleContent.title}</h1>
             </div>
           </div>
-          <ProgressBar value={progressValue} label={progressLabel} size="sm" />
+          {isQuestionStep(currentStepData) ? (
+            <ProgressBar value={progressValue} label={progressLabel} size="sm" />
+          ) : (
+            <div className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-medium pt-1">
+              A pause to read
+            </div>
+          )}
         </div>
 
 
@@ -190,16 +195,8 @@ const ModulePage = () => {
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           className="space-y-8"
         >
-          {/* Slide kind marker */}
-          <div className="flex items-center gap-2 -mb-2">
-            <span
-              className="inline-block w-1.5 h-1.5 rounded-full"
-              style={{ backgroundColor: isQuestionStep(currentStepData) ? themeColor : 'hsl(var(--muted-foreground))', opacity: isQuestionStep(currentStepData) ? 0.9 : 0.5 }}
-            />
-            <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground font-medium">
-              {isQuestionStep(currentStepData) ? 'Reflection question' : 'A pause to read'}
-            </span>
-          </div>
+
+
 
           {/* Step title */}
           {currentStepData.title && (
