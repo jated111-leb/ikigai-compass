@@ -175,8 +175,9 @@ const ModulePage = () => {
               <h1 className="text-2xl font-serif font-bold text-primary">{moduleContent.title}</h1>
             </div>
           </div>
-          <ProgressBar value={((step + 1) / totalSteps) * 100} label={`Step ${step + 1} of ${totalSteps}`} size="sm" />
+          <ProgressBar value={progressValue} label={progressLabel} size="sm" />
         </div>
+
 
         {/* Step content */}
         <AnimatePresence mode="wait" custom={direction}>
