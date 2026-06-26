@@ -3,17 +3,13 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Logo } from '@/components/Logo';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Mail, Loader2, CheckCircle } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { isOnboardingComplete } from './OnboardingPage';
 
 const LoginPage = () => {
-  const { user, loading } = useAuth();
-  const [email, setEmail] = useState('');
-  const [sent, setSent] = useState(false);
-  const [sending, setSending] = useState(false);
+  const { user, loading, signInWithGoogle } = useAuth();
+  const [signingIn, setSigningIn] = useState(false);
   const [error, setError] = useState('');
-  const { signIn } = useAuth();
 
   if (loading) {
     return (
@@ -25,17 +21,13 @@ const LoginPage = () => {
 
   if (user) return <Navigate to={isOnboardingComplete() ? "/journey" : "/onboarding"} replace />;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setSending(true);
+  const handleGoogle = async () => {
+    setSigningIn(true);
     setError('');
-    const { error } = await signIn(email.trim());
-    setSending(false);
+    const { error } = await signInWithGoogle();
     if (error) {
       setError(error.message);
-    } else {
-      setSent(true);
+      setSigningIn(false);
     }
   };
 
@@ -52,44 +44,27 @@ const LoginPage = () => {
           </p>
         </div>
 
-        {sent ? (
-          <div className="bg-accent/10 border border-accent/30 rounded-xl p-6 space-y-3">
-            <CheckCircle className="h-10 w-10 text-accent mx-auto" />
-            <h2 className="font-serif font-semibold text-lg text-foreground">Check your email</h2>
-            <p className="text-sm text-muted-foreground">
-              We sent a magic link to <strong className="text-foreground">{email}</strong>. Click it to sign in.
-            </p>
-            <button
-              onClick={() => { setSent(false); setEmail(''); }}
-              className="text-sm text-accent underline underline-offset-4 hover:opacity-80"
-            >
-              Use a different email
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="email"
-                placeholder="your@email.com"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                className="pl-10"
-                required
-                autoFocus
-              />
-            </div>
-            {error && <p className="text-sm text-destructive">{error}</p>}
-            <Button type="submit" variant="hero" className="w-full" disabled={sending}>
-              {sending ? (
-                <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Sending...</>
-              ) : (
-                'Send Magic Link'
-              )}
-            </Button>
-          </form>
-        )}
+        <div className="space-y-4">
+          <Button
+            type="button"
+            variant="hero"
+            className="w-full"
+            disabled={signingIn}
+            onClick={handleGoogle}
+          >
+            {signingIn ? (
+              <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Connecting...</>
+            ) : (
+              <span className="flex items-center justify-center gap-2">
+                <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="#FFFFFF" d="M21.35 11.1H12v2.92h5.35c-.23 1.4-1.66 4.1-5.35 4.1-3.22 0-5.85-2.66-5.85-5.94S8.78 6.24 12 6.24c1.83 0 3.06.78 3.76 1.45l2.57-2.47C16.78 3.74 14.6 2.8 12 2.8 6.93 2.8 2.83 6.9 2.83 12s4.1 9.2 9.17 9.2c5.29 0 8.8-3.72 8.8-8.96 0-.6-.07-1.06-.15-1.55z"/>
+                </svg>
+                Continue with Google
+              </span>
+            )}
+          </Button>
+          {error && <p className="text-sm text-destructive">{error}</p>}
+        </div>
       </div>
     </div>
   );
