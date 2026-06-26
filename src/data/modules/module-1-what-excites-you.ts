@@ -44,12 +44,6 @@ export const module1: ModuleData = {
       },
     },
     {
-      id: "m1-intro-5",
-      type: "callout",
-      content:
-        "Research shows that 70% of employees endure their jobs rather than enjoy them. People who report having a clear sense of purpose have improved life expectancy, reduced risk of heart attack and stroke, and are 2.4 times less likely to develop Alzheimer's disease. This journey is not a luxury — it is essential.",
-    },
-    {
       id: "m1-intro-6",
       type: "paragraph",
       content:
