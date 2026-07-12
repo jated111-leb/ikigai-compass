@@ -51,8 +51,10 @@ Reply to this email with feedback — it changes tomorrow's issue.
 
 1. `git fetch` and read newsletter/PREFERENCES.md (including feedback log),
    newsletter/SOURCES.md, and the last 7 files in newsletter/issues/.
-2. HARVEST: sweep Tier 1 sources + today's Tier 2 rotation via Nimble scraping and
-   web search (direct HTTP is blocked in this environment). Target ~40 candidates
+2. HARVEST: sweep Tier 1 sources + today's Tier 2 rotation via Apify scraping
+   (Zapier connector → Apify `scrapeSingleUrl`, crawlerType `cheerio`, falling back to
+   `playwright:firefox` for JS-heavy or bot-protected pages) and web search for
+   discovery (direct HTTP is blocked in this environment). Target ~40 candidates
    with title/author/source/date/URL and a candidate pull-quote.
 3. CURATE: score against preferences; enforce standing rules (dedupe vs last 14 issues,
    70/30 recency, all-pillar coverage unless a pillar is genuinely quiet).

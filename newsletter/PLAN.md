@@ -33,7 +33,7 @@ rebuilt around one reader's interests and delivered by an autonomous agent every
                  ┌────────────────────────────────────────────┐
   6:00 Beirut ──▶│ Scheduled Routine (fresh Claude session)   │
                  └────────────────────────────────────────────┘
-                    │ 1. HARVEST   Nimble scrape + web search across
+                    │ 1. HARVEST   Apify scrape + web search across
                     │              newsletter/SOURCES.md (~40 candidates)
                     │ 2. CURATE    score vs newsletter/PREFERENCES.md;
                     │              dedupe vs recent issues; pick winners
@@ -44,8 +44,9 @@ rebuilt around one reader's interests and delivered by an autonomous agent every
               feedback (email replies / chat) ──▶ PREFERENCES.md updates
 ```
 
-- **Harvest** uses the Nimble MCP scraper (verified working in this environment; direct
-  fetches are blocked by network policy) plus server-side web search.
+- **Harvest** uses Apify (via the Zapier connector's `Scrape Single URL` action — verified
+  working in this environment; direct fetches are blocked by network policy) plus
+  server-side web search for discovery.
 - **Curate** enforces the kill-rules and quotas in EDITORIAL_SPEC.md and checks the last
   ~7 issues in `newsletter/issues/` so nothing repeats.
 - **Deliver** sends via Gmail (Zapier Gmail `message` action once authorized; until then,
