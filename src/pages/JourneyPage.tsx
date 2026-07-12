@@ -5,6 +5,7 @@ import { modules } from "@/lib/content";
 import { ModuleCard } from "@/components/ModuleCard";
 import { ProgressBar } from "@/components/ProgressBar";
 import { ReflectionBoundary } from "@/components/ReflectionBoundary";
+import { CohortPanel } from "@/components/CohortPanel";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { isOnboardingComplete } from "./OnboardingPage";
@@ -58,7 +59,9 @@ const JourneyPage = () => {
           <ProgressBar value={overallProgress} label={`${completedCount} of ${modules.length} modules complete`} />
         </div>
 
-        <ReflectionBoundary className="mb-10" />
+        <ReflectionBoundary className="mb-4" />
+
+        <CohortPanel journeyComplete={completedCount === modules.length} className="mb-10" />
 
         {/* Inward Journey */}
         <div className="mb-10">

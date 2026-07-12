@@ -217,7 +217,12 @@ begin
   from jsonb_each(coalesce(new.state->'modules', '{}'::jsonb)) as m(key, value)
   where (m.value->>'completed') = 'true';
 
-  v_current  := coalesce((new.state->>'currentModule')::int, 1);
+  begin
+    v_current := coalesce((new.state->>'currentModule')::int, 1);
+  exception when others then
+    v_current := 1;
+  end;
+
   v_complete := coalesce(new.state->>'ikigaiStatement', '') <> '';
 
   insert into public.journey_progress
@@ -232,6 +237,10 @@ begin
     last_active_at    = now(),
     completed_at      = coalesce(public.journey_progress.completed_at, excluded.completed_at);
 
+  return new;
+exception when others then
+  -- The progress projection is best-effort: a failure here must NEVER block a
+  -- user's journey write. Degrade silently rather than break the save.
   return new;
 end $$;
 
@@ -292,5 +301,75 @@ begin
   having count(*) >= p_min;
 end $$;
 
+-- Roster for an instructor's cohort: participation identity (email) + derived
+-- progress only. NO answer content. profiles stays own-only RLS; this definer
+-- function is the authorized read for the owning instructor.
+create or replace function public.cohort_roster(p_cohort uuid)
+returns table (
+  user_id           uuid,
+  email             text,
+  role              text,
+  joined_at         timestamptz,
+  modules_completed int,
+  total_modules     int,
+  current_module    int,
+  is_complete       boolean,
+  last_active_at    timestamptz,
+  shared            boolean
+)
+language plpgsql stable security definer set search_path = public as $$
+begin
+  if not exists (
+    select 1 from public.cohorts c
+    where c.id = p_cohort and c.instructor_id = auth.uid()
+  ) then
+    raise exception 'not_authorized';
+  end if;
+
+  return query
+  select
+    m.user_id,
+    p.email,
+    m.role,
+    m.joined_at,
+    coalesce(jp.modules_completed, 0),
+    coalesce(jp.total_modules, 6),
+    coalesce(jp.current_module, 1),
+    coalesce(jp.is_complete, false),
+    jp.last_active_at,
+    exists (
+      select 1 from public.shared_summaries s
+      where s.cohort_id = p_cohort and s.student_id = m.user_id
+    )
+  from public.cohort_members m
+  join public.profiles p on p.id = m.user_id
+  left join public.journey_progress jp on jp.user_id = m.user_id
+  where m.cohort_id = p_cohort
+  order by m.role desc, p.email;
+end $$;
+
+-- Student-shared summaries for the owning instructor (opt-in content the
+-- student chose to reveal).
+create or replace function public.cohort_shared_summaries(p_cohort uuid)
+returns table (student_id uuid, email text, summary text, shared_at timestamptz)
+language plpgsql stable security definer set search_path = public as $$
+begin
+  if not exists (
+    select 1 from public.cohorts c
+    where c.id = p_cohort and c.instructor_id = auth.uid()
+  ) then
+    raise exception 'not_authorized';
+  end if;
+
+  return query
+  select s.student_id, p.email, s.summary, s.shared_at
+  from public.shared_summaries s
+  join public.profiles p on p.id = s.student_id
+  where s.cohort_id = p_cohort
+  order by s.shared_at desc;
+end $$;
+
 grant execute on function public.join_cohort(text) to authenticated;
 grant execute on function public.cohort_clarity_lift(uuid, int) to authenticated;
+grant execute on function public.cohort_roster(uuid) to authenticated;
+grant execute on function public.cohort_shared_summaries(uuid) to authenticated;
