@@ -9,7 +9,7 @@ export const module5: ModuleData = {
   id: 5,
   slug: "whats-your-story",
   title: "What's Your Story",
-  subtitle: "Reconstructing your life narrative to discover your authentic self",
+  subtitle: "Reconstructing your life narrative to understand who you've become",
   journeyPhase: "outward",
   icon: "scroll",
   themeColor: "#2563eb",

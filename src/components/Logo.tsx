@@ -22,7 +22,7 @@ export function Logo({ size = 'md', showText = true, className = '' }: LogoProps
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
-        className={size === 'lg' ? 'animate-spin-slow' : ''}
+        className={size === 'lg' ? 'animate-spin-slow motion-reduce:animate-none' : ''}
         style={size === 'lg' ? { filter: 'drop-shadow(0 0 18px hsl(38 92% 58% / 0.5))' } : undefined}
       >
         <circle cx="42" cy="42" r="28" fill="hsl(38 92% 58% / 0.18)" stroke="hsl(38 92% 58%)" strokeWidth="1.2" />
@@ -33,7 +33,7 @@ export function Logo({ size = 'md', showText = true, className = '' }: LogoProps
       </svg>
       {showText && (
         <span className={`font-serif font-bold text-foreground leading-none tracking-tight ${text}`}>
-          Ikigai Journey
+          Ikigai Compass
         </span>
       )}
     </div>

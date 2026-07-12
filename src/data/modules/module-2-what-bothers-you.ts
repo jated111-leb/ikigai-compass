@@ -9,7 +9,7 @@ export const module2: ModuleData = {
   id: 2,
   slug: "what-bothers-you",
   title: "What Bothers You",
-  subtitle: "Looking into your suffering and shadow to find your gift",
+  subtitle: "Turning what unsettles you into a source of purpose",
   journeyPhase: "inward",
   icon: "eye",
   themeColor: "#7c3aed",

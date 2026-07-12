@@ -121,7 +121,7 @@ export const module3: ModuleData = {
           id: "m3-s2-c1",
           type: "paragraph",
           content:
-            "The opinion of others is an important factor in persevering in one's mission or in abandoning it. The possible rejection of close friends awakens old fears of being abandoned that date back to childhood. It is not uncommon that the decision to pursue your mission may frighten and upset parents and loved ones. They will show their disagreement in various ways: coldness, withdrawal, sarcasm, and even threats. But the price to pay for making one's soul's desire come true is never too high.",
+            "The opinion of others is an important factor in persevering in one's mission or in abandoning it. The possible rejection of close friends can awaken old fears of being left behind. It is not uncommon that the decision to pursue your direction unsettles parents and loved ones, and they may show it in various ways — coldness, withdrawal, or sarcasm. Pursuing what matters to you has a real cost, and so does staying where you are. Both are worth weighing honestly.",
         },
         {
           id: "m3-s2-c2",
@@ -272,7 +272,7 @@ export const module3: ModuleData = {
           prompt:
             "What is the cost of NOT pursuing your purpose? If you let fear win — if you stay safe — what do you lose?",
           guidance:
-            "Jung observed that 'when an inner situation is not made conscious, it happens outside, as fate.' The fear you refuse to face does not stay quietly where you left it — it arranges your life from behind, and you come to call the result your circumstances, your luck, your fate. Sometimes we focus so much on the risk of action that we forget the risk of inaction. What is the price of staying where you are?",
+            "Jung noticed that what we won't look at has a way of shaping choices we never examine. You don't have to solve your fears here — just name them, and notice what they've been costing you. We often focus so much on the risk of acting that we forget the quieter risk of staying put. What is the price of staying where you are?",
           placeholder:
             "Describe what you lose if fear wins...",
           followUpPrompt:

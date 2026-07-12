@@ -4,6 +4,7 @@ import { useJourney } from "@/lib/store";
 import { modules } from "@/lib/content";
 import { ModuleCard } from "@/components/ModuleCard";
 import { ProgressBar } from "@/components/ProgressBar";
+import { ReflectionBoundary } from "@/components/ReflectionBoundary";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { isOnboardingComplete } from "./OnboardingPage";
@@ -53,9 +54,11 @@ const JourneyPage = () => {
     <div className="py-8 px-6">
       <div className="max-w-2xl mx-auto">
         {/* Progress */}
-        <div className="mb-10">
+        <div className="mb-6">
           <ProgressBar value={overallProgress} label={`${completedCount} of ${modules.length} modules complete`} />
         </div>
+
+        <ReflectionBoundary className="mb-10" />
 
         {/* Inward Journey */}
         <div className="mb-10">

@@ -31,7 +31,7 @@ const Index = () => {
         {/* Mystical orb backdrop */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
           <div
-            className="w-[520px] h-[520px] rounded-full animate-orb"
+            className="w-[520px] h-[520px] rounded-full animate-orb motion-reduce:animate-none"
             style={{
               background: 'radial-gradient(circle, hsl(38 92% 58% / 0.45), hsl(20 88% 50% / 0.25) 40%, transparent 70%)',
             }}
@@ -39,7 +39,7 @@ const Index = () => {
         </div>
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-40">
           <div
-            className="w-[380px] h-[380px] rounded-full animate-orb"
+            className="w-[380px] h-[380px] rounded-full animate-orb motion-reduce:animate-none"
             style={{
               background: 'radial-gradient(circle, hsl(280 60% 55% / 0.35), transparent 70%)',
               animationDelay: '-3s',
@@ -48,7 +48,7 @@ const Index = () => {
         </div>
 
         <div className="relative max-w-2xl mx-auto space-y-8 animate-fade-in">
-          <div className="flex justify-center animate-float">
+          <div className="flex justify-center animate-float motion-reduce:animate-none">
             <Logo size="lg" showText={false} />
           </div>
 
@@ -57,28 +57,29 @@ const Index = () => {
               生き甲斐 · A Reason for Being
             </p>
             <h1 className="text-5xl md:text-7xl font-serif font-bold leading-[1.05] shimmer-text">
-              Ikigai Journey
+              Ikigai Compass
             </h1>
             <p className="text-base md:text-lg text-accent/90 font-serif italic pt-2">
-              Six chapters between the inner flame and the outer world
+              Six chapters between what moves you and where you're headed
             </p>
           </div>
 
           <p className="text-foreground/65 leading-relaxed max-w-md mx-auto">
-            A slow, deliberate path to the intersection of passion, wound,
-            and meaning — guided by a witness that learns you before it answers.
+            A guided journey to the center of four questions — what you love, what you're good
+            at, what the world needs, and what you can build a life around. Six modules, your own
+            words, a direction that's yours.
           </p>
 
           <div className="flex flex-col items-center gap-3 pt-6">
             {authLoading || journeyLoading ? (
               <Loader2 className="h-6 w-6 animate-spin text-accent" />
             ) : !user ? (
-              <Button variant="hero" size="lg" onClick={() => navigate("/login")} className="px-10 py-6 text-base tracking-wider uppercase shadow-glow">
+              <Button variant="hero" size="lg" onClick={() => navigate("/login")} className="px-10 py-6 text-base tracking-wide shadow-glow">
                 Enter the Journey <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             ) : hasProgress ? (
               <>
-                <Button variant="hero" size="lg" onClick={() => navigate("/journey")} className="px-10 py-6 text-base tracking-wider uppercase shadow-glow">
+                <Button variant="hero" size="lg" onClick={() => navigate("/journey")} className="px-10 py-6 text-base tracking-wide shadow-glow">
                   Continue Your Journey <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
                 <AlertDialog>
@@ -108,7 +109,7 @@ const Index = () => {
                 variant="hero"
                 size="lg"
                 onClick={() => navigate(isOnboardingComplete() ? "/journey" : "/onboarding")}
-                className="px-10 py-6 text-base tracking-wider uppercase shadow-glow"
+                className="px-10 py-6 text-base tracking-wide shadow-glow"
               >
                 Begin Your Journey <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
