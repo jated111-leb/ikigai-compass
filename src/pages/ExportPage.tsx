@@ -4,6 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useJourney } from "@/lib/store";
 import { modules, worldNeedCategories, archetypes } from "@/lib/content";
 import { Button } from "@/components/ui/button";
+import { ShareWithInstructor } from "@/components/ShareWithInstructor";
 import { Printer, Loader2 } from "lucide-react";
 
 const ExportPage = () => {
@@ -44,7 +45,8 @@ const ExportPage = () => {
     <div className="py-8 px-6">
       <div className="max-w-2xl mx-auto">
         {/* Actions (hidden in print) */}
-        <div className="flex justify-end mb-10 no-print">
+        <div className="flex flex-wrap items-start justify-between gap-3 mb-10 no-print">
+          <ShareWithInstructor summary={journey.ikigaiStatement} />
           <Button variant="warm" onClick={() => window.print()} className="gap-2">
             <Printer className="h-4 w-4" /> Print / Save PDF
           </Button>

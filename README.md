@@ -1,73 +1,66 @@
-# Welcome to your Lovable project
+# Ikigai Compass
 
-## Project info
+A guided reflective journey that helps students find their direction — the place where
+what they love, what they're good at, what the world needs, and what they can build a life
+around meet.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+Ikigai (生き甲斐) is a Japanese idea about what makes life feel worth living. The four-circle
+framework used here is a modern, Western adaptation — a practical lens for finding direction,
+not a claim to the whole tradition.
 
-## How can I edit this code?
+## What it is
 
-There are several ways of editing your application.
+Six modules of guided reflection, each paired with an AI coach that responds to the student's
+own words, building toward a personalized synthesis of their direction. Designed for use in
+university settings (first-year experience, career-readiness, and advising contexts) as well
+as by individuals.
 
-**Use Lovable**
+- **Reflection, not counseling.** The experience surfaces a "this is reflection, not a
+  substitute for counseling" boundary at the start of the journey and on heavier modules.
+- **Privacy by design.** A student's raw answers and AI dialogue stay private to them;
+  instructors see participation and only what a student explicitly chooses to share. See
+  `docs/pmf-minimum-plan.md`.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Tech stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- Vite + React + TypeScript
+- Tailwind CSS + shadcn/ui
+- Supabase (Postgres, Auth, Edge Functions)
+- AI coaching via a Supabase Edge Function (`supabase/functions/ai-coach`)
 
-**Use your preferred IDE**
+## Local development
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Requires Node.js (or Bun). Then:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+# install dependencies
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# start the dev server with hot reload
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Environment variables (see `.env`):
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_PUBLISHABLE_KEY`
+- `VITE_SUPABASE_PROJECT_ID`
 
-**Use GitHub Codespaces**
+Edge functions additionally require `ANTHROPIC_API_KEY` (and, for the trend engine,
+`INGEST_SECRET` / `SUPABASE_SERVICE_ROLE_KEY`) configured as function secrets — never commit
+these.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Scripts
 
-## What technologies are used for this project?
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build |
+| `npm run lint` | Lint |
+| `npm run test` | Run tests (Vitest) |
 
-This project is built with:
+## Docs
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- `docs/brand-voice-and-copy.md` — brand, voice, and copy guide
+- `docs/pmf-minimum-plan.md` — the university course-pilot data model and privacy boundary
+- `docs/trend-engine/` — the trend engine (architecture, taxonomy, data model, scoring)

@@ -9,7 +9,7 @@ export const module6: ModuleData = {
   id: 6,
   slug: "whats-your-gift",
   title: "What's Your Gift",
-  subtitle: "Synthesizing everything into your purpose",
+  subtitle: "Naming the strengths you keep bringing, wherever you go",
   journeyPhase: "outward",
   icon: "sparkles",
   themeColor: "#d97706",

@@ -12,6 +12,7 @@ import { ExerciseTimeline } from "@/components/ExerciseTimeline";
 import { AiCoachingPanel } from "@/components/AiCoachingPanel";
 import { ArchetypeCard } from "@/components/ArchetypeCard";
 import { ProgressBar } from "@/components/ProgressBar";
+import { ReflectionBoundary } from "@/components/ReflectionBoundary";
 import { Button } from "@/components/ui/button";
 import { archetypes } from "@/lib/content";
 import { ArrowLeft, ArrowRight, Check, Sparkles, AlertCircle, Key } from "lucide-react";
@@ -215,6 +216,13 @@ const ModulePage = () => {
               {currentStepData.content.length > 0 && (
                 <div className="text-left">
                   <ContentBlock blocks={currentStepData.content} />
+                </div>
+              )}
+
+              {/* Safety boundary on heavier chapters (e.g. "My Fears") */}
+              {moduleId === 3 && (
+                <div className="text-left">
+                  <ReflectionBoundary />
                 </div>
               )}
 

@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Logo } from "./Logo";
 import { Button } from "./ui/button";
-import { ArrowLeft, LogOut, Compass } from "lucide-react";
+import { ArrowLeft, LogOut, Compass, GraduationCap } from "lucide-react";
 
 export function Header() {
   const navigate = useNavigate();
@@ -32,6 +32,9 @@ export function Header() {
               <div className="flex items-center gap-2">
                 <Button variant="ghost" size="sm" onClick={() => navigate("/trends")} className="gap-1.5 text-muted-foreground">
                   <Compass className="h-4 w-4" /> Trends
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => navigate("/teach")} className="gap-1.5 text-muted-foreground hidden sm:inline-flex">
+                  <GraduationCap className="h-4 w-4" /> Educators
                 </Button>
                 <span className="text-xs text-muted-foreground hidden sm:inline max-w-[140px] truncate">
                   {user.email}

@@ -16,6 +16,7 @@ import ExportPage from "./pages/ExportPage.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import OnboardingPage from "./pages/OnboardingPage.tsx";
 import TrendsPage from "./pages/TrendsPage.tsx";
+import TeachPage from "./pages/TeachPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
                 <Route path="/module/:id" element={<ProtectedRoute><ModulePage /></ProtectedRoute>} />
                 <Route path="/export" element={<ProtectedRoute><ExportPage /></ProtectedRoute>} />
                 <Route path="/trends" element={<ProtectedRoute><TrendsPage /></ProtectedRoute>} />
+                <Route path="/teach" element={<ProtectedRoute><TeachPage /></ProtectedRoute>} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
