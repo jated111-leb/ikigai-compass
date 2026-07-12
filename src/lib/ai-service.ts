@@ -7,6 +7,7 @@ import { aiSystemPrompts, masterSynthesisPrompt, metaFramePrompt } from '@/data/
 import { supabase } from '@/integrations/supabase/client';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
 const FUNCTION_URL = `${SUPABASE_URL}/functions/v1/ai-coach`;
 
 // ── Back-compat shims (no longer needed but kept so callers don't break) ──
@@ -41,10 +42,15 @@ async function streamChat(
   onChunk: (text: string) => void,
   options?: { model?: string; signal?: AbortSignal }
 ): Promise<string> {
+  // The ai-coach function requires an authenticated user; forward the token.
+  const { data: { session } } = await supabase.auth.getSession();
+  const token = session?.access_token;
+
   const response = await fetch(FUNCTION_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}`, apikey: SUPABASE_ANON_KEY } : {}),
     },
     body: JSON.stringify({
       model: options?.model,
@@ -61,6 +67,7 @@ async function streamChat(
     } catch {
       // ignore
     }
+    if (response.status === 401) throw new Error('Your session expired. Please sign in again.');
     if (response.status === 429) throw new Error('Rate limit exceeded. Please try again in a moment.');
     if (response.status === 402) throw new Error('AI credits exhausted. Please add credits to continue.');
     throw new Error(msg);
@@ -280,9 +287,6 @@ export async function streamSynthesis(
   if (archetypeResult) {
     userData += `\n## Selected Archetype: ${archetypeResult}\n`;
   }
-
-  // Suppress unused warning
-  void supabase;
 
   return streamChat(
     [

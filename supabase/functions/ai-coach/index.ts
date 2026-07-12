@@ -8,6 +8,13 @@
 //
 // Requires ANTHROPIC_API_KEY. Interactive (user is waiting) so it streams and
 // is NOT batched; prompt caching is applied to the (large, reused) system prefix.
+//
+// Access control: the caller MUST be an authenticated user. We validate the
+// bearer token in-function (so we can reject anonymous/anon-key callers, which
+// verify_jwt alone would still let through) and apply a per-user rate limit
+// BEFORE spending any Anthropic tokens.
+import { createClient } from "npm:@supabase/supabase-js@2";
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -17,6 +24,13 @@ const corsHeaders = {
 const MODEL = "claude-haiku-4-5";
 const ANTHROPIC_VERSION = "2023-06-01";
 const MAX_TOKENS = 1024;
+
+// Per-user throttle: modest bursts are fine (one call per reflection), but a
+// single account cannot run up unbounded spend.
+const RATE_LIMITS = [
+  { bucket: "min", limit: 20, windowSeconds: 60 },
+  { bucket: "day", limit: 300, windowSeconds: 86_400 },
+];
 
 type ChatMessage = { role: "system" | "user" | "assistant"; content: string };
 
@@ -29,6 +43,34 @@ function jsonError(message: string, status: number) {
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
+
+  // ── Require an authenticated user before doing any work ──
+  const authHeader = req.headers.get("Authorization");
+  if (!authHeader) return jsonError("Authentication required.", 401);
+
+  const supabaseUrl = Deno.env.get("SUPABASE_URL");
+  const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
+  if (!supabaseUrl || !anonKey) return jsonError("Auth not configured", 500);
+
+  const supabase = createClient(supabaseUrl, anonKey, {
+    global: { headers: { Authorization: authHeader } },
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
+
+  const { data: userData, error: userErr } = await supabase.auth.getUser();
+  if (userErr || !userData?.user) return jsonError("Authentication required.", 401);
+
+  // ── Per-user rate limit (fail-open only on infra error, never on "denied") ──
+  for (const rl of RATE_LIMITS) {
+    const { data: allowed, error: rlErr } = await supabase.rpc("check_ai_rate_limit", {
+      p_bucket: rl.bucket,
+      p_limit: rl.limit,
+      p_window_seconds: rl.windowSeconds,
+    });
+    if (!rlErr && allowed === false) {
+      return jsonError("Rate limit exceeded. Please wait a moment and try again.", 429);
+    }
+  }
 
   const apiKey = Deno.env.get("ANTHROPIC_API_KEY");
   if (!apiKey) return jsonError("ANTHROPIC_API_KEY not configured", 500);
