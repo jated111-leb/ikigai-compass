@@ -33,7 +33,7 @@ An item's *author* matters as much as its outlet — individual thinkers are fir
 | The Information (AI) | https://www.theinformation.com | industry scoops; excerpt free part only |
 | MIT Tech Review (AI) | https://www.technologyreview.com/topic/artificial-intelligence | accessible depth |
 
-## Pillar 2 — Strategy (four lenses)
+## Pillar 2 — Strategy (six lenses)
 
 ### Business & tech strategy — Tier 1
 | Source | URL | Notes |
@@ -58,6 +58,29 @@ An item's *author* matters as much as its outlet — individual thinkers are fir
 | Farnam Street | https://fs.blog | mental models |
 | Commoncog — Cedric Chin | https://commoncog.com | operational expertise |
 | Astral Codex Ten | https://www.astralcodexten.com | forecasting, rationality |
+
+### Venture & growth — Tier 1 (added 2026-07-12 per Jad)
+| Source | URL | Notes |
+|---|---|---|
+| The Generalist — Mario Gabriele | https://www.generalist.com | venture deep dives |
+| Elad Gil | https://blog.eladgil.com | scaling & AI startup strategy |
+| Tomasz Tunguz | https://tomtunguz.com | data-driven venture, daily |
+| Lenny's Newsletter — Lenny Rachitsky | https://www.lennysnewsletter.com | product & growth |
+| Andrew Chen (a16z) | https://andrewchen.com | growth loops, network effects |
+| Growth Unhinged — Kyle Poyar | https://www.growthunhinged.com | PLG & GTM benchmarks |
+| First Round Review | https://review.firstround.com | operator playbooks |
+| a16z | https://a16z.com/news-content | venture theses; filter marketing |
+| Benedict Evans | https://www.ben-evans.com/essays | macro tech + venture framing |
+
+### Leadership & organizational psychology — Tier 2 (added 2026-07-12 per Jad)
+| Source | URL | Notes |
+|---|---|---|
+| Adam Grant — Granted | https://adamgrant.substack.com | org psych, evidence-based |
+| HBR — Leadership & Managing People | https://hbr.org/topic/subject/leadership | classic + current |
+| Bob Sutton | https://bobsutton.substack.com | friction, scaling culture |
+| Stanford GSB Insights | https://www.gsb.stanford.edu/insights | research-backed leadership |
+| Farnam Street (leadership picks) | https://fs.blog | overlaps decision-making |
+| The Knowledge Project essays | https://fs.blog/knowledge-project-podcast | interview writeups |
 
 ### Personal strategy & career — Tier 2
 | Source | URL | Notes |
@@ -103,6 +126,9 @@ An item's *author* matters as much as its outlet — individual thinkers are fir
 | 80,000 Hours Podcast | https://80000hours.org/podcast | AI futures, careers |
 | Lex Fridman | https://lexfridman.com/podcast | long-form interviews |
 | The Ezra Klein Show | https://www.nytimes.com/column/ezra-klein-podcast-transcripts | AI & society episodes only |
+| 20VC — Harry Stebbings | https://www.thetwentyminutevc.com | venture (added 2026-07-12) |
+| Lenny's Podcast | https://www.lennysnewsletter.com/podcast | growth & product (added 2026-07-12) |
+| The Knowledge Project — Shane Parrish | https://fs.blog/knowledge-project-podcast | decision-making & leadership (added 2026-07-12) |
 
 ## Wildcard slot (3QD serendipity)
 
@@ -112,3 +138,6 @@ to a friend?" bar. This slot exists so the newsletter never becomes a filter bub
 
 ## Changelog
 - 2026-07-12: initial register drafted with Jad.
+- 2026-07-12 (evening): added venture & growth lens and leadership/organizational
+  psychology lens plus three podcasts (20VC, Lenny's, Knowledge Project) per Jad's
+  feedback after issue #001.

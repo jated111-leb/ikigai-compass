@@ -15,8 +15,9 @@ Three items, ~250–350 words each. Anatomy of a brief:
   • WHAT HAPPENED — 2–3 sentences, concrete.
   • THE EXCERPT — an indented pull-quote in the source's own voice,
     chosen 3QD-style: the passage that would make you click.
-  • WHY IT MATTERS — 3–5 sentences of analysis keyed to Jad's four
-    strategy lenses; connect across pillars when the connection is real.
+  • WHY IT MATTERS — 3–5 sentences of analysis keyed to Jad's
+    strategy lenses (see PREFERENCES.md); connect across pillars when
+    the connection is real.
   • Source: Author, Publication — link. Read time.
 
 ── RAPID FIRE ────────────────────────────────

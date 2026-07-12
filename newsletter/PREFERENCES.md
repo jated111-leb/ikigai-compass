@@ -6,8 +6,9 @@ Update it whenever Jad gives feedback; never delete history — append to the lo
 ## Confirmed preferences (interview, 2026-07-12)
 
 - **Pillars**: AI, strategy, futurism, podcasts.
-- **Strategy = all four lenses**: business & tech strategy; geopolitics & grand strategy;
-  decision-making & mental models; personal strategy & career.
+- **Strategy = six lenses**: business & tech strategy; geopolitics & grand strategy;
+  decision-making & mental models; personal strategy & career; venture & growth
+  (added 2026-07-12); leadership & organizational psychology (added 2026-07-12).
 - **Format**: hybrid intelligence brief — top-3 deep briefs, then rapid-fire links,
   then podcast queue.
 - **Length**: rich, 15–20 minutes. Briefs may include both excerpt AND analysis;
@@ -33,4 +34,8 @@ Update it whenever Jad gives feedback; never delete history — append to the lo
 
 ## Feedback log (append-only, newest first)
 
+- 2026-07-12 (evening) — Issue #001 received positively ("good job"). Jad asked to add
+  three coverage areas starting with issue #002: **venture**, **growth**, and
+  **leadership psychology**. Sources added to SOURCES.md; harvest agents must include
+  a venture/growth sweep and a leadership-psychology sweep from tomorrow onward.
 - 2026-07-12 — Baseline established from onboarding interview. No issue feedback yet.
