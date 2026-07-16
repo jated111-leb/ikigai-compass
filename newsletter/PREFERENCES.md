@@ -13,7 +13,12 @@ Update it whenever Jad gives feedback; never delete history — append to the lo
   then podcast queue.
 - **Length**: rich, 15–20 minutes. Briefs may include both excerpt AND analysis;
   data points and the occasional chart welcome.
-- **Recency**: 70% fresh (≤48h) / 30% timeless. The timeless slot is a feature, not filler.
+- **Recency** (updated 2026-07-16, was 70/30 fresh): ~40% fresh / 60% timeless-strategic-
+  philosophical. Interestingness and durability beat recency. The daily AI news cycle
+  (model launches, lawsuit beats, feature releases, benchmark fights) gets AT MOST one
+  brief — and only when genuinely consequential; otherwise compress it into 1-2 rapid-fire
+  lines or skip it. Briefs default to ideas: strategy frames, essays, philosophy of
+  technology, history that reframes the present.
 - **Podcasts**: why-listen blurbs — guest, topic, and an honest 2-sentence verdict on
   whether it deserves queue time. Honest means sometimes "skippable."
 - **Delivery**: email, daily ~6:00 AM Beirut.
@@ -33,6 +38,13 @@ Update it whenever Jad gives feedback; never delete history — append to the lo
 7. It is acceptable — encouraged — to say "quiet day on X" rather than pad.
 
 ## Feedback log (append-only, newest first)
+
+- 2026-07-16 — Jad (in chat, after issue #005): **"Less AI daily news and more timeless,
+  strategic and philosophical angles."** Actioned: recency balance flipped to ~40/60
+  fresh/timeless above; AI-news capped at one brief max; harvest agents get an explicit
+  idea-essays-first mandate (Aeon/Noema/3QD register, strategy classics, Mauboussin/
+  Porter/Neumann-grade frameworks, philosophy of technology). The lens on any AI story
+  should be "what does this mean" not "what happened."
 
 - 2026-07-12 (evening) — Issue #001 received positively ("good job"). Jad asked to add
   three coverage areas starting with issue #002: **venture**, **growth**, and

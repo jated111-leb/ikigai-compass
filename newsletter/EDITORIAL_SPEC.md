@@ -10,7 +10,11 @@ Subject: The Daily Compass #NNN — <the day's sharpest hook, ≤8 words>
 <2–3 sentence cold open: the day's throughline, written with a point of view.>
 
 ── THE BRIEFS ────────────────────────────────
-Three items, ~250–350 words each. Anatomy of a brief:
+Three items, ~250–350 words each. Briefs are idea-led, not news-led (per the
+2026-07-16 feedback): at most ONE brief may be driven by the AI news cycle, and
+only when genuinely consequential. The other two lead with an essay, a strategy
+framework, a philosophical question, or history that reframes the present —
+fresh publication date optional. Anatomy of a brief:
   ◆ Hook title (not the source's headline — ours)
   • WHAT HAPPENED — 2–3 sentences, concrete.
   • THE EXCERPT — an indented pull-quote in the source's own voice,
