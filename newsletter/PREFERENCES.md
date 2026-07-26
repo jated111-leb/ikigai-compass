@@ -39,6 +39,14 @@ Update it whenever Jad gives feedback; never delete history — append to the lo
 
 ## Feedback log (append-only, newest first)
 
+- 2026-07-26 — Jad (in chat, after issue #011): **"Also take inspiration from Azeem
+  Azhar's and The Marginalian newsletter."** Actioned: Exponential View promoted to
+  Futurism Tier 1 (daily sweep, Sunday edition prioritized) and The Marginalian
+  (Maria Popova) added to Futurism Tier 1 in SOURCES.md. Treat both as stylistic
+  models too — Azhar's exponential-tech-meets-strategy synthesis for briefs, Popova's
+  reflective literary register for CODA/wildcard picks. Harvest agents must include
+  both from issue #012 onward.
+
 - 2026-07-16 — Jad (in chat, after issue #005): **"Less AI daily news and more timeless,
   strategic and philosophical angles."** Actioned: recency balance flipped to ~40/60
   fresh/timeless above; AI-news capped at one brief max; harvest agents get an explicit

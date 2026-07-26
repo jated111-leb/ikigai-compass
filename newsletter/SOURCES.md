@@ -100,6 +100,8 @@ An item's *author* matters as much as its outlet — individual thinkers are fir
 | Noema | https://www.noemamag.com | philosophy of technology |
 | Aeon | https://aeon.co | ideas & philosophy |
 | Quanta Magazine | https://www.quantamagazine.org | fundamental science |
+| Exponential View — Azeem Azhar | https://www.exponentialview.co | macro tech/AI/energy transitions; Sunday edition is the flagship (promoted from Tier 2, 2026-07-26 per Jad) |
+| The Marginalian — Maria Popova | https://www.themarginalian.org | literary/philosophical essays; natural CODA and wildcard register (added 2026-07-26 per Jad) |
 
 ### Tier 2 (rotating)
 | Source | URL | Notes |
@@ -107,7 +109,6 @@ An item's *author* matters as much as its outlet — individual thinkers are fir
 | Nautilus | https://nautil.us | literary science |
 | Palladium | https://www.palladiummag.com | governance futurism |
 | The New Atlantis | https://www.thenewatlantis.com | tech & society |
-| Exponential View — Azeem Azhar | https://www.exponentialview.co | macro tech trends |
 | Long Now Foundation | https://longnow.org/ideas | long-term thinking |
 | Ribbonfarm archive | https://www.ribbonfarm.com | timeless slot staple |
 | Our World in Data | https://ourworldindata.org | data-driven futures |
@@ -137,6 +138,11 @@ a YouTube lecture, a 15-year-old blog post — provided it clears the "would Jad
 to a friend?" bar. This slot exists so the newsletter never becomes a filter bubble.
 
 ## Changelog
+- 2026-07-26: per Jad — promoted Exponential View (Azeem Azhar) from Tier 2 to Tier 1
+  (daily sweep; Sunday edition prioritized) and added The Marginalian (Maria Popova)
+  to Tier 1. Both are also *stylistic* references: Azhar for connecting exponential
+  tech to strategy/economics, Popova for the reflective literary register the CODA
+  aims at.
 - 2026-07-12: initial register drafted with Jad.
 - 2026-07-12 (evening): added venture & growth lens and leadership/organizational
   psychology lens plus three podcasts (20VC, Lenny's, Knowledge Project) per Jad's
