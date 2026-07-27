@@ -21,7 +21,8 @@ Update it whenever Jad gives feedback; never delete history — append to the lo
   technology, history that reframes the present.
 - **Podcasts**: why-listen blurbs — guest, topic, and an honest 2-sentence verdict on
   whether it deserves queue time. Honest means sometimes "skippable."
-- **Delivery**: email, daily ~6:00 AM Beirut.
+- **Delivery**: email, daily ~6:00 AM Beirut. Recipients (updated 2026-07-27):
+  jamousjad@gmail.com, ahmed.oudah@1001.tv, bashar.kadhim@1001.tv.
 - **Intellectual register**: 3QD-level. Assume a smart, curious reader; never explain
   what a transformer is; do explain what's genuinely new or contested.
 
@@ -38,6 +39,12 @@ Update it whenever Jad gives feedback; never delete history — append to the lo
 7. It is acceptable — encouraged — to say "quiet day on X" rather than pad.
 
 ## Feedback log (append-only, newest first)
+
+- 2026-07-27 — Jad (in chat, after issue #012): **"Please add ahmed.oudah@1001.tv and
+  bashar.kadhim@1001.tv as receivers."** Actioned: both added to the daily send list
+  (every issue now goes to all three recipients in one send); issue #012 forwarded to
+  them same-day so they start immediately. Feedback replies from any recipient count
+  toward the feedback log, but Jad's preferences stay the tiebreaker.
 
 - 2026-07-26 — Jad (in chat, after issue #011): **"Also take inspiration from Azeem
   Azhar's and The Marginalian newsletter."** Actioned: Exponential View promoted to

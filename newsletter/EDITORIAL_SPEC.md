@@ -65,7 +65,9 @@ Reply to this email with feedback — it changes tomorrow's issue.
    70/30 recency, all-pillar coverage unless a pillar is genuinely quiet).
 4. COMPOSE per the template above. Write the briefs from the actual source text
    (scrape it), never from a headline alone. Verify every URL resolves.
-5. DELIVER: send via Zapier Gmail `message` action (HTML body) to jamousjad@gmail.com.
+5. DELIVER: send via Zapier Gmail `message` action (HTML body) to all recipients in
+   PREFERENCES.md (currently jamousjad@gmail.com, ahmed.oudah@1001.tv,
+   bashar.kadhim@1001.tv — one send, all in the `to` list).
    Fallback if send fails: create a Gmail draft via the direct connector and flag it.
 6. ARCHIVE: write the issue to newsletter/issues/YYYY-MM-DD-issue-NNN.md, commit, push.
 7. If the mailbox/chat contains new feedback since the last issue: append it to the
