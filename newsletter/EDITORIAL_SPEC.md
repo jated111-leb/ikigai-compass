@@ -17,8 +17,8 @@ framework, a philosophical question, or history that reframes the present —
 fresh publication date optional. Anatomy of a brief:
   ◆ Hook title (not the source's headline — ours)
   • WHAT HAPPENED — 2–3 sentences, concrete.
-  • THE EXCERPT — an indented pull-quote in the source's own voice,
-    chosen 3QD-style: the passage that would make you click.
+  • THE EXCERPT — optional; a short quote in the source's own voice, used only
+    when its exact wording is verified (full-text scraping is unavailable).
   • WHY IT MATTERS — 3–5 sentences of analysis keyed to Jad's
     strategy lenses (see PREFERENCES.md); connect across pillars when
     the connection is real.
@@ -56,19 +56,26 @@ Reply to this email with feedback — it changes tomorrow's issue.
 
 1. `git fetch` and read newsletter/PREFERENCES.md (including feedback log),
    newsletter/SOURCES.md, and the last 7 files in newsletter/issues/.
-2. HARVEST: sweep Tier 1 sources + today's Tier 2 rotation via Apify scraping
-   (Zapier connector → Apify `scrapeSingleUrl`, crawlerType `cheerio`, falling back to
-   `playwright:firefox` for JS-heavy or bot-protected pages) and web search for
-   discovery (direct HTTP is blocked in this environment). Target ~40 candidates
-   with title/author/source/date/URL and a candidate pull-quote.
+2. HARVEST (updated 2026-10-20): run 4 parallel background agents — AI / strategy
+   core / venture+growth+leadership / futurism+podcasts+coda — using WebSearch only
+   (direct HTTP is blocked; the Apify-via-Zapier scraper is retired; never Nimble).
+   Give each agent the dedupe list and a budget: ~20 searches, a ranked report of
+   ≤700 words with title/author/outlet/date/URL and verified specifics. If agents fail
+   on a usage limit, do not stall: research directly with ~10–15 targeted searches
+   and ship a thinner honest issue. Re-verify every key fact and URL yourself before
+   it goes in.
 3. CURATE: score against preferences; enforce standing rules (dedupe vs last 14 issues,
-   70/30 recency, all-pillar coverage unless a pillar is genuinely quiet).
+   ~40/60 fresh/timeless per PREFERENCES.md, all-pillar coverage unless a pillar is genuinely quiet).
 4. COMPOSE per the template above. Write the briefs from the actual source text
-   (scrape it), never from a headline alone. Verify every URL resolves.
+   (via search results and abstracts), never from a headline alone. Paraphrase
+   and credit; quote only short passages whose exact wording you have verified.
+   Verify every URL resolves.
 5. DELIVER: send via Zapier Gmail `message` action (HTML body) to all recipients in
    PREFERENCES.md (currently jamousjad@gmail.com, ahmed.oudah@1001.tv,
    bashar.kadhim@1001.tv — one send, all in the `to` list).
    Fallback if send fails: create a Gmail draft via the direct connector and flag it.
+   After sending, confirm it landed with an `in:sent` search for the subject; a
+   timeout is not a failure, so check before any retry to avoid duplicates.
 6. ARCHIVE: write the issue to newsletter/issues/YYYY-MM-DD-issue-NNN.md, commit, push.
 7. If the mailbox/chat contains new feedback since the last issue: append it to the
    PREFERENCES.md feedback log (dated) before composing, and honor it immediately.
