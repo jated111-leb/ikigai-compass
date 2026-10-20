@@ -46,6 +46,8 @@ Update it whenever Jad gives feedback; never delete history — append to the lo
   sends. Actioned: each morning try the Zapier send first again; the moment it
   succeeds, drop the hand-send editor's note. Until then, drafts continue with a
   shorter note (the "found and checked through search" line is retired).
+  Same day: Jad upgraded Zapier; a test Gmail read via Zapier succeeded, so from
+  issue #081 sends go through Zapier again and the hand-send note is gone.
 
 - 2026-07-27 — Jad (in chat, after issue #012): **"Please add ahmed.oudah@1001.tv and
   bashar.kadhim@1001.tv as receivers."** Actioned: both added to the daily send list
