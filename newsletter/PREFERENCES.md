@@ -40,6 +40,13 @@ Update it whenever Jad gives feedback; never delete history — append to the lo
 
 ## Feedback log (append-only, newest first)
 
+- 2026-10-20 — Jad (in chat, sharing a screenshot of the "the service that normally
+  sends this email is still at its monthly limit…" editor's note): **"can you fix
+  this"**, then chose **"I'll raise Zapier limit"** over switching to direct Gmail
+  sends. Actioned: each morning try the Zapier send first again; the moment it
+  succeeds, drop the hand-send editor's note. Until then, drafts continue with a
+  shorter note (the "found and checked through search" line is retired).
+
 - 2026-07-27 — Jad (in chat, after issue #012): **"Please add ahmed.oudah@1001.tv and
   bashar.kadhim@1001.tv as receivers."** Actioned: both added to the daily send list
   (every issue now goes to all three recipients in one send); issue #012 forwarded to
